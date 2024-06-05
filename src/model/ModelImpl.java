@@ -3,6 +3,8 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.stock.IStock;
+
 public class ModelImpl implements IModel {
   private Map<String, IStock> stocks;
 
