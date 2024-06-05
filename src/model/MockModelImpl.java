@@ -23,7 +23,7 @@ public class MockModelImpl implements IModel {
 
   @Override
   public double movingAverage(String ticker, int days) {
-    log.append("Moving average " + log + days);
+    log.append("MovingAverage " + ticker + " " + days);
     return 0;
   }
 
