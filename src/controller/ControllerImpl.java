@@ -18,7 +18,7 @@ public class ControllerImpl implements IController {
   public ControllerImpl(Readable input) {
     this.commandMap = new HashMap<>();
     this.commandMap.put("GainOrLoss", () -> new GainOrLossCommand(System.out));
-    this.commandMap.put("MovingAverage", () ->new MovingAverageCommand(System.out));
+    this.commandMap.put("MovingAverage", () -> new MovingAverageCommand(System.out));
     this.commandMap.put("Crossover", () -> new CrossoverCommand(System.out));
     this.input = input;
   }
