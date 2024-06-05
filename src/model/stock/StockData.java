@@ -1,13 +1,15 @@
-package model;
+package model.stock;
 
-public class StockDay implements IStockDay {
+import model.stock.IStockData;
+
+public class StockData implements IStockData {
   private final double open;
   private final double high;
   private final double low;
   private final double close;
   private final int volume;
 
-  public StockDay(double open, double high, double low, double close, int volume) {
+  public StockData(double open, double high, double low, double close, int volume) {
     this.open = open;
     this.high = high;
     this.low = low;

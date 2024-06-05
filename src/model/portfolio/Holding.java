@@ -1,4 +1,7 @@
-package model;
+package model.portfolio;
+
+import model.IDate;
+import model.stock.IStock;
 
 public class Holding implements IHolding {
   private final IStock stock;

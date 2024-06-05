@@ -1,7 +1,9 @@
-package model;
+package model.portfolio;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.IDate;
 
 public class Portfolio implements IPortfolio {
   private final String name;

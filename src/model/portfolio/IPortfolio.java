@@ -1,4 +1,6 @@
-package model;
+package model.portfolio;
+
+import model.IDate;
 
 public interface IPortfolio {
 

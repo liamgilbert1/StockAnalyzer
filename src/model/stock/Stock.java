@@ -1,12 +1,14 @@
-package model;
+package model.stock;
 
 import java.util.Map;
 
+import model.IDate;
+
 public class Stock implements IStock {
   private final String ticker;
-  private final Map<String, StockDay> stockData;
+  private final Map<String, StockData> stockData;
 
-  public Stock(String ticker, Map<String, StockDay> stockData) {
+  public Stock(String ticker, Map<String, StockData> stockData) {
     this.ticker = ticker;
     this.stockData = stockData;
   }

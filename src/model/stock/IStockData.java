@@ -1,6 +1,6 @@
-package model;
+package model.stock;
 
-public interface IStockDay {
+public interface IStockData {
   double getOpen();
 
   double getHigh();

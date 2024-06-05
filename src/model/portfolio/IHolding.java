@@ -1,4 +1,7 @@
-package model;
+package model.portfolio;
+
+import model.IDate;
+import model.stock.IStock;
 
 public interface IHolding {
   IStock getStock();
