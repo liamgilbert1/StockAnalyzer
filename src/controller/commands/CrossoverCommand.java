@@ -1,5 +1,6 @@
 package controller.commands;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 import model.IModel;
@@ -11,8 +12,33 @@ import model.IModel;
  * specified date range, and a specified value of x (the number of days in the moving average).
  */
 public class CrossoverCommand implements ICommand {
+  private final Appendable out;
+
+  public CrossoverCommand(Appendable out) {
+    this.out = Objects.requireNonNull(out);
+  }
+
   @Override
   public void execute(IModel model, Scanner scanner) {
+    String date = "";
+    int days = 0;
+    if (scanner.hasNext()) {
+      date = scanner.next();
+    }
+
+    if (scanner.hasNextInt()) {
+      days = scanner.nextInt();
+    }
+
+    if (!date.isEmpty() && days > 0) {
+      boolean isCrossOver = model.crossOver(date, days);
+
+      try {
+        this.out.append(String.format("Is there a crossover: " + isCrossOver));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
 
   }
 
