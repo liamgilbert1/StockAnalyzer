@@ -3,8 +3,11 @@ package model;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import model.stock.IStock;
+import model.stock.Stock;
+import model.stock.StockData;
 
 public class ModelImpl implements IModel {
   private Map<String, IStock> stocks;
@@ -15,6 +18,29 @@ public class ModelImpl implements IModel {
 
   @Override
   public void populate(Readable readable) {
+    Scanner scanner = new Scanner(readable);
+
+    if (scanner.hasNext()) {
+      scanner.nextLine();
+    }
+
+    while (scanner.hasNext()) {
+      String[] data = scanner.nextLine().split(",");
+      String ticker = data[0];
+      LocalDate date = LocalDate.parse(data[1]);
+      double open = Double.parseDouble(data[2]);
+      double high = Double.parseDouble(data[3]);
+      double low = Double.parseDouble(data[4]);
+      double close = Double.parseDouble(data[5]);
+      int volume = Integer.parseInt(data[6]);
+
+      if (!this.stocks.containsKey(ticker)) {
+        this.stocks.put(ticker, new Stock(ticker));
+      }
+
+      this.stocks.get(ticker).addStockData(date, new StockData(open, high, low, close, volume));
+    }
+
 
   }
 

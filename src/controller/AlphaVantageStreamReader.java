@@ -1,17 +1,23 @@
+package controller;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
+import java.io.StringReader;
 
 public class AlphaVantageStreamReader implements IReader {
-  public static void main(String []args) {
-    //the API key needed to use this web service.
-    //Please get your own free API key here: https://www.alphavantage.co/
-    //Please look at documentation here: https://www.alphavantage.co/documentation/
+  private final String ticker;
 
+  public AlphaVantageStreamReader(String ticker) {
+    this.ticker = Objects.requireNonNull(ticker);
+  }
+
+  public Readable getReadable() {
     // I already got the new API Key - JOE
-    String apiKey = "77HF1Q9EHA9M0W2L";
-    String stockSymbol = "GOOG"; //ticker symbol for Google
+    String apiKey = "4ZZS6M66PTROODSK";
+    String stockSymbol = this.ticker; //ticker symbol for Google
     URL url = null;
 
     try {
@@ -56,7 +62,6 @@ public class AlphaVantageStreamReader implements IReader {
     catch (IOException e) {
       throw new IllegalArgumentException("No price data found for "+stockSymbol);
     }
-    System.out.println("Return value: ");
-    System.out.println(output.toString());
+    return new StringReader(output.toString());
   }
 }
