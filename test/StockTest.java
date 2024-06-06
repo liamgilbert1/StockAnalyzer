@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 public class StockTest {
 
   IStock stock1;
+  IStock stock1Clone;
   IStock stock2;
   IStock stock3;
   IStockData day1;
@@ -39,6 +40,7 @@ public class StockTest {
     stockData1.put(date2, day2);
     stockData1.put(date3, day3);
     stock1 = new Stock("GOOG");
+    stock1Clone = new Stock("GOOG");
     stock2 = new Stock("MSFT", stockData1);
   }
 
@@ -73,5 +75,25 @@ public class StockTest {
     assertEquals(day1.getClose(), stock3.getPrice(date1), .0001);
     assertEquals(day2.getClose(), stock3.getPrice(date2), .0001);
     assertEquals(day3.getClose(), stock3.getPrice(date3), .0001);
+  }
+
+  @Test
+  public void getStockData() {
+    assertEquals(stockData1, stock2.getStockData());
+  }
+
+  @Test
+  public void equals() {
+    assertEquals(stock1, stock1Clone);
+    stock1Clone.addStockData(date1, day1);
+    assertEquals(stock1, stock1Clone);
+    assertNotEquals(stock1, stock2);
+  }
+
+  @Test
+  public void hashCodeTest() {
+    assertEquals(stock1.hashCode(), stock1Clone.hashCode());
+    stock1.addStockData(date1, day1);
+    assertEquals(stock1.hashCode(), stock1Clone.hashCode());
   }
 }

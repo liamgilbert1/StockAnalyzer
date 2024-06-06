@@ -54,4 +54,27 @@ public class StockDataTest {
     assertEquals(1000000, day2.getVolume());
     assertEquals(1000000, day3.getVolume());
   }
+
+  @Test
+  public void equals() {
+    IStockData day1Clone = new StockData(100, 110, 90, 105, 1000000);
+    IStockData day2Clone = new StockData(105, 115, 95, 110, 1000000);
+    IStockData day3Clone = new StockData(110, 120, 100, 115, 1000000);
+    assertEquals(day1, day1Clone);
+    assertEquals(day2, day2Clone);
+    assertEquals(day3, day3Clone);
+    assertNotEquals(day1, day2);
+    assertNotEquals(day1, day3);
+    assertNotEquals(day2, day3);
+  }
+
+  @Test
+  public void hashCodeTest() {
+    IStockData day1Clone = new StockData(100, 110, 90, 105, 1000000);
+    IStockData day2Clone = new StockData(105, 115, 95, 110, 1000000);
+    IStockData day3Clone = new StockData(110, 120, 100, 115, 1000000);
+    assertEquals(day1.hashCode(), day1Clone.hashCode());
+    assertEquals(day2.hashCode(), day2Clone.hashCode());
+    assertEquals(day3.hashCode(), day3Clone.hashCode());
+  }
 }

@@ -38,4 +38,26 @@ public class Stock implements IStock {
     newStockData.put(date, data);
     return new Stock(ticker, newStockData);
   }
+
+  @Override
+  public Map<LocalDate, IStockData> getStockData() {
+    return new HashMap<>(stockData);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Stock stock = (Stock) obj;
+    return ticker.equals(stock.ticker);
+  }
+
+  @Override
+  public int hashCode() {
+    return ticker.hashCode();
+  }
 }

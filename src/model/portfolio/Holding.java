@@ -1,6 +1,7 @@
 package model.portfolio;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import model.stock.IStock;
 
@@ -31,5 +32,22 @@ public class Holding implements IHolding {
   @Override
   public IHolding addQuantity(int quantity) {
     return new Holding(stock, this.quantity + quantity);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    Holding holding = (Holding) obj;
+    return quantity == holding.quantity && stock.equals(holding.stock);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(stock, quantity);
   }
 }
