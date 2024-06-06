@@ -22,9 +22,14 @@ public class MovingAverageCommand implements ICommand {
   @Override
   public void execute(IModel model, Scanner scanner) {
     String ticker = "";
+    String date = "";
     String numDays = "";
     if (scanner.hasNext()) {
       ticker = scanner.next();
+    }
+
+    if (scanner.hasNext()) {
+      date = scanner.next();
     }
 
     if (scanner.hasNextInt()) {
@@ -33,7 +38,7 @@ public class MovingAverageCommand implements ICommand {
 
     if (!ticker.isEmpty() && !numDays.isEmpty()) {
       int days = Integer.parseInt(numDays);
-      double movingAverage = model.movingAverage(ticker, days);
+      double movingAverage = model.movingAverage(ticker, date, days);
 
       try {
         this.out.append(String.format("Moving average is: " + movingAverage));

@@ -1,6 +1,7 @@
 package model.portfolio;
 
-import model.IDate;
+import java.time.LocalDate;
+
 import model.stock.IStock;
 
 public class Holding implements IHolding {
@@ -12,18 +13,22 @@ public class Holding implements IHolding {
     this.quantity = quantity;
   }
 
+  @Override
   public IStock getStock() {
     return stock;
   }
 
+  @Override
   public int getQuantity() {
     return quantity;
   }
 
-  public double getValue(IDate date) {
+  @Override
+  public double getValue(LocalDate date) {
     return stock.getPrice(date) * quantity;
   }
 
+  @Override
   public IHolding addQuantity(int quantity) {
     return new Holding(stock, this.quantity + quantity);
   }

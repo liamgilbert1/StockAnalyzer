@@ -1,20 +1,19 @@
 package model.stock;
 
+import java.time.LocalDate;
 import java.util.Map;
-
-import model.IDate;
 
 public class Stock implements IStock {
   private final String ticker;
-  private final Map<String, StockData> stockData;
+  private final Map<LocalDate, StockData> stockData;
 
-  public Stock(String ticker, Map<String, StockData> stockData) {
+  public Stock(String ticker, Map<LocalDate, StockData> stockData) {
     this.ticker = ticker;
     this.stockData = stockData;
   }
   @Override
-  public double getPrice(IDate date) {
-    return stockData.get(date.dateToString()).getClose();
+  public double getPrice(LocalDate date) {
+    return stockData.get(date).getClose();
   }
 
   @Override

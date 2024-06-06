@@ -35,7 +35,7 @@ public class GainOrLossCommand implements ICommand {
     }
 
     if (!startDate.isEmpty() || !endDate.isEmpty()) {
-      double gainOrLoss = model.calculateGainOrLoss(startDate, endDate);
+      double gainOrLoss = model.calculateGainOrLoss(ticker, startDate, endDate);
 
       try {
         this.out.append(String.format("Gain or Loss: %.2f\n", gainOrLoss));

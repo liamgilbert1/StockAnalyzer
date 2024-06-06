@@ -14,7 +14,7 @@ public interface IModel {
    * @param endDate the end date of the stock
    * @return the gain or loss of the stock
    */
-  double calculateGainOrLoss(String startDate, String endDate);
+  double calculateGainOrLoss(String ticker, String startDate, String endDate);
 
   /**
    * Calculate the moving average of the stock for the given number of days.
@@ -22,7 +22,7 @@ public interface IModel {
    * @param days the number of days to calculate the moving average
    * @return the moving average of the stock
    */
-  double movingAverage(String ticker, int days);
+  double movingAverage(String ticker, String date, int days);
 
   /**
    * Determine if the stock has crossed over for the given number of days.
@@ -30,7 +30,7 @@ public interface IModel {
    * @param days the number of days to determine if the stock has crossed over
    * @return true if the stock has crossed over, false otherwise
    */
-  boolean crossOver(String ticker, int days);
+  boolean crossOver(String ticker, String date, int days);
 
 
 

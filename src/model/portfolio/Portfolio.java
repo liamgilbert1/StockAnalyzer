@@ -3,7 +3,7 @@ package model.portfolio;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.IDate;
+import java.time.LocalDate;
 
 public class Portfolio implements IPortfolio {
   private final String name;
@@ -38,8 +38,8 @@ public class Portfolio implements IPortfolio {
     return new Portfolio(name, newHoldings);
   }
 
-  public double getValue(IDate date) {
-    int value = 0;
+  public double getValue(LocalDate date) {
+    double value = 0;
     for (IHolding holding : holdings) {
       value += holding.getValue(date);
     }

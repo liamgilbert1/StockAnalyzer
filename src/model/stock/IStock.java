@@ -1,9 +1,9 @@
 package model.stock;
 
-import model.IDate;
+import java.time.LocalDate;
 
 public interface IStock {
-  double getPrice(IDate date);
+  double getPrice(LocalDate date);
 
   String getTicker();
 }

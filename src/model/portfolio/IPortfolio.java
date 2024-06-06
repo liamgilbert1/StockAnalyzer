@@ -1,10 +1,10 @@
 package model.portfolio;
 
-import model.IDate;
+import java.time.LocalDate;
 
 public interface IPortfolio {
 
   IPortfolio addHolding(IHolding holding);
 
-  double getValue(IDate date);
+  double getValue(LocalDate date);
 }

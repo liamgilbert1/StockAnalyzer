@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,17 +25,42 @@ public class ModelImpl implements IModel {
    * @return
    */
   @Override
-  public double calculateGainOrLoss(String startDate, String endDate) {
-    return 0;
+  public double calculateGainOrLoss(String ticker, String startDate, String endDate) {
+    LocalDate start = LocalDate.parse(startDate);
+    LocalDate end = LocalDate.parse(endDate);
+
+    return this.stocks.get(ticker).getPrice(start) - this.stocks.get(ticker).getPrice(end);
+
   }
 
+  /**
+   * Calculate the moving average of the stock for the given number of days.
+   * @param ticker the date of the stock
+   * @param date the date of the stock
+   * @param days the number of days to calculate the moving average
+   * @return the moving average of the stock
+   */
   @Override
-  public double movingAverage(String ticker, int days) {
-    return 0;
+  public double movingAverage(String ticker, String date, int days) {
+    LocalDate startDate = LocalDate.parse(date);
+    double total = 0.0;
+
+    for (int i = 0; i < days; i++) {
+      total += this.stocks.get(ticker).getPrice(startDate.minusDays(i));
+    }
+
+    return total / days;
   }
 
+  /**
+   * Determine if the stock has crossed over for the given number of days.
+   * @param ticker the ticker of the stock
+   * @param days the number of days to determine if the stock has crossed over
+   * @return true if the stock has crossed over, false otherwise
+   */
   @Override
-  public boolean crossOver(String ticker, int days) {
-    return false;
+  public boolean crossOver(String ticker, String date, int days) {
+    return this.stocks.get(ticker).getPrice(LocalDate.parse(date))
+            > this.movingAverage(ticker, date, days);
   }
 }

@@ -20,8 +20,13 @@ public class CrossoverCommand implements ICommand {
 
   @Override
   public void execute(IModel model, Scanner scanner) {
+    String ticker = "";
     String date = "";
     int days = 0;
+    if (scanner.hasNext()) {
+      ticker = scanner.next();
+    }
+
     if (scanner.hasNext()) {
       date = scanner.next();
     }
@@ -31,7 +36,7 @@ public class CrossoverCommand implements ICommand {
     }
 
     if (!date.isEmpty() && days > 0) {
-      boolean isCrossOver = model.crossOver(date, days);
+      boolean isCrossOver = model.crossOver(ticker, date, days);
 
       try {
         this.out.append(String.format("Is there a crossover: " + isCrossOver));
