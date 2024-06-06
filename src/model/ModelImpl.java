@@ -17,6 +17,12 @@ public class ModelImpl implements IModel {
 
   }
 
+  /**
+   * Calculate the gain or loss of the stock from the start date to the end date.
+   * @param startDate the start date of the stock
+   * @param endDate the end date of the stock
+   * @return
+   */
   @Override
   public double calculateGainOrLoss(String startDate, String endDate) {
     return 0;

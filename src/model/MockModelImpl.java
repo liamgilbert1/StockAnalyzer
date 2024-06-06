@@ -16,8 +16,7 @@ public class MockModelImpl implements IModel {
 
   @Override
   public double calculateGainOrLoss(String startDate, String endDate) {
-    log.append("Calculate gain or loss with start date: " + startDate + " and endDate: "
-            + endDate + "\n");
+    log.append("GainOrLoss " + startDate + " " + endDate);
     return 0;
   }
 
@@ -29,7 +28,7 @@ public class MockModelImpl implements IModel {
 
   @Override
   public boolean crossOver(String ticker, int days) {
-    log.append("Does stock " + ticker + " crossover over " + days + " days\n");
+    log.append("Crossover " + ticker + " " + days);
     return false;
   }
 }

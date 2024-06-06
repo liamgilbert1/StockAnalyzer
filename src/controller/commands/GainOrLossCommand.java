@@ -19,8 +19,13 @@ public class GainOrLossCommand implements ICommand {
 
   @Override
   public void execute(IModel model, Scanner scanner) {
+    String ticker = "";
     String startDate = "";
     String endDate = "";
+    if (scanner.hasNext()) {
+      ticker = scanner.next();
+    }
+
     if (scanner.hasNext()) {
       startDate = scanner.next();
     }

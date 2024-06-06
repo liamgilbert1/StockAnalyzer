@@ -31,7 +31,7 @@ public class MovingAverageCommand implements ICommand {
       numDays = scanner.next();
     }
 
-    if (ticker != "" && numDays != "") {
+    if (!ticker.isEmpty() && !numDays.isEmpty()) {
       int days = Integer.parseInt(numDays);
       double movingAverage = model.movingAverage(ticker, days);
 
