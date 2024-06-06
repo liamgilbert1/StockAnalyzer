@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Stock implements IStock {
   private final String ticker;
-  private final Map<LocalDate, StockData> stockData;
+  private final Map<LocalDate, IStockData> stockData;
 
-  public Stock(String ticker, Map<LocalDate, StockData> stockData) {
+  public Stock(String ticker, Map<LocalDate, IStockData> stockData) {
     this.ticker = ticker;
     this.stockData = stockData;
   }
