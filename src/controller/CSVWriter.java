@@ -7,7 +7,6 @@ import java.io.Writer;
 import java.util.Scanner;
 
 public class CSVWriter implements IWriter {
-
   public void write(String ticker, Readable readable) {
     String file = ticker + ".csv";
     try (Writer writer = new FileWriter(file)) {

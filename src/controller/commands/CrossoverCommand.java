@@ -1,10 +1,12 @@
 package controller.commands;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Scanner;
 
 import controller.AlphaVantageStreamReader;
+import controller.CSVReader;
 import controller.CSVWriter;
 import model.IModel;
 
@@ -33,8 +35,8 @@ public class CrossoverCommand implements ICommand {
 
     String fileName = ticker + ".csv";
     File file = new File(fileName);
-    Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
     if (!file.exists()) {
+      Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
       new CSVWriter().write(ticker, stockAPIData);
     }
 
@@ -47,6 +49,17 @@ public class CrossoverCommand implements ICommand {
     }
 
     if (!date.isEmpty() && days > 0) {
+      LocalDate dateEntered = LocalDate.parse(date);
+      if (new CSVReader(ticker).getMostRecentDate().isBefore(dateEntered)) {
+        Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
+        new CSVWriter().write(ticker, stockAPIData);
+        System.out.print("Data has been updateD DUE TO INPUT BEING AFTER MOST RECENT DATE");
+      }
+      if (!new CSVReader(ticker).checkContainsDates(dateEntered, days)) {
+        Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
+        new CSVWriter().write(ticker, stockAPIData);
+      }
+
       boolean isCrossOver = model.crossOver(ticker, date, days);
 
       try {
@@ -55,7 +68,6 @@ public class CrossoverCommand implements ICommand {
         throw new IllegalStateException("Could not write to file");
       }
     }
-
   }
 
   @Override
