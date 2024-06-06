@@ -35,7 +35,6 @@ public class CSVReader implements ICSVReader {
   public boolean checkContainsDates(LocalDate date, int days) {
     date = findLastOpenDate(date);
     Readable stockData = getReadable();
-
     try (Scanner scanner = new Scanner(stockData)) {
       scanner.nextLine();
       while (scanner.hasNextLine()) {
@@ -56,6 +55,36 @@ public class CSVReader implements ICSVReader {
     }
   }
 
+  @Override
+  public boolean checkContainsDateRange(LocalDate startDate, LocalDate endDate) {
+    startDate = findLastOpenDate(startDate);
+    endDate = findLastOpenDate(endDate);
+    boolean containsStartDate = false;
+    boolean containsEndDate = false;
+    Readable stockData = getReadable();
+    try (Scanner scanner = new Scanner(stockData)) {
+      scanner.nextLine();
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] data = line.split(",");
+        LocalDate dateInFile = LocalDate.parse(data[0]);
+        if (dateInFile.equals(startDate)) {
+          containsStartDate = true;
+        }
+        if (dateInFile.equals(endDate)) {
+          containsEndDate = true;
+        }
+        if (containsStartDate && containsEndDate) {
+          return true;
+        }
+        if (dateInFile.isBefore(endDate) && !containsEndDate) {
+          return false;
+        }
+      }
+      return false;
+    }
+  }
+
   private LocalDate findLastOpenDate(LocalDate date) {
     Readable stockData = getReadable();
     try (Scanner scanner = new Scanner(stockData)) {
@@ -65,7 +94,6 @@ public class CSVReader implements ICSVReader {
         String[] data = line.split(",");
         LocalDate dateInFile = LocalDate.parse(data[0]);
         if (dateInFile.equals(date) || dateInFile.isBefore(date)) {
-          System.out.print(dateInFile);
           return dateInFile;
         }
       }

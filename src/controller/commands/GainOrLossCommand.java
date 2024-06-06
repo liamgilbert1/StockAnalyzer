@@ -10,7 +10,7 @@ import model.IModel;
  * over a given period of time, the gain or loss of a given stock.
  * (Closing prices only).
  */
-public class GainOrLossCommand implements ICommand {
+public class GainOrLossCommand extends AWriterCommand {
   private final Appendable out;
 
   public GainOrLossCommand(Appendable out) {
@@ -19,29 +19,19 @@ public class GainOrLossCommand implements ICommand {
 
   @Override
   public void execute(IModel model, Scanner scanner) {
-    String ticker = "";
-    String startDate = "";
-    String endDate = "";
-    if (scanner.hasNext()) {
-      ticker = scanner.next();
-    }
+    String ticker = getNextString(scanner);
+    String startDateEntered = getNextString(scanner);
+    String endDateEntered = getNextString(scanner);
 
-    if (scanner.hasNext()) {
-      startDate = scanner.next();
-    }
 
-    if (scanner.hasNext()) {
-      endDate = scanner.next();
-    }
+    tryWrite(ticker, startDateEntered, endDateEntered);
 
-    if (!startDate.isEmpty() || !endDate.isEmpty()) {
-      double gainOrLoss = model.calculateGainOrLoss(ticker, startDate, endDate);
+    double gainOrLoss = model.calculateGainOrLoss(ticker, startDateEntered, endDateEntered);
 
-      try {
-        this.out.append(String.format("Gain or Loss: %.2f\n", gainOrLoss));
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+    try {
+      this.out.append(String.format("Gain or Loss: %.2f\n", gainOrLoss));
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to process command.");
     }
   }
 
