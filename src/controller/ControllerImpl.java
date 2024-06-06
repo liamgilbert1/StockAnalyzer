@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -15,12 +16,15 @@ public class ControllerImpl implements IController {
   private final Map<String, Supplier<ICommand>> commandMap;
   private final Readable input;
 
-  public ControllerImpl(Readable input) {
-    this.commandMap = new HashMap<>();
-    this.commandMap.put("GainOrLoss", () -> new GainOrLossCommand(System.out));
-    this.commandMap.put("MovingAverage", () -> new MovingAverageCommand(System.out));
-    this.commandMap.put("Crossover", () -> new CrossoverCommand(System.out));
+  private final Appendable output;
+
+  public ControllerImpl(Readable input, Appendable output) {
     this.input = input;
+    this.output = output;
+    this.commandMap = new HashMap<>();
+    this.commandMap.put("GainOrLoss", () -> new GainOrLossCommand(output));
+    this.commandMap.put("MovingAverage", () -> new MovingAverageCommand(output));
+    this.commandMap.put("Crossover", () -> new CrossoverCommand(output));
   }
 
   /**
@@ -30,12 +34,19 @@ public class ControllerImpl implements IController {
   @Override
   public void go(IModel model) {
     Scanner scanner = new Scanner(input);
-
     while(scanner.hasNext()) {
       String command = scanner.next();
       ICommand commandToRun = this.commandMap.get(command).get();
       if (command != null) {
-        commandToRun.execute(model, scanner);
+        try {
+          commandToRun.execute(model, scanner);
+        } catch (Exception e) {
+          try {
+            output.append("\nAn error occurred while executing the command. Please try again.");
+          } catch (IOException ioException) {
+            throw new IllegalStateException("Could not append to output.");
+          }
+        }
       }
     }
   }

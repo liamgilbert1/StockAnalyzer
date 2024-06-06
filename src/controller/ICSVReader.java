@@ -11,5 +11,7 @@ public interface ICSVReader extends IReader {
    */
   boolean checkContainsDates(LocalDate date, int days);
 
+  boolean checkContainsDateRange(LocalDate startDate, LocalDate endDate);
+
   LocalDate getMostRecentDate();
 }

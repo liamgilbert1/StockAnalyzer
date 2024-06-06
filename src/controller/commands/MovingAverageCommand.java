@@ -12,7 +12,7 @@ import model.IModel;
  * days, going back from the given date.
  * (Closing prices only).
  */
-public class MovingAverageCommand implements ICommand {
+public class MovingAverageCommand extends AWriterCommand {
   private final Appendable out;
 
   public MovingAverageCommand(Appendable out) {
@@ -21,32 +21,19 @@ public class MovingAverageCommand implements ICommand {
 
   @Override
   public void execute(IModel model, Scanner scanner) {
-    String ticker = "";
-    String date = "";
-    String numDays = "";
-    if (scanner.hasNext()) {
-      ticker = scanner.next();
+    String ticker = getNextString(scanner);
+    String dateEntered = getNextString(scanner);
+    int days = getPositiveInt(scanner);
+
+    tryWrite(ticker, dateEntered, days);
+
+    double movingAverage = model.movingAverage(ticker, dateEntered, days);
+
+    try {
+      this.out.append(String.format("Moving average is: " + movingAverage));
+    } catch (Exception e) {
+      throw new IllegalStateException("Could not process command.");
     }
-
-    if (scanner.hasNext()) {
-      date = scanner.next();
-    }
-
-    if (scanner.hasNextInt()) {
-      numDays = scanner.next();
-    }
-
-    if (!ticker.isEmpty() && !numDays.isEmpty()) {
-      int days = Integer.parseInt(numDays);
-      double movingAverage = model.movingAverage(ticker, date, days);
-
-      try {
-        this.out.append(String.format("Moving average is: " + movingAverage));
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }
-
   }
 
   @Override
