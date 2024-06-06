@@ -1,8 +1,11 @@
 package controller.commands;
 
+import java.io.File;
 import java.util.Objects;
 import java.util.Scanner;
 
+import controller.AlphaVantageStreamReader;
+import controller.CSVWriter;
 import model.IModel;
 
 /**
@@ -23,8 +26,16 @@ public class CrossoverCommand implements ICommand {
     String ticker = "";
     String date = "";
     int days = 0;
+
     if (scanner.hasNext()) {
       ticker = scanner.next();
+    }
+
+    String fileName = ticker + ".csv";
+    File file = new File(fileName);
+    Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
+    if (!file.exists()) {
+      new CSVWriter().write(ticker, stockAPIData);
     }
 
     if (scanner.hasNext()) {
@@ -41,7 +52,7 @@ public class CrossoverCommand implements ICommand {
       try {
         this.out.append(String.format("Is there a crossover: " + isCrossOver));
       } catch (Exception e) {
-        e.printStackTrace();
+        throw new IllegalStateException("Could not write to file");
       }
     }
 

@@ -38,10 +38,9 @@ public class ControllerImplTest {
     StringBuilder log = new StringBuilder();
     IModel mockModel = new MockModelImpl(log);
 
-    Readable readable = new StringReader("Crossover GOOG 2020-10-05 12");
+    Readable readable = new StringReader("Crossover AMZN 2020-10-05 12");
     IController controller = new ControllerImpl(readable);
     controller.go(mockModel);
-    assertEquals("Crossover GOOG 2020-10-05 12", log.toString());
+    assertEquals("Crossover AMZN 2020-10-05 12", log.toString());
   }
-
 }

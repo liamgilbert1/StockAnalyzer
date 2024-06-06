@@ -14,11 +14,11 @@ public class AlphaVantageStreamReader implements IReader {
     this.ticker = Objects.requireNonNull(ticker);
   }
 
+  // 4ZZS6M66PTROODSK
   public Readable getReadable() {
-    // I already got the new API Key - JOE
-    String apiKey = "4ZZS6M66PTROODSK";
+    String apiKey = "W0M1JOKC82EZEQA8";
     String stockSymbol = this.ticker; //ticker symbol for Google
-    URL url = null;
+    URL url;
 
     try {
       /*
@@ -39,10 +39,9 @@ public class AlphaVantageStreamReader implements IReader {
               + "no longer works");
     }
 
-    InputStream in = null;
-    StringBuilder output = new StringBuilder();
+    Appendable output = new StringBuilder();
 
-    try {
+    try (InputStream in = url.openStream()) {
       /*
       Execute this query. This returns an InputStream object.
       In the csv format, it returns several lines, each line being separated
@@ -52,16 +51,15 @@ public class AlphaVantageStreamReader implements IReader {
 
       This is printed below.
        */
-      in = url.openStream();
       int b;
-
-      while ((b=in.read())!=-1) {
-        output.append((char)b);
+      while ((b = in.read()) != -1) {
+        output.append(((char)b));
       }
     }
     catch (IOException e) {
       throw new IllegalArgumentException("No price data found for "+stockSymbol);
     }
+
     return new StringReader(output.toString());
   }
 }
