@@ -3,6 +3,8 @@ package controller;
 import java.io.FileReader;
 import java.io.StringReader;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -85,4 +87,45 @@ public class CSVReader implements ICSVReader {
     }
     return dateInFile;
   }
+
+  public double getPrice(LocalDate date) {
+    Readable stockData = getReadable();
+    try (Scanner scanner = new Scanner(stockData)) {
+      scanner.nextLine();
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] data = line.split(",");
+        LocalDate dateInFile = LocalDate.parse(data[0]);
+        if (dateInFile.equals(date)) {
+          return Double.parseDouble(data[4]);
+        }
+      }
+    }
+    throw new IllegalArgumentException("Date not found");
+  }
+
+  public List<Double> getPricesAcrossDays(LocalDate date, int days) {
+    Readable stockData = getReadable();
+    List<Double> prices = new ArrayList<>();
+    try (Scanner scanner = new Scanner(stockData)) {
+      scanner.nextLine();
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] data = line.split(",");
+        LocalDate dateInFile = LocalDate.parse(data[0]);
+        if (dateInFile.equals(date)) {
+          for (int i = 0; i < days; i++) {
+            prices.add(Double.parseDouble(data[4]));
+            if (!scanner.hasNextLine()) {
+              break;
+            }
+            data = scanner.nextLine().split(",");
+          }
+          return prices;
+        }
+      }
+    }
+    throw new IllegalArgumentException("Date not found");
+  }
+
 }

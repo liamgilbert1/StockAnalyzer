@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class MockModelImpl implements IModel {
@@ -15,20 +16,20 @@ public class MockModelImpl implements IModel {
   }
 
   @Override
-  public double calculateGainOrLoss(String ticker, String startDate, String endDate) {
-    log.append("GainOrLoss " + ticker + " " + startDate + " " + endDate);
+  public double calculateGainOrLoss(String ticker, LocalDate startDate, LocalDate endDate) {
+    log.append("GainOrLoss " + ticker + " " + startDate.toString() + " " + endDate.toString());
     return 0;
   }
 
   @Override
-  public double movingAverage(String ticker, String date, int days) {
-    log.append("MovingAverage " + ticker + " " + date + " " + days);
+  public double movingAverage(String ticker, LocalDate date, int days) {
+    log.append("MovingAverage " + ticker + " " + date.toString() + " " + days);
     return 0;
   }
 
   @Override
-  public boolean crossOver(String ticker, String date, int days) {
-    log.append("Crossover " + ticker + " " + date + " " + days);
+  public boolean crossOver(String ticker, LocalDate date, int days) {
+    log.append("Crossover " + ticker + " " + date.toString() + " " + days);
     return false;
   }
 }

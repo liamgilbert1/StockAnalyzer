@@ -1,6 +1,7 @@
 package controller;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface ICSVReader extends IReader {
   /**
@@ -12,4 +13,8 @@ public interface ICSVReader extends IReader {
   boolean checkContainsDates(LocalDate date, int days);
 
   LocalDate getMostRecentDate();
+
+  double getPrice(LocalDate date);
+
+  List<Double> getPricesAcrossDays(LocalDate date, int days);
 }

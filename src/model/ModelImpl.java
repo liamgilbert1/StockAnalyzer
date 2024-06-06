@@ -1,46 +1,29 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import controller.CSVReader;
+import controller.ICSVReader;
+import controller.IReader;
+import model.portfolio.IPortfolio;
 import model.stock.IStock;
 import model.stock.Stock;
 import model.stock.StockData;
 
 public class ModelImpl implements IModel {
-  private Map<String, IStock> stocks;
+  private List<IPortfolio> portfolios;
 
   public ModelImpl() {
-    this.stocks = new HashMap<>();
+    this.portfolios = new ArrayList<>();
   }
 
   @Override
   public void populate(Readable readable) {
-    Scanner scanner = new Scanner(readable);
-
-    if (scanner.hasNext()) {
-      scanner.nextLine();
-    }
-
-    while (scanner.hasNext()) {
-      String[] data = scanner.nextLine().split(",");
-      String ticker = data[0];
-      LocalDate date = LocalDate.parse(data[1]);
-      double open = Double.parseDouble(data[2]);
-      double high = Double.parseDouble(data[3]);
-      double low = Double.parseDouble(data[4]);
-      double close = Double.parseDouble(data[5]);
-      int volume = Integer.parseInt(data[6]);
-
-      if (!this.stocks.containsKey(ticker)) {
-        this.stocks.put(ticker, new Stock(ticker));
-      }
-
-      this.stocks.get(ticker).addStockData(date, new StockData(open, high, low, close, volume));
-    }
-
 
   }
 
@@ -51,12 +34,9 @@ public class ModelImpl implements IModel {
    * @return
    */
   @Override
-  public double calculateGainOrLoss(String ticker, String startDate, String endDate) {
-    LocalDate start = LocalDate.parse(startDate);
-    LocalDate end = LocalDate.parse(endDate);
-
-    return this.stocks.get(ticker).getPrice(start) - this.stocks.get(ticker).getPrice(end);
-
+  public double calculateGainOrLoss(String ticker, LocalDate startDate, LocalDate endDate) {
+    ICSVReader reader = new CSVReader(ticker);
+    return reader.getPrice(endDate) - reader.getPrice(startDate);
   }
 
   /**
@@ -67,15 +47,15 @@ public class ModelImpl implements IModel {
    * @return the moving average of the stock
    */
   @Override
-  public double movingAverage(String ticker, String date, int days) {
-    LocalDate startDate = LocalDate.parse(date);
-    double total = 0.0;
-
-    for (int i = 0; i < days; i++) {
-      total += this.stocks.get(ticker).getPrice(startDate.minusDays(i));
+  public double movingAverage(String ticker, LocalDate date, int days) {
+    ICSVReader reader = new CSVReader(ticker);
+    List<Double> prices = reader.getPricesAcrossDays(date, days);
+    double total = 0;
+    for (double price : prices) {
+      total += price;
     }
-
     return total / days;
+
   }
 
   /**
@@ -85,8 +65,8 @@ public class ModelImpl implements IModel {
    * @return true if the stock has crossed over, false otherwise
    */
   @Override
-  public boolean crossOver(String ticker, String date, int days) {
-    return this.stocks.get(ticker).getPrice(LocalDate.parse(date))
-            > this.movingAverage(ticker, date, days);
+  public boolean crossOver(String ticker, LocalDate date, int days) {
+    ICSVReader reader = new CSVReader(ticker);
+    return reader.getPrice(date) > movingAverage(ticker, date, days);
   }
 }
