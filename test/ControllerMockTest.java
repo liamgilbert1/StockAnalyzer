@@ -9,10 +9,10 @@ import model.MockModelImpl;
 
 import static org.junit.Assert.assertEquals;
 
-public class ControllerImplTest {
+public class ControllerMockTest {
 
   @Test
-  public void testControllerGainOrLoss() {
+  public void testControllerMockGainOrLoss() {
     StringBuilder log = new StringBuilder();
     IModel mockModel = new MockModelImpl(log);
     Appendable output = new StringBuilder();
@@ -23,7 +23,7 @@ public class ControllerImplTest {
   }
 
   @Test
-  public void testControllerMovingAverage() {
+  public void testControllerMockMovingAverage() {
     StringBuilder log = new StringBuilder();
     IModel mockModel = new MockModelImpl(log);
     Appendable output = new StringBuilder();
@@ -34,7 +34,7 @@ public class ControllerImplTest {
   }
 
   @Test
-  public void testControllerCrossover() {
+  public void testControllerMockCrossover() {
     StringBuilder log = new StringBuilder();
     IModel mockModel = new MockModelImpl(log);
     Appendable output = new StringBuilder();
