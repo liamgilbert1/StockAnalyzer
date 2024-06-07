@@ -3,6 +3,12 @@ package controller.commands;
 import java.util.Scanner;
 
 public abstract class ACommand implements ICommand {
+  protected final Appendable out;
+
+  public ACommand(Appendable out) {
+    this.out = out;
+  }
+
   protected String getNextString(Scanner scanner) {
     String nextString = "";
     if (scanner.hasNext()) {

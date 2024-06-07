@@ -14,10 +14,9 @@ import model.IModel;
  * specified date range, and a specified value of x (the number of days in the moving average).
  */
 public class CrossoverCommand extends AWriterCommand {
-  private final Appendable out;
 
   public CrossoverCommand(Appendable out) {
-    this.out = Objects.requireNonNull(out);
+    super(out);
   }
 
   @Override
@@ -29,17 +28,16 @@ public class CrossoverCommand extends AWriterCommand {
 
     tryWrite(ticker, startDateEntered, endDateEntered);
 
-    List<LocalDate> isCrossOver = model.crossOver(ticker, LocalDate.parse(startDateEntered),
-            LocalDate.parse(endDateEntered), xDays);
-
     try {
+      List<LocalDate> isCrossOver = model.crossOver(ticker, LocalDate.parse(startDateEntered),
+              LocalDate.parse(endDateEntered), xDays);
       int numCrossOvers = isCrossOver.size();
       this.out.append(String.format("Number of crossovers: " + numCrossOvers + "\n"));
       for (LocalDate date : isCrossOver) {
         this.out.append(String.format(date.toString() + "\n"));
       }
     } catch (Exception e) {
-      throw new IllegalStateException("Could not write to file");
+      throw new IllegalStateException("Failed to process command.");
     }
   }
 

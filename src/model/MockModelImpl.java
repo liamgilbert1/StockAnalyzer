@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import model.stock.IStock;
+
 public class MockModelImpl implements IModel {
   private final StringBuilder log;
 
@@ -45,5 +47,20 @@ public class MockModelImpl implements IModel {
   @Override
   public void addPortfolioHolding(String portfolioName, String ticker, int quantity) {
 
+  }
+
+  @Override
+  public double getPortfolioValue(String portfolioName, LocalDate date) {
+    return 0;
+  }
+
+  @Override
+  public List<String> getStocksInPortfolio(String portfolioName) {
+    return null;
+  }
+
+  @Override
+  public IStock getStock(String ticker) {
+    return null;
   }
 }

@@ -9,19 +9,16 @@ import model.IModel;
  */
 public class CreatePortfolioCommand extends ACommand {
 
-  Appendable out;
-
   public CreatePortfolioCommand(Appendable out) {
-    this.out = out;
+    super(out);
   }
 
   @Override
   public void execute(IModel model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
 
-    model.createPortfolio(portfolioName);
-
     try {
+      model.createPortfolio(portfolioName);
       this.out.append("Portfolio Created\n");
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");

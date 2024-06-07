@@ -1,7 +1,6 @@
 package controller.commands;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Scanner;
 
 import model.IModel;
@@ -14,10 +13,8 @@ import model.IModel;
  * (Closing prices only).
  */
 public class MovingAverageCommand extends AWriterCommand {
-  private final Appendable out;
-
   public MovingAverageCommand(Appendable out) {
-    this.out = Objects.requireNonNull(out);
+    super(out);
   }
 
   @Override
@@ -28,9 +25,8 @@ public class MovingAverageCommand extends AWriterCommand {
 
     tryWrite(ticker, dateEntered, days);
 
-    double movingAverage = model.movingAverage(ticker, LocalDate.parse(dateEntered), days);
-
     try {
+      double movingAverage = model.movingAverage(ticker, LocalDate.parse(dateEntered), days);
       this.out.append(String.format("Moving average is: " + movingAverage));
     } catch (Exception e) {
       throw new IllegalStateException("Could not process command.");

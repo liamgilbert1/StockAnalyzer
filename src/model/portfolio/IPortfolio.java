@@ -12,4 +12,6 @@ public interface IPortfolio {
   List<IHolding> getHoldings();
 
   String getName();
+
+  List<String> getStocks();
 }

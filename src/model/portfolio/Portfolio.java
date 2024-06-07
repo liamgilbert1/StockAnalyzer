@@ -61,6 +61,15 @@ public class Portfolio implements IPortfolio {
   }
 
   @Override
+  public List<String> getStocks() {
+    List<String> stocks = new ArrayList<>();
+    for (IHolding holding : holdings) {
+      stocks.add(holding.getStock().getTicker());
+    }
+    return stocks;
+  }
+
+  @Override
   public boolean equals(Object obj) {
     if (this == obj) {
       return true;

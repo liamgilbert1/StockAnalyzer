@@ -11,6 +11,7 @@ import controller.commands.AddPortfolioHoldingCommand;
 import controller.commands.CreatePortfolioCommand;
 import controller.commands.CrossoverCommand;
 import controller.commands.GainOrLossCommand;
+import controller.commands.GetPortfolioValueCommand;
 import controller.commands.ICommand;
 import controller.commands.MovingAverageCommand;
 import model.IModel;
@@ -24,14 +25,15 @@ public class ControllerImpl implements IController {
   public ControllerImpl(Readable input, Appendable output) {
     this.input = input;
     this.output = output;
-    this.commandMap = new HashMap<>();
-    this.commandMap.put("GainOrLoss", () -> new GainOrLossCommand(output));
-    this.commandMap.put("MovingAverage", () -> new MovingAverageCommand(output));
-    this.commandMap.put("Crossover", () -> new CrossoverCommand(output));
-    this.commandMap.put("CreatePortfolio", () -> new CreatePortfolioCommand(output));
-    this.commandMap.put("AddPortfolioHolding", () -> new AddPortfolioHoldingCommand(output));
+    commandMap = new HashMap<>();
+    commandMap.put("GainOrLoss", () -> new GainOrLossCommand(output));
+    commandMap.put("MovingAverage", () -> new MovingAverageCommand(output));
+    commandMap.put("Crossover", () -> new CrossoverCommand(output));
+    commandMap.put("CreatePortfolio", () -> new CreatePortfolioCommand(output));
+    commandMap.put("AddPortfolioHolding", () -> new AddPortfolioHoldingCommand(output));
+    commandMap.put("GetPortfolioValue", () -> new GetPortfolioValueCommand(output));
     this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover", "CreatePortfolio",
-            "AddPortfolioHolding");
+            "AddPortfolioHolding", "GetPortfolioValue");
   }
 
   /**

@@ -26,7 +26,8 @@ public class ModelImpl implements IModel {
 
   }
 
-  protected IStock getStock(String ticker) {
+  @Override
+  public IStock getStock(String ticker) {
     return new Stock(ticker);
   }
 
@@ -108,6 +109,26 @@ public class ModelImpl implements IModel {
       if (portfolio.getName().equals(portfolioName)) {
         portfolio.addHolding(new Holding(getStock(ticker), quantity));
         return;
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
+  }
+
+  @Override
+  public double getPortfolioValue(String portfolioName, LocalDate date) {
+    for (IPortfolio portfolio : this.portfolios) {
+      if (portfolio.getName().equals(portfolioName)) {
+        return portfolio.getValue(date);
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
+  }
+
+  @Override
+  public List<String> getStocksInPortfolio(String portfolioName) {
+    for (IPortfolio portfolio : this.portfolios) {
+      if (portfolio.getName().equals(portfolioName)) {
+        return portfolio.getStocks();
       }
     }
     throw new IllegalArgumentException("Portfolio does not exist");

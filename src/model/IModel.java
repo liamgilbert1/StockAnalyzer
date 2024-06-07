@@ -41,4 +41,10 @@ public interface IModel {
   void createPortfolio(String name);
 
   void addPortfolioHolding(String portfolioName, String ticker, int quantity);
+
+  double getPortfolioValue(String portfolioName, LocalDate date);
+
+  List<String> getStocksInPortfolio(String portfolioName);
+
+  IStock getStock(String ticker);
 }

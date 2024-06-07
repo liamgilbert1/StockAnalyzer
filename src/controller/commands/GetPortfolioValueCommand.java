@@ -1,21 +1,55 @@
 package controller.commands;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import model.IModel;
+import model.stock.IStock;
 
 /**
  * This class represents a command that can be executed by the controller. This command determines
  * the value of a given portfolio.
  */
 public class GetPortfolioValueCommand extends AWriterCommand {
+  public GetPortfolioValueCommand(Appendable out) {
+    super(out);
+  }
+
   @Override
   public void execute(IModel model, Scanner scanner) {
+    String portfolioName = getNextString(scanner);
+    String dateEntered = getNextString(scanner);
+    LocalDate date = LocalDate.parse(dateEntered);
 
+
+    List<String> tickersInPortfolio = model.getStocksInPortfolio(portfolioName);
+    List<IStock> stocks = new ArrayList<>();
+    for (String ticker : tickersInPortfolio) {
+      stocks.add(model.getStock(ticker));
+    }
+
+    tryWrite(stocks, date);
+
+    try {
+      double portfolioValue = model.getPortfolioValue(portfolioName, date);
+      this.out.append(String.format("Portfolio value is: " + portfolioValue));
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Failed to process command.");
+    }
   }
 
   @Override
   public String getInstructions() {
-    return null;
+    StringBuilder instructions;
+    instructions = new StringBuilder();
+    instructions.append("Get Portfolio Value: \n");
+    instructions.append("This command calculates the value of a portfolio on a given date.\n");
+    instructions.append("Enter the following parameters separated by spaces:\n");
+    instructions.append("1. Command name (GetPortfolioValue)\n");
+    instructions.append("2. Portfolio name\n");
+    instructions.append("3. Date in the format yyyy-mm-dd\n");
+    return instructions.toString();
   }
 }

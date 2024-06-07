@@ -1,7 +1,6 @@
 package controller.commands;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.Scanner;
 
 import model.IModel;
@@ -12,10 +11,9 @@ import model.IModel;
  * (Closing prices only).
  */
 public class GainOrLossCommand extends AWriterCommand {
-  private final Appendable out;
 
   public GainOrLossCommand(Appendable out) {
-    this.out = Objects.requireNonNull(out);
+    super(out);
   }
 
   @Override
@@ -26,10 +24,9 @@ public class GainOrLossCommand extends AWriterCommand {
 
     tryWrite(ticker, startDateEntered, endDateEntered);
 
-    double gainOrLoss = model.calculateGainOrLoss(ticker, LocalDate.parse(startDateEntered),
-            LocalDate.parse(endDateEntered));
-
     try {
+      double gainOrLoss = model.calculateGainOrLoss(ticker, LocalDate.parse(startDateEntered),
+              LocalDate.parse(endDateEntered));
       this.out.append(String.format("Gain or Loss: %.2f\n", gainOrLoss));
     } catch (Exception e) {
       throw new IllegalStateException("Failed to process command.");

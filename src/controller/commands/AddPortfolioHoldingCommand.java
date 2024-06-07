@@ -5,10 +5,8 @@ import java.util.Scanner;
 import model.IModel;
 
 public class AddPortfolioHoldingCommand extends AWriterCommand {
-  private final Appendable out;
-
   public AddPortfolioHoldingCommand(Appendable out) {
-    this.out = out;
+    super(out);
   }
 
   @Override
@@ -19,9 +17,8 @@ public class AddPortfolioHoldingCommand extends AWriterCommand {
 
     tryWrite(ticker);
 
-    model.addPortfolioHolding(portfolioName, ticker, quantity);
-
     try {
+      model.addPortfolioHolding(portfolioName, ticker, quantity);
       this.out.append("Portfolio holdings updated");
     } catch (Exception e) {
       throw new IllegalStateException("Failed to process command.");
