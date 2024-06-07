@@ -2,6 +2,7 @@ package model.stock;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import controller.readers.CSVReader;
 import controller.readers.IStockReader;
@@ -92,6 +93,6 @@ public class Stock implements IStock {
 
   @Override
   public int hashCode() {
-    return ticker.hashCode();
+    return Objects.hash(ticker);
   }
 }
