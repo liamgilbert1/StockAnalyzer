@@ -16,12 +16,26 @@ import controller.commands.ICommand;
 import controller.commands.MovingAverageCommand;
 import model.IModel;
 
+/**
+ * This class represents the controller for the stock market simulator.
+ * It implements the IController interface.
+ * The controller is responsible for taking in user input and executing the appropriate commands.
+ * The controller has a map of commands that maps a command name to a Supplier of that command.
+ * The controller has a Readable object that takes in user input.
+ * The controller has an Appendable object that outputs to the user.
+ * The controller has a list of ordered commands that are executed in order.
+ */
 public class ControllerImpl implements IController {
   private final Map<String, Supplier<ICommand>> commandMap;
   private final Readable input;
   private final List<String> orderedCommands;
   private final Appendable output;
 
+  /**
+   * Constructs a ControllerImpl object with the given input and output.
+   * @param input the input to be used
+   * @param output the output to be used
+   */
   public ControllerImpl(Readable input, Appendable output) {
     this.input = input;
     this.output = output;
@@ -37,8 +51,8 @@ public class ControllerImpl implements IController {
   }
 
   /**
-   * This method is used to start the controller.
-   * @param model the model to be used
+   * Executes the controller with the given model.
+   * @param model the model to execute the controller on
    */
   @Override
   public void go(IModel model) {
@@ -68,6 +82,9 @@ public class ControllerImpl implements IController {
     }
   }
 
+  /**
+   * Prints the instructions for each command.
+   */
   private void printInstructions() {
     for (String command : this.orderedCommands) {
       try {
