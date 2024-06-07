@@ -15,9 +15,7 @@ import static org.junit.Assert.*;
 public class AddPortfolioHoldingCommandTest {
   ICommand command;
   Appendable output;
-
   IModel model;
-
   Scanner scanner;
 
   Readable input;
