@@ -5,10 +5,19 @@ import java.util.Objects;
 
 import model.stock.IStock;
 
+/**
+ * Represents a holding in a portfolio. A holding is a stock and the quantity of that stock that is
+ * held in a portfolio. A holding can be used to calculate the value of the stock in the portfolio.
+ */
 public class Holding implements IHolding {
   private final IStock stock;
   private final double quantity;
 
+  /**
+   * Constructs a holding with the given stock and quantity.
+   * @param stock the stock that is held in the portfolio.
+   * @param quantity the quantity of the stock that is held in the portfolio.
+   */
   public Holding(IStock stock, double quantity) {
     this.stock = stock;
     this.quantity = quantity;

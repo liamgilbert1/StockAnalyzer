@@ -6,25 +6,34 @@ import java.util.List;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Represents a portfolio of holdings. A portfolio is a collection of holdings, and can be used to
+ * calculate the value of the holdings in the portfolio. A portfolio can also be used to add a
+ * holding to the portfolio.
+ */
 public class Portfolio implements IPortfolio {
   private final String name;
   private final List<IHolding> holdings;
 
+  /**
+   * Constructs a portfolio with the given name. The portfolio is initially empty.
+   * @param name the name of the portfolio.
+   */
   public Portfolio(String name) {
     this.name = name;
     holdings = new ArrayList<>();
   }
 
+  /**
+   * Constructs a portfolio with the given name and holdings.
+   * @param name the name of the portfolio.
+   * @param holdings the holdings in the portfolio.
+   */
   private Portfolio(String name, List<IHolding> holdings) {
     this.name = name;
     this.holdings = holdings;
   }
 
-  /**
-   * Add a holding to the portfolio. If a holding for the same stock already exists, the quantity of
-   * the existing holding is increased by the quantity of the new holding.
-   * @param holding the holding to add.
-   */
   @Override
   public IPortfolio addHolding(IHolding holding) {
     List<IHolding> newHoldings = new ArrayList<>(holdings);
@@ -39,7 +48,6 @@ public class Portfolio implements IPortfolio {
     newHoldings.add(holding);
     return new Portfolio(name, newHoldings);
   }
-
 
   @Override
   public double getValue(LocalDate date) {
