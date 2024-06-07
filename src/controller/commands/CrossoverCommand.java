@@ -1,6 +1,7 @@
 package controller.commands;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -22,15 +23,21 @@ public class CrossoverCommand extends AWriterCommand {
   @Override
   public void execute(IModel model, Scanner scanner) {
     String ticker = getNextString(scanner);
-    String dateEntered = getNextString(scanner);
-    int days = getPositiveInt(scanner);
+    String startDateEntered = getNextString(scanner);
+    String endDateEntered = getNextString(scanner);
+    int xDays = getPositiveInt(scanner);
 
-    tryWrite(ticker, dateEntered, days);
+    tryWrite(ticker, startDateEntered, endDateEntered);
 
-    boolean isCrossOver = model.crossOver(ticker, LocalDate.parse(dateEntered), days);
+    List<LocalDate> isCrossOver = model.crossOver(ticker, LocalDate.parse(startDateEntered),
+            LocalDate.parse(endDateEntered), xDays);
 
     try {
-      this.out.append(String.format("Is there a crossover: " + isCrossOver));
+      int numCrossOvers = isCrossOver.size();
+      this.out.append(String.format("Number of crossovers: " + numCrossOvers + "\n"));
+      for (LocalDate date : isCrossOver) {
+        this.out.append(String.format(date.toString() + "\n"));
+      }
     } catch (Exception e) {
       throw new IllegalStateException("Could not write to file");
     }
@@ -38,6 +45,17 @@ public class CrossoverCommand extends AWriterCommand {
 
   @Override
   public String getInstructions() {
-    return null;
+    StringBuilder instructions;
+    instructions = new StringBuilder();
+    instructions.append("Crossovers: \n");
+    instructions.append("This command determines which days are x-day crossovers for a given "
+            + "stock, over a specified time period \n");
+    instructions.append("Enter the following parameters separated by spaces:\n");
+    instructions.append("1. Command name (Crossover)\n");
+    instructions.append("2. Stock ticker symbol\n");
+    instructions.append("3. Starting date in the format yyyy-mm-dd\n");
+    instructions.append("4. Ending date in the format yyyy-mm-dd\n");
+    instructions.append("5. The number of days to check the crossover over (x)\n");
+    return instructions.toString();
   }
 }

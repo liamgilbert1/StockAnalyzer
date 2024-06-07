@@ -9,6 +9,7 @@ import model.stock.IStock;
 import model.stock.Stock;
 
 import static model.stock.StockDataPoint.CLOSE;
+import static model.stock.StockDataPoint.DATE;
 
 public class ModelImpl implements IModel {
 
@@ -26,8 +27,6 @@ public class ModelImpl implements IModel {
   protected IStock getStock(String ticker) {
     return new Stock(ticker);
   }
-
-
 
   /**
    * Calculate the gain or loss of the stock from the start date to the end date.
@@ -51,25 +50,48 @@ public class ModelImpl implements IModel {
   @Override
   public double movingAverage(String ticker, LocalDate date, int days) {
     IStock stock = getStock(ticker);
-    List<Double> prices = stock.getDataAcrossDays(date, days, CLOSE);
+    List<String> prices = stock.getDataAcrossDays(date, days, CLOSE);
     double total = 0;
-    for (double price : prices) {
-      total += price;
+    for (String price : prices) {
+      double stockPrice = Double.parseDouble(price);
+      total += stockPrice;
     }
     return total / days;
   }
 
   /**
-   * Determine if the stock has crossed over for the given number of days.
+   * Determine the dates, if any, where there was an x-day crossover within the given date range.
    * @param ticker the ticker of the stock
+   * @param startDate the start date of the stock
+   * @param endDate the end date of the stock
    * @param days the number of days to determine if the stock has crossed over
-   * @return true if the stock has crossed over, false otherwise
+   * @return the dates where there was an x-day crossover
    */
   @Override
-  public boolean crossOver(String ticker, LocalDate date, int days) {
+  public List<LocalDate> crossOver(String ticker, LocalDate startDate, LocalDate endDate,
+                                   int days) {
     IStock stock = getStock(ticker);
-    double movingAverage = movingAverage(ticker, date, days);
-    double closePrice = stock.getClosePrice(date);
-    return closePrice > movingAverage;
+    List<String> stringDates = stock.getDataAcrossDays(startDate, endDate, DATE);
+
+    List<LocalDate> dates = new ArrayList<>();
+    List<Double> closingPrices = new ArrayList<>();
+    List<Double> movingAverages = new ArrayList<>();
+
+    for (String stringDate : stringDates) {
+      LocalDate stockDate = LocalDate.parse(stringDate);
+      dates.add(stockDate);
+      closingPrices.add(stock.getClosePrice(stockDate));
+      movingAverages.add(movingAverage(ticker, stockDate, days));
+    }
+
+    List<LocalDate> crossovers = new ArrayList<>();
+
+    for (int i = 0; i < dates.size(); i++) {
+      if (closingPrices.get(i) > movingAverages.get(i)) {
+        crossovers.add(dates.get(i));
+      }
+    }
+
+    return crossovers;
   }
 }

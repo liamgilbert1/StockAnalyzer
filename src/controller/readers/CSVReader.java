@@ -35,7 +35,6 @@ public class CSVReader implements IStockReader {
 
   @Override
   public boolean checkContainsDates(LocalDate date, int days) {
-
     date = findLastOpenDate(date);
     Readable stockData = getReadable();
     try (Scanner scanner = new Scanner(stockData)) {
@@ -104,6 +103,37 @@ public class CSVReader implements IStockReader {
     throw new IllegalArgumentException("Most recent date not found");
   }
 
+  private LocalDate findNextOpenDate(LocalDate date) {
+    Readable stockData = getReadable();
+    try (Scanner scanner = new Scanner(stockData)) {
+      scanner.nextLine();
+      int closestDaysAway = Integer.MAX_VALUE;
+      LocalDate closestDate = null;
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] data = line.split(",");
+        LocalDate dateInFile = LocalDate.parse(data[0]);
+        if (dateInFile.isAfter(date)) {
+          int daysAway = Math.toIntExact(date.datesUntil(dateInFile).count());
+          if (daysAway < closestDaysAway) {
+            closestDaysAway = daysAway;
+            closestDate = dateInFile;
+          }
+        }
+        if (dateInFile.equals(date)) {
+          return dateInFile;
+        }
+        if (dateInFile.isBefore(date)) {
+          if (closestDate == null) {
+            throw new IllegalArgumentException("Next open date not found");
+          }
+          return closestDate;
+        }
+      }
+    }
+    throw new IllegalArgumentException("Most recent date not found");
+  }
+
   @Override
   public LocalDate getMostRecentDate() {
     Readable stockData = getReadable();
@@ -137,10 +167,17 @@ public class CSVReader implements IStockReader {
     throw new IllegalArgumentException("Date not found");
   }
 
+  /**
+   * Includes data potentially before the intended startDate.
+   * @param date the date to start from
+   * @param days the number of days to include
+   * @param dataPoint the data point to get
+   * @return a list of the data points
+   */
   @Override
-  public List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint) {
+  public List<String> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint) {
     Readable stockData = getReadable();
-    List<Double> prices = new ArrayList<>();
+    List<String> prices = new ArrayList<>();
     date = findLastOpenDate(date);
     try (Scanner scanner = new Scanner(stockData)) {
       scanner.nextLine();
@@ -150,11 +187,47 @@ public class CSVReader implements IStockReader {
         LocalDate dateInFile = LocalDate.parse(data[0]);
         if (dateInFile.equals(date)) {
           for (int i = 0; i < days; i++) {
-            prices.add(Double.parseDouble(data[dataPoint.getIndex()]));
+            prices.add(data[dataPoint.getIndex()]);
             if (!scanner.hasNextLine()) {
               break;
             }
             data = scanner.nextLine().split(",");
+          }
+          return prices;
+        }
+      }
+    }
+    throw new IllegalArgumentException("Date not found");
+  }
+
+  /**
+   * Excludes data before the start date and after the end date.
+   * @param startDate the date to start from
+   * @param endDate the date to end at
+   * @param dataPoint the data point to get
+   * @return
+   */
+  @Override
+  public List<String> getDataAcrossDays(LocalDate startDate, LocalDate endDate,
+                                        StockDataPoint dataPoint) {
+    Readable stockData = getReadable();
+    List<String> prices = new ArrayList<>();
+    startDate = findNextOpenDate(startDate);
+    endDate = findLastOpenDate(endDate);
+    try (Scanner scanner = new Scanner(stockData)) {
+      scanner.nextLine();
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] data = line.split(",");
+        LocalDate dateInFile = LocalDate.parse(data[0]);
+        if (dateInFile.equals(endDate)) {
+          while(dateInFile.isAfter(startDate)) {
+            prices.add(data[dataPoint.getIndex()]);
+            if (!scanner.hasNextLine()) {
+              break;
+            }
+            data = scanner.nextLine().split(",");
+            dateInFile = LocalDate.parse(data[0]);
           }
           return prices;
         }

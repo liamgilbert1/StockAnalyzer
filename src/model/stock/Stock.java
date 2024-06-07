@@ -67,8 +67,15 @@ public class Stock implements IStock {
   }
 
   @Override
-  public List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint) {
-    return getReader().getDataAcrossDays(date, days, dataPoint);
+  public List<String> getDataAcrossDays(LocalDate endDate, int days,
+                                        StockDataPoint dataPoint) {
+    return getReader().getDataAcrossDays(endDate, days, dataPoint);
+  }
+
+  @Override
+  public List<String> getDataAcrossDays(LocalDate startDate, LocalDate endDate,
+                                        StockDataPoint dataPoint) {
+    return getReader().getDataAcrossDays(startDate, endDate, dataPoint);
   }
 
   @Override

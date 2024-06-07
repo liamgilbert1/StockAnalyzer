@@ -1,6 +1,12 @@
 package model.stock;
 
 public enum StockDataPoint {
+  DATE {
+    @Override
+    public int getIndex() {
+      return 0;
+    }
+  },
   OPEN {
     @Override
     public int getIndex() {

@@ -1,7 +1,5 @@
 package controller.commands;
-
 import java.util.Scanner;
-
 import model.IModel;
 
 /**

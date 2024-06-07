@@ -22,5 +22,8 @@ public interface IStock {
 
   double getVolume(LocalDate date);
 
-  List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint);
+  List<String> getDataAcrossDays(LocalDate endDate, int days,
+                                 StockDataPoint dataPoint);
+
+  List<String> getDataAcrossDays(LocalDate startDate, LocalDate endDate, StockDataPoint dataPoint);
 }

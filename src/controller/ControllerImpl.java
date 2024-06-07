@@ -33,12 +33,20 @@ public class ControllerImpl implements IController {
    */
   @Override
   public void go(IModel model) {
+    for (String command : this.commandMap.keySet()) {
+      try {
+        output.append("\n");
+        output.append(commandMap.get(command).get().getInstructions());
+      } catch (IOException e) {
+        throw new IllegalStateException("Could not append to output.");
+      }
+    }
     Scanner scanner = new Scanner(input);
     while(scanner.hasNext()) {
       String command = scanner.next();
-      ICommand commandToRun = this.commandMap.get(command).get();
       if (command != null) {
         try {
+          ICommand commandToRun = this.commandMap.get(command).get();
           commandToRun.execute(model, scanner);
         } catch (Exception e) {
           try {

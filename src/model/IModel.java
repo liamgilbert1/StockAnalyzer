@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import model.stock.IStock;
 
@@ -34,7 +35,7 @@ public interface IModel {
    * @param days the number of days to determine if the stock has crossed over
    * @return true if the stock has crossed over, false otherwise
    */
-  boolean crossOver(String ticker, LocalDate date, int days);
+  List<LocalDate> crossOver(String ticker, LocalDate startDate, LocalDate endDate, int days);
 
 
 

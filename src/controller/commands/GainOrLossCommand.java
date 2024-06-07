@@ -24,7 +24,6 @@ public class GainOrLossCommand extends AWriterCommand {
     String startDateEntered = getNextString(scanner);
     String endDateEntered = getNextString(scanner);
 
-
     tryWrite(ticker, startDateEntered, endDateEntered);
 
     double gainOrLoss = model.calculateGainOrLoss(ticker, LocalDate.parse(startDateEntered),
@@ -39,6 +38,16 @@ public class GainOrLossCommand extends AWriterCommand {
 
   @Override
   public String getInstructions() {
-    return null;
+    StringBuilder instructions;
+    instructions = new StringBuilder();
+    instructions.append("Gain or Loss: \n");
+    instructions.append("This command calculates the gain or loss of a stock over a given period "
+            + "of time.\n");
+    instructions.append("Enter the following parameters separated by spaces:\n");
+    instructions.append("1. Command name (GainOrLoss)\n");
+    instructions.append("2. Stock ticker symbol\n");
+    instructions.append("3. Starting date in the format yyyy-mm-dd\n");
+    instructions.append("4. Ending date in the format yyyy-mm-dd\n");
+    return instructions.toString();
   }
 }

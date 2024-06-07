@@ -18,7 +18,9 @@ public interface IStockReader extends IReader {
 
   double getStockData(LocalDate date, StockDataPoint dataPoint);
 
-  List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint);
+  List<String> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint);
+
+  List<String> getDataAcrossDays(LocalDate startDate, LocalDate endDate, StockDataPoint dataPoint);
 
   LocalDate getMostRecentDate();
 }
