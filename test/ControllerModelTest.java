@@ -8,8 +8,10 @@ import model.ModelImpl;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test cases for ControllerImpl with a model.
+ */
 public class ControllerModelTest {
-
   @Test
   public void testControllerModelGainOrLoss() {
     Appendable output = new StringBuilder();

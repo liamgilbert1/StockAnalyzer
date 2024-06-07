@@ -10,8 +10,10 @@ import controller.readers.CSVReader;
 import static model.stock.StockDataPoint.OPEN;
 import static org.junit.Assert.*;
 
+/**
+ * Test cases for CSVReader.
+ */
 public class CSVReaderTest {
-
   CSVReader reader;
   @Before
   public void setUp() {

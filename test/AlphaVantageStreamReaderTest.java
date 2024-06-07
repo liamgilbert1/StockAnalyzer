@@ -5,8 +5,10 @@ import controller.readers.AlphaVantageStreamReader;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests for AlphaVantageStreamReader.
+ */
 public class AlphaVantageStreamReaderTest {
-
   @Test
   public void testGetReadable() {
     AlphaVantageStreamReader reader = new AlphaVantageStreamReader("GOOG");

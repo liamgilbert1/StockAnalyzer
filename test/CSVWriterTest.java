@@ -9,6 +9,9 @@ import controller.IWriter;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test cases for CSVWriter.
+ */
 public class CSVWriterTest {
   IWriter writer;
   Readable readable;

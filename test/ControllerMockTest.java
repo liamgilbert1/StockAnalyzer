@@ -9,8 +9,10 @@ import model.MockModelImpl;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test cases for ControllerImpl with a mock model.
+ */
 public class ControllerMockTest {
-
   @Test
   public void testControllerMockGainOrLoss() {
     StringBuilder log = new StringBuilder();
