@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Supplier;
@@ -16,7 +17,7 @@ import model.IModel;
 public class ControllerImpl implements IController {
   private final Map<String, Supplier<ICommand>> commandMap;
   private final Readable input;
-
+  private final List<String> orderedCommands;
   private final Appendable output;
 
   public ControllerImpl(Readable input, Appendable output) {
@@ -27,6 +28,7 @@ public class ControllerImpl implements IController {
     this.commandMap.put("MovingAverage", () -> new MovingAverageCommand(output));
     this.commandMap.put("Crossover", () -> new CrossoverCommand(output));
     this.commandMap.put("CreatePortfolio", () -> new CreatePortfolioCommand(output));
+    this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover", "CreatePortfolio");
   }
 
   /**
@@ -35,10 +37,10 @@ public class ControllerImpl implements IController {
    */
   @Override
   public void go(IModel model) {
-    for (Supplier<ICommand> command : commandMap.values()) {
+    for (String command : this.orderedCommands) {
       try {
         output.append("\n");
-        output.append(command.get().getInstructions());
+        output.append(commandMap.get(command).get().getInstructions());
       } catch (IOException e) {
         throw new IllegalStateException("Could not append to output.");
       }
