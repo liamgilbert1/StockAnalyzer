@@ -45,7 +45,7 @@ public class MockModelImpl implements IModel {
   }
 
   @Override
-  public void addPortfolioHolding(String portfolioName, String ticker, int quantity) {
+  public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
 
   }
 

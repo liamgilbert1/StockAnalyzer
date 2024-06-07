@@ -42,18 +42,18 @@ public class ControllerImpl implements IController {
    */
   @Override
   public void go(IModel model) {
-    for (String command : this.orderedCommands) {
-      try {
-        output.append("\n");
-        output.append(commandMap.get(command).get().getInstructions());
-      } catch (IOException e) {
-        throw new IllegalStateException("Could not append to output.");
-      }
-    }
+    printInstructions();
     Scanner scanner = new Scanner(input);
     while(scanner.hasNext()) {
       String command = scanner.next();
       if (command != null) {
+        if (command.equals("quit")) {
+          return;
+        }
+        if (command.equals("menu")) {
+          printInstructions();
+          continue;
+        }
         try {
           ICommand commandToRun = this.commandMap.get(command).get();
           commandToRun.execute(model, scanner);
@@ -65,6 +65,31 @@ public class ControllerImpl implements IController {
           }
         }
       }
+    }
+  }
+
+  private void printInstructions() {
+    for (String command : this.orderedCommands) {
+      try {
+        output.append("\n");
+        output.append(commandMap.get(command).get().getInstructions());
+      } catch (IOException e) {
+        throw new IllegalStateException("Could not append to output.");
+      }
+    }
+    try {
+      output.append("\n");
+      Appendable menuCommand = new StringBuilder();
+      menuCommand.append("Enter 'menu' to see the instructions again.");
+      output.append(menuCommand.toString());
+      output.append("\n");
+      Appendable quitCommand = new StringBuilder();
+      quitCommand.append("Enter 'quit' to quit the program.");
+      output.append(quitCommand.toString());
+      output.append("\n");
+      output.append("\n");
+    } catch (IOException e) {
+      throw new IllegalStateException("Could not append to output.");
     }
   }
 }

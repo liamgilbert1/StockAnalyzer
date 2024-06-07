@@ -40,7 +40,7 @@ public interface IModel {
 
   void createPortfolio(String name);
 
-  void addPortfolioHolding(String portfolioName, String ticker, int quantity);
+  void addPortfolioHolding(String portfolioName, String ticker, double quantity);
 
   double getPortfolioValue(String portfolioName, LocalDate date);
 

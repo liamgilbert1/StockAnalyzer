@@ -7,9 +7,9 @@ import model.stock.IStock;
 
 public class Holding implements IHolding {
   private final IStock stock;
-  private final int quantity;
+  private final double quantity;
 
-  public Holding(IStock stock, int quantity) {
+  public Holding(IStock stock, double quantity) {
     this.stock = stock;
     this.quantity = quantity;
   }
@@ -20,7 +20,7 @@ public class Holding implements IHolding {
   }
 
   @Override
-  public int getQuantity() {
+  public double getQuantity() {
     return quantity;
   }
 
@@ -30,7 +30,7 @@ public class Holding implements IHolding {
   }
 
   @Override
-  public IHolding addQuantity(int quantity) {
+  public IHolding addQuantity(double quantity) {
     return new Holding(stock,
             this.quantity + quantity);
   }

@@ -13,7 +13,7 @@ public class AddPortfolioHoldingCommand extends AWriterCommand {
   public void execute(IModel model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
     String ticker = getNextString(scanner);
-    int quantity = getPositiveInt(scanner);
+    double quantity = getPositiveInt(scanner);
 
     tryWrite(ticker);
 
