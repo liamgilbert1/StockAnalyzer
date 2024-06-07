@@ -19,7 +19,7 @@ public class CreatePortfolioCommand extends ACommand {
 
     try {
       model.createPortfolio(portfolioName);
-      this.out.append("Portfolio Created\n");
+      this.out.append("Portfolio Created: " + portfolioName + "\n");
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");
     }
