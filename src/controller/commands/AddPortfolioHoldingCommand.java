@@ -19,7 +19,7 @@ public class AddPortfolioHoldingCommand extends AWriterCommand {
 
     try {
       model.addPortfolioHolding(portfolioName, ticker, quantity);
-      this.out.append("Portfolio holdings updated");
+      this.out.append("Portfolio holdings updated\n");
     } catch (Exception e) {
       throw new IllegalStateException("Failed to process command.");
     }
