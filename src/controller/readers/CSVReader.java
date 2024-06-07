@@ -221,7 +221,7 @@ public class CSVReader implements IStockReader {
         String[] data = line.split(",");
         LocalDate dateInFile = LocalDate.parse(data[0]);
         if (dateInFile.equals(endDate)) {
-          while(dateInFile.isAfter(startDate)) {
+          while(dateInFile.isAfter(startDate) || dateInFile.equals(startDate)) {
             prices.add(data[dataPoint.getIndex()]);
             if (!scanner.hasNextLine()) {
               break;
