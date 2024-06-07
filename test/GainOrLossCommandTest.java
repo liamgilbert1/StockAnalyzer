@@ -167,4 +167,17 @@ public class GainOrLossCommandTest {
     }
   }
 
+  @Test
+  public void testGetInstructions() {
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    assertEquals("Gain or Loss: \n" +
+            "This command calculates the gain or loss of a stock over a given period of time.\n" +
+            "Enter the following parameters separated by spaces:\n" +
+            "1. Command name (GainOrLoss)\n" +
+            "2. Stock ticker symbol\n" +
+            "3. Starting date in the format yyyy-mm-dd\n" +
+            "4. Ending date in the format yyyy-mm-dd\n", command.getInstructions());
+  }
+
 }

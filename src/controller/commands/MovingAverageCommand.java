@@ -27,7 +27,7 @@ public class MovingAverageCommand extends AWriterCommand {
 
     try {
       double movingAverage = model.movingAverage(ticker, LocalDate.parse(dateEntered), days);
-      this.out.append(String.format("Moving average is: " + movingAverage));
+      this.out.append(String.format("Moving average is: %.2f\n", movingAverage));
     } catch (Exception e) {
       throw new IllegalStateException("Could not process command.");
     }
