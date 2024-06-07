@@ -5,7 +5,15 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Scanner;
 
+/**
+ * This class represents a CSVWriter object. It writes the data to a CSV file.
+ */
 public class CSVWriter implements IWriter {
+  /**
+   * Writes the data to a CSV file.
+   * @param ticker the ticker of the stock
+   * @param readable the data to write
+   */
   public void write(String ticker, Readable readable) {
     String file = ticker + ".csv";
     try (Writer writer = new FileWriter(file)) {
