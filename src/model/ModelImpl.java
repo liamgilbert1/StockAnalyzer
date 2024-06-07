@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.portfolio.Holding;
 import model.portfolio.IPortfolio;
 import model.portfolio.Portfolio;
 import model.stock.IStock;
@@ -99,5 +100,16 @@ public class ModelImpl implements IModel {
   @Override
   public void createPortfolio(String name) {
     this.portfolios.add(new Portfolio(name));
+  }
+
+  @Override
+  public void addPortfolioHolding(String portfolioName, String ticker, int quantity) {
+    for (IPortfolio portfolio : this.portfolios) {
+      if (portfolio.getName().equals(portfolioName)) {
+        portfolio.addHolding(new Holding(getStock(ticker), quantity));
+        return;
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
   }
 }

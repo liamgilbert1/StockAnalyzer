@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
+import controller.commands.AddPortfolioHoldingCommand;
 import controller.commands.CreatePortfolioCommand;
 import controller.commands.CrossoverCommand;
 import controller.commands.GainOrLossCommand;
@@ -28,7 +29,9 @@ public class ControllerImpl implements IController {
     this.commandMap.put("MovingAverage", () -> new MovingAverageCommand(output));
     this.commandMap.put("Crossover", () -> new CrossoverCommand(output));
     this.commandMap.put("CreatePortfolio", () -> new CreatePortfolioCommand(output));
-    this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover", "CreatePortfolio");
+    this.commandMap.put("AddPortfolioHolding", () -> new AddPortfolioHoldingCommand(output));
+    this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover", "CreatePortfolio",
+            "AddPortfolioHolding");
   }
 
   /**

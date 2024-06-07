@@ -15,7 +15,8 @@ public class CSVWriter implements IWriter {
         writer.append("\n");
       }
     } catch (IOException e) {
-      throw new IllegalStateException("Could not write to file");
+      throw new IllegalStateException("Could not write to file. Please check if the ticker was " +
+              "valid.");
     }
   }
 }

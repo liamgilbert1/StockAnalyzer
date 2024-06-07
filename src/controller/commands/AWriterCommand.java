@@ -35,4 +35,12 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
       writeStockData(ticker);
     }
   }
+
+  protected void tryWrite(String ticker) {
+    String fileName = ticker + ".csv";
+    File file = new File(fileName);
+    if (!file.exists()) {
+      writeStockData(ticker);
+    }
+  }
 }

@@ -10,4 +10,6 @@ public interface IPortfolio {
   double getValue(LocalDate date);
 
   List<IHolding> getHoldings();
+
+  String getName();
 }
