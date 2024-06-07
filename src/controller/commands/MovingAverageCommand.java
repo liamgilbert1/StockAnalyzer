@@ -1,5 +1,6 @@
 package controller.commands;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class MovingAverageCommand extends AWriterCommand {
 
     tryWrite(ticker, dateEntered, days);
 
-    double movingAverage = model.movingAverage(ticker, dateEntered, days);
+    double movingAverage = model.movingAverage(ticker, LocalDate.parse(dateEntered), days);
 
     try {
       this.out.append(String.format("Moving average is: " + movingAverage));

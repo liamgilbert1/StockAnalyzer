@@ -1,5 +1,6 @@
 package controller.commands;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -26,7 +27,8 @@ public class GainOrLossCommand extends AWriterCommand {
 
     tryWrite(ticker, startDateEntered, endDateEntered);
 
-    double gainOrLoss = model.calculateGainOrLoss(ticker, startDateEntered, endDateEntered);
+    double gainOrLoss = model.calculateGainOrLoss(ticker, LocalDate.parse(startDateEntered),
+            LocalDate.parse(endDateEntered));
 
     try {
       this.out.append(String.format("Gain or Loss: %.2f\n", gainOrLoss));

@@ -1,5 +1,6 @@
 package controller.commands;
 
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class CrossoverCommand extends AWriterCommand {
 
     tryWrite(ticker, dateEntered, days);
 
-    boolean isCrossOver = model.crossOver(ticker, dateEntered, days);
+    boolean isCrossOver = model.crossOver(ticker, LocalDate.parse(dateEntered), days);
 
     try {
       this.out.append(String.format("Is there a crossover: " + isCrossOver));
