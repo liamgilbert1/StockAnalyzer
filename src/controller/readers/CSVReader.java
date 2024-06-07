@@ -10,10 +10,19 @@ import java.util.Scanner;
 
 import model.stock.StockDataPoint;
 
+/**
+ * Represents a reader that can read stock data from a CSV file. The CSV file should be formatted
+ * such that the first column contains the date, the second column contains the open price, the
+ * third column contains the high price, the fourth column contains the low price, the fifth column
+ * contains the close price, and the sixth column contains the volume.
+ */
 public class CSVReader implements IStockReader {
-
   private final String ticker;
 
+  /**
+   * Constructs an object of the CSVReader with the given ticker symbol.
+   * @param ticker the ticker symbol of the stock.
+   */
   public CSVReader(String ticker) {
     this.ticker = Objects.requireNonNull(ticker);
   }
@@ -87,6 +96,12 @@ public class CSVReader implements IStockReader {
     }
   }
 
+  /**
+   * Finds the last open date before the given date. If the given date is an open date (a date
+   * where the stock market was open), it will return the given date.
+   * @param date the date to find the last open date before.
+   * @return the last open date before the given date.
+   */
   private LocalDate findLastOpenDate(LocalDate date) {
     Readable stockData = getReadable();
     try (Scanner scanner = new Scanner(stockData)) {
@@ -103,6 +118,12 @@ public class CSVReader implements IStockReader {
     throw new IllegalArgumentException("Most recent date not found");
   }
 
+  /**
+   * Finds the next open date after the given date. If the given date is an open date (a date
+   * where the stock market was open), it will return the given date.
+   * @param date the date to find the next open date after.
+   * @return the next open date after the given date.
+   */
   private LocalDate findNextOpenDate(LocalDate date) {
     Readable stockData = getReadable();
     try (Scanner scanner = new Scanner(stockData)) {
@@ -167,13 +188,6 @@ public class CSVReader implements IStockReader {
     throw new IllegalArgumentException("Date not found");
   }
 
-  /**
-   * Includes data potentially before the intended startDate.
-   * @param date the date to start from
-   * @param days the number of days to include
-   * @param dataPoint the data point to get
-   * @return a list of the data points
-   */
   @Override
   public List<String> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint) {
     Readable stockData = getReadable();
@@ -200,13 +214,6 @@ public class CSVReader implements IStockReader {
     throw new IllegalArgumentException("Date not found");
   }
 
-  /**
-   * Excludes data before the start date and after the end date.
-   * @param startDate the date to start from
-   * @param endDate the date to end at
-   * @param dataPoint the data point to get
-   * @return
-   */
   @Override
   public List<String> getDataAcrossDays(LocalDate startDate, LocalDate endDate,
                                         StockDataPoint dataPoint) {
