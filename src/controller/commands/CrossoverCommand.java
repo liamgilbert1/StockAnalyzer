@@ -25,7 +25,6 @@ public class CrossoverCommand extends AWriterCommand {
     String dateEntered = getNextString(scanner);
     int days = getPositiveInt(scanner);
 
-
     tryWrite(ticker, dateEntered, days);
 
     boolean isCrossOver = model.crossOver(ticker, LocalDate.parse(dateEntered), days);

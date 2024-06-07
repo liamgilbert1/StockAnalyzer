@@ -68,6 +68,8 @@ public class ModelImpl implements IModel {
   @Override
   public boolean crossOver(String ticker, LocalDate date, int days) {
     IStock stock = getStock(ticker);
-    return stock.getClosePrice(date) > movingAverage(ticker, date, days);
+    double movingAverage = movingAverage(ticker, date, days);
+    double closePrice = stock.getClosePrice(date);
+    return closePrice > movingAverage;
   }
 }

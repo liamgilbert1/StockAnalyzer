@@ -141,6 +141,7 @@ public class CSVReader implements IStockReader {
   public List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint) {
     Readable stockData = getReadable();
     List<Double> prices = new ArrayList<>();
+    date = findLastOpenDate(date);
     try (Scanner scanner = new Scanner(stockData)) {
       scanner.nextLine();
       while (scanner.hasNextLine()) {
