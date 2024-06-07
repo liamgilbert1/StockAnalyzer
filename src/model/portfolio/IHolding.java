@@ -5,7 +5,7 @@ import model.stock.IStock;
 
 public interface IHolding {
   IStock getStock();
-  int getQuantity();
+  double getQuantity();
   double getValue(LocalDate date);
-  IHolding addQuantity(int quantity);
+  IHolding addQuantity(double quantity);
 }

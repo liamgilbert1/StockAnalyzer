@@ -104,7 +104,7 @@ public class ModelImpl implements IModel {
   }
 
   @Override
-  public void addPortfolioHolding(String portfolioName, String ticker, int quantity) {
+  public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
     for (IPortfolio portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         portfolio.addHolding(new Holding(getStock(ticker), quantity));
