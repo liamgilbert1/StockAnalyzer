@@ -8,8 +8,13 @@ import model.stock.IStock;
 import model.stock.Stock;
 
 import static model.stock.StockDataPoint.CLOSE;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
+/**
+ * This class tests the Stock class.
+ */
 public class StockTest {
 
   IStock stock1;

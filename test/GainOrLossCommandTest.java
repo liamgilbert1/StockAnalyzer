@@ -10,16 +10,7 @@ import model.ModelImpl;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test cases for GainOrLossCommand.
- * <p>
- * Test cases cover various valid and invalid input scenarios, including:
- * - Valid stock tickers with valid date ranges.
- * - Valid stock tickers with invalid date ranges.
- * - Invalid stock tickers.
- * - Edge cases with dates such as leap years, start date equals end date.
- * - Handling missing or incorrectly formatted inputs.
- * <p>
- * Stocks used for testing: GOOG, MSFT, AMZN.
+ * This class tests the GainOrLossCommand class.
  */
 public class GainOrLossCommandTest {
 

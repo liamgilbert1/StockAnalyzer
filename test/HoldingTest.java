@@ -8,8 +8,12 @@ import model.portfolio.IHolding;
 import model.stock.IStock;
 import model.stock.Stock;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
+/**
+ * This class tests the Holding class.
+ */
 public class HoldingTest {
 
   IHolding holding1;

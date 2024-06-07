@@ -10,6 +10,9 @@ import model.ModelImpl;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the Model class.
+ */
 public class ModelTests {
 
   @Test

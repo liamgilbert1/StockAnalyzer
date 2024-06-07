@@ -3,13 +3,15 @@ import org.junit.Test;
 import java.io.StringReader;
 import java.util.Scanner;
 
-import controller.commands.GainOrLossCommand;
 import controller.commands.ICommand;
 import controller.commands.MovingAverageCommand;
 import model.ModelImpl;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the MovingAverageCommand class.
+ */
 public class MovingAverageCommandTest {
 
   @Test

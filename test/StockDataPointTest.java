@@ -6,8 +6,11 @@ import static model.stock.StockDataPoint.HIGH;
 import static model.stock.StockDataPoint.LOW;
 import static model.stock.StockDataPoint.OPEN;
 import static model.stock.StockDataPoint.VOLUME;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the StockDataPoint enum.
+ */
 public class StockDataPointTest {
   @Test
   public void testGetIndex() {
