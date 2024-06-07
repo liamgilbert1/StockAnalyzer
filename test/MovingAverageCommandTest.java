@@ -63,4 +63,17 @@ public class MovingAverageCommandTest {
     }
   }
 
+  @Test
+  public void testGetInstructions() {
+    Appendable output = new StringBuilder();
+    ICommand command = new MovingAverageCommand(output);
+    assertEquals("Moving Average: \n" +
+            "This command calculates the moving average of a stock over a given period of time.\n" +
+            "Enter the following parameters separated by spaces:\n" +
+            "1. Command name (MovingAverage)\n" +
+            "2. Stock ticker symbol\n" +
+            "3. Ending date in the format yyyy-mm-dd\n" +
+            "4. Number of days to calculate the moving average over\n", command.getInstructions());
+  }
+
 }
