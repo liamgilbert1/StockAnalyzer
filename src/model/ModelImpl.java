@@ -2,21 +2,17 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
-import controller.CSVReader;
-import controller.ICSVReader;
-import controller.IReader;
 import model.portfolio.IPortfolio;
 import model.stock.IStock;
 import model.stock.Stock;
-import model.stock.StockData;
+
+import static controller.StockDataPoint.CLOSE;
 
 public class ModelImpl implements IModel {
-  private List<IPortfolio> portfolios;
+
+  private final List<IPortfolio> portfolios;
 
   public ModelImpl() {
     this.portfolios = new ArrayList<>();
@@ -27,16 +23,22 @@ public class ModelImpl implements IModel {
 
   }
 
+  protected IStock getStock(String ticker) {
+    return new Stock(ticker);
+  }
+
+
+
   /**
    * Calculate the gain or loss of the stock from the start date to the end date.
-   * @param startDate the start date of the stock
-   * @param endDate the end date of the stock
-   * @return
+   * @param startDate the start date of the stock.
+   * @param endDate the end date of the stock.
+   * @return the gain or loss of the stock.
    */
   @Override
   public double calculateGainOrLoss(String ticker, LocalDate startDate, LocalDate endDate) {
-    ICSVReader reader = new CSVReader(ticker);
-    return reader.getPrice(endDate) - reader.getPrice(startDate);
+    IStock stock = getStock(ticker);
+    return stock.getClosePrice(endDate) - stock.getClosePrice(startDate);
   }
 
   /**
@@ -48,14 +50,13 @@ public class ModelImpl implements IModel {
    */
   @Override
   public double movingAverage(String ticker, LocalDate date, int days) {
-    ICSVReader reader = new CSVReader(ticker);
-    List<Double> prices = reader.getPricesAcrossDays(date, days);
+    IStock stock = getStock(ticker);
+    List<Double> prices = stock.getDataAcrossDays(date, days, CLOSE);
     double total = 0;
     for (double price : prices) {
       total += price;
     }
     return total / days;
-
   }
 
   /**
@@ -66,7 +67,7 @@ public class ModelImpl implements IModel {
    */
   @Override
   public boolean crossOver(String ticker, LocalDate date, int days) {
-    ICSVReader reader = new CSVReader(ticker);
-    return reader.getPrice(date) > movingAverage(ticker, date, days);
+    IStock stock = getStock(ticker);
+    return stock.getClosePrice(date) > movingAverage(ticker, date, days);
   }
 }

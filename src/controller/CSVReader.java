@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class CSVReader implements ICSVReader {
+public class CSVReader implements IStockReader {
 
   private final String ticker;
 
@@ -33,6 +33,7 @@ public class CSVReader implements ICSVReader {
 
   @Override
   public boolean checkContainsDates(LocalDate date, int days) {
+
     date = findLastOpenDate(date);
     Readable stockData = getReadable();
     try (Scanner scanner = new Scanner(stockData)) {
@@ -116,8 +117,10 @@ public class CSVReader implements ICSVReader {
     return dateInFile;
   }
 
-  public double getPrice(LocalDate date) {
+  @Override
+  public double getStockData(LocalDate date, StockDataPoint dataPoint) {
     Readable stockData = getReadable();
+    date = findLastOpenDate(date);
     try (Scanner scanner = new Scanner(stockData)) {
       scanner.nextLine();
       while (scanner.hasNextLine()) {
@@ -125,14 +128,15 @@ public class CSVReader implements ICSVReader {
         String[] data = line.split(",");
         LocalDate dateInFile = LocalDate.parse(data[0]);
         if (dateInFile.equals(date)) {
-          return Double.parseDouble(data[4]);
+          return Double.parseDouble(data[dataPoint.getIndex()]);
         }
       }
     }
     throw new IllegalArgumentException("Date not found");
   }
 
-  public List<Double> getPricesAcrossDays(LocalDate date, int days) {
+  @Override
+  public List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint) {
     Readable stockData = getReadable();
     List<Double> prices = new ArrayList<>();
     try (Scanner scanner = new Scanner(stockData)) {
@@ -143,7 +147,7 @@ public class CSVReader implements ICSVReader {
         LocalDate dateInFile = LocalDate.parse(data[0]);
         if (dateInFile.equals(date)) {
           for (int i = 0; i < days; i++) {
-            prices.add(Double.parseDouble(data[4]));
+            prices.add(Double.parseDouble(data[dataPoint.getIndex()]));
             if (!scanner.hasNextLine()) {
               break;
             }
@@ -155,5 +159,4 @@ public class CSVReader implements ICSVReader {
     }
     throw new IllegalArgumentException("Date not found");
   }
-
 }

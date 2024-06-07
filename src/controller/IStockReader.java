@@ -3,7 +3,7 @@ package controller;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface ICSVReader extends IReader {
+public interface IStockReader extends IReader {
   /**
    * This method checks if the file contains the given date and the number of days before that.
    * @param date the date to check.
@@ -14,9 +14,9 @@ public interface ICSVReader extends IReader {
 
   boolean checkContainsDateRange(LocalDate startDate, LocalDate endDate);
 
+  double getStockData(LocalDate date, StockDataPoint dataPoint);
+
+  List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint);
+
   LocalDate getMostRecentDate();
-
-  double getPrice(LocalDate date);
-
-  List<Double> getPricesAcrossDays(LocalDate date, int days);
 }

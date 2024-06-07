@@ -25,7 +25,7 @@ public class ModelTests {
   @Test
   public void testModelMovingAverage() {
     IModel model = new ModelImpl();
-    assertEquals(10, model.movingAverage("GOOG", LocalDate.of(2024, 6, 5), 4), 0.01);
+    assertEquals(175.145, model.movingAverage("GOOG", LocalDate.of(2024, 6, 5), 4), 0.01);
 
   }
 }

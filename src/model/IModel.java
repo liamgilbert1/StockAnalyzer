@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+import model.stock.IStock;
+
 public interface IModel {
 
   /**

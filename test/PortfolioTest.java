@@ -11,9 +11,7 @@ import model.portfolio.IHolding;
 import model.portfolio.IPortfolio;
 import model.portfolio.Portfolio;
 import model.stock.IStock;
-import model.stock.IStockData;
 import model.stock.Stock;
-import model.stock.StockData;
 
 import static org.junit.Assert.*;
 
@@ -24,10 +22,6 @@ public class PortfolioTest {
   IHolding holding3;
   IStock stock1;
   IStock stock2;
-  IStockData day1;
-  IStockData day2;
-  IStockData day3;
-  Map<LocalDate, IStockData> stockData1;
   LocalDate date1;
   LocalDate date2;
   LocalDate date3;
@@ -35,18 +29,11 @@ public class PortfolioTest {
   IPortfolio portfolio1;
   @Before
   public void setUp() {
-    day1 = new StockData(100, 110, 90, 105, 1000000);
-    day2 = new StockData(105, 115, 95, 110, 1000000);
-    day3 = new StockData(110, 120, 100, 115, 1000000);
     date1 = LocalDate.of(2018, 1, 1);
     date2 = LocalDate.of(2018, 1, 2);
     date3 = LocalDate.of(2018, 1, 3);
-    stockData1 = new HashMap<>();
-    stockData1.put(date1, day1);
-    stockData1.put(date2, day2);
-    stockData1.put(date3, day3);
-    stock1 = new Stock("GOOG", stockData1);
-    stock2 = new Stock("MSFT", stockData1);
+    stock1 = new Stock("GOOG");
+    stock2 = new Stock("MSFT");
     holding1 = new Holding(stock1, 1000);
     holding2 = new Holding(stock1, 2000);
     holding3 = new Holding(stock2, 5000);

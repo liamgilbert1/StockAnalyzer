@@ -1,30 +1,17 @@
 package model.stock;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import controller.CSVReader;
+import controller.IStockReader;
+import controller.StockDataPoint;
 
 public class Stock implements IStock {
   private final String ticker;
-  private final Map<LocalDate, IStockData> stockData;
-
-  public Stock(String ticker, Map<LocalDate, IStockData> stockData) {
-    this.ticker = ticker;
-    this.stockData = new HashMap<>(stockData);
-  }
 
   public Stock(String ticker) {
     this.ticker = ticker;
-    this.stockData = new HashMap<>();
-  }
-
-  @Override
-  public double getPrice(LocalDate date) {
-    if (!stockData.containsKey(date)) {
-      throw new IllegalArgumentException("No stock data found for " + ticker + " on "
-              + date);
-    }
-    return stockData.get(date).getClose();
   }
 
   @Override
@@ -32,16 +19,57 @@ public class Stock implements IStock {
     return ticker;
   }
 
-  @Override
-  public Stock addStockData(LocalDate date, IStockData data) {
-    Map<LocalDate, IStockData> newStockData = new HashMap<>(stockData);
-    newStockData.put(date, data);
-    return new Stock(ticker, newStockData);
+  protected IStockReader getReader() {
+    return new CSVReader(ticker);
   }
 
   @Override
-  public Map<LocalDate, IStockData> getStockData() {
-    return new HashMap<>(stockData);
+  public boolean checkContainsDates(LocalDate date, int days) {
+    return getReader().checkContainsDates(date, days);
+  }
+
+  @Override
+  public boolean checkContainsDateRange(LocalDate startDate, LocalDate endDate) {
+    return getReader().checkContainsDateRange(startDate, endDate);
+  }
+
+  @Override
+  public LocalDate getMostRecentDate() {
+    return getReader().getMostRecentDate();
+  }
+
+  @Override
+  public double getOpenPrice(LocalDate date) {
+    return getStockData(date, StockDataPoint.OPEN);
+  }
+
+  @Override
+  public double getClosePrice(LocalDate date) {
+    return getStockData(date, StockDataPoint.CLOSE);
+  }
+
+  @Override
+  public double getHighPrice(LocalDate date) {
+    return getStockData(date, StockDataPoint.HIGH);
+  }
+
+  @Override
+  public double getLowPrice(LocalDate date) {
+    return getStockData(date, StockDataPoint.LOW);
+  }
+
+  @Override
+  public double getVolume(LocalDate date) {
+    return getStockData(date, StockDataPoint.VOLUME);
+  }
+
+  private double getStockData(LocalDate date, StockDataPoint dataPoint) {
+    return getReader().getStockData(date, dataPoint);
+  }
+
+  @Override
+  public List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint) {
+    return getReader().getDataAcrossDays(date, days, dataPoint);
   }
 
   @Override

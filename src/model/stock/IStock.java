@@ -1,12 +1,30 @@
 package model.stock;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
-public interface IStock {
-  double getPrice(LocalDate date);
-  String getTicker();
-  IStock addStockData(LocalDate date, IStockData data);
+import controller.IStockReader;
+import controller.StockDataPoint;
 
-  Map<LocalDate, IStockData> getStockData();
+public interface IStock {
+  String getTicker();
+
+  boolean checkContainsDates(LocalDate date, int days);
+
+  boolean checkContainsDateRange(LocalDate startDate, LocalDate endDate);
+
+  LocalDate getMostRecentDate();
+
+  double getOpenPrice(LocalDate date);
+
+  double getClosePrice(LocalDate date);
+
+  double getHighPrice(LocalDate date);
+
+  double getLowPrice(LocalDate date);
+
+  double getVolume(LocalDate date);
+
+  List<Double> getDataAcrossDays(LocalDate date, int days, StockDataPoint dataPoint);
 }

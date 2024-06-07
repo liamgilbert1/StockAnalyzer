@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import model.stock.IStock;
 
+import static controller.StockDataPoint.CLOSE;
+
 public class Holding implements IHolding {
   private final IStock stock;
   private final int quantity;
@@ -26,12 +28,13 @@ public class Holding implements IHolding {
 
   @Override
   public double getValue(LocalDate date) {
-    return stock.getPrice(date) * quantity;
+    return stock.getClosePrice(date) * quantity;
   }
 
   @Override
   public IHolding addQuantity(int quantity) {
-    return new Holding(stock, this.quantity + quantity);
+    return new Holding(stock,
+            this.quantity + quantity);
   }
 
   @Override
