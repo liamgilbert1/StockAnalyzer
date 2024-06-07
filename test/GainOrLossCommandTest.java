@@ -1,5 +1,14 @@
 import org.junit.Test;
 
+import java.io.StringReader;
+import java.util.Scanner;
+
+import controller.commands.GainOrLossCommand;
+import controller.commands.ICommand;
+import model.ModelImpl;
+
+import static org.junit.Assert.assertEquals;
+
 /**
  * Test cases for GainOrLossCommand.
  * <p>
@@ -21,7 +30,11 @@ public class GainOrLossCommandTest {
    */
   @Test
   public void testValidTickerAndDateRange() {
-
+    Readable input = new StringReader("GainOrLoss GOOG 2023-01-01 2023-01-31\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    command.execute(new ModelImpl(), new Scanner(input));
+    assertEquals("Gain or Loss: 0.00\n", output.toString());
   }
 
   /**
