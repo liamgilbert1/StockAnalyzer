@@ -7,7 +7,6 @@ import java.util.List;
 
 import model.IModel;
 import model.ModelImpl;
-import model.portfolio.IPortfolio;
 
 import static org.junit.Assert.assertEquals;
 
@@ -77,7 +76,35 @@ public class ModelTests {
 
   @Test
   public void testAddPortfolioHolding() {
+    IModel model = new ModelImpl();
+    model.createPortfolio("TestPortfolio");
+    model.addPortfolioHolding("TestPortfolio", "GOOG", 10);
+    model.addPortfolioHolding("TestPortfolio", "MSFT", 20);
+    model.addPortfolioHolding("TestPortfolio", "AMZN", 30);
+    List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
+    assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
   }
 
+  @Test
+  public void testGetPortfolioValue() {
+    IModel model = new ModelImpl();
+    LocalDate testDate = LocalDate.of(2024, 6, 4);
+    model.createPortfolio("TestPortfolio");
+    model.addPortfolioHolding("TestPortfolio", "GOOG", 10);
+    model.addPortfolioHolding("TestPortfolio", "MSFT", 20);
+    model.addPortfolioHolding("TestPortfolio", "AMZN", 30);
+    assertEquals(15452.90, model.getPortfolioValue("TestPortfolio", testDate),
+            0.01);
+  }
 
+  @Test
+  public void getStocksInPortfolio() {
+    IModel model = new ModelImpl();
+    model.createPortfolio("TestPortfolio");
+    model.addPortfolioHolding("TestPortfolio", "GOOG", 10);
+    model.addPortfolioHolding("TestPortfolio", "MSFT", 20);
+    model.addPortfolioHolding("TestPortfolio", "AMZN", 30);
+    List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
+    assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
+  }
 }
