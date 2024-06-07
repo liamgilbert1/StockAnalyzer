@@ -12,14 +12,14 @@ import model.ModelImpl;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test cases for CreatePortfolioCommand.
+ */
 public class CreatePortfolioCommandTest {
   ICommand command;
   Appendable output;
-
   IModel model;
-
   Scanner scanner;
-
   Readable input;
 
   @Before

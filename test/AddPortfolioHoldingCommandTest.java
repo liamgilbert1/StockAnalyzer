@@ -10,8 +10,11 @@ import controller.commands.ICommand;
 import model.IModel;
 import model.ModelImpl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Test cases for AddPortfolioHoldingCommand.
+ */
 public class AddPortfolioHoldingCommandTest {
   ICommand command;
   Appendable output;
