@@ -22,11 +22,6 @@ public class ModelImpl implements IModel {
   }
 
   @Override
-  public void populate(Readable readable) {
-
-  }
-
-  @Override
   public IStock getStock(String ticker) {
     return new Stock(ticker);
   }

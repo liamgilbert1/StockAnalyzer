@@ -38,9 +38,31 @@ public class ControllerMockTest {
     StringBuilder log = new StringBuilder();
     IModel mockModel = new MockModelImpl(log);
     Appendable output = new StringBuilder();
-    Readable input = new StringReader("Crossover AMZN 2024-05-19 12");
+    Readable input = new StringReader("Crossover AMZN 2024-05-19 2024-06-05 30");
     IController controller = new ControllerImpl(input, output);
     controller.go(mockModel);
-    assertEquals("Crossover AMZN 2024-05-19 12", log.toString());
+    assertEquals("Crossover AMZN 2024-05-19 2024-06-05 30", log.toString());
+  }
+
+  @Test
+  public void testControllerMockCreatePortfolio() {
+    StringBuilder log = new StringBuilder();
+    IModel mockModel = new MockModelImpl(log);
+    Appendable output = new StringBuilder();
+    Readable input = new StringReader("CreatePortfolio Portfolio1");
+    IController controller = new ControllerImpl(input, output);
+    controller.go(mockModel);
+    assertEquals("CreatePortfolio Portfolio1", log.toString());
+  }
+
+  @Test
+  public void testControllerMockAddPortfolioHolding() {
+    StringBuilder log = new StringBuilder();
+    IModel mockModel = new MockModelImpl(log);
+    Appendable output = new StringBuilder();
+    Readable input = new StringReader("AddPortfolioHolding Portfolio1 GOOG 10");
+    IController controller = new ControllerImpl(input, output);
+    controller.go(mockModel);
+    assertEquals("AddPortfolioHolding Portfolio1 GOOG 10.0", log.toString());
   }
 }
