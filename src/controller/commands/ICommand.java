@@ -7,7 +7,18 @@ import model.IModel;
  */
 public interface ICommand {
 
+  /**
+   * Executes the command.
+   *
+   * @param model   the model to execute the command on
+   * @param scanner the scanner to read input from
+   */
   void execute(IModel model, Scanner scanner);
 
+  /**
+   * Gets the instructions for the command.
+   *
+   * @return the instructions for the command
+   */
   String getInstructions();
 }

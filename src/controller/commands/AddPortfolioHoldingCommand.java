@@ -4,11 +4,24 @@ import java.util.Scanner;
 
 import model.IModel;
 
+/**
+ * This class represents a command to add a holding to an existing portfolio.
+ */
 public class AddPortfolioHoldingCommand extends AWriterCommand {
+  /**
+   * Constructs an AddPortfolioHoldingCommand object.
+   * @param out an appendable object to send output to
+   */
   public AddPortfolioHoldingCommand(Appendable out) {
     super(out);
   }
 
+  /**
+   * Executes the AddPortfolioHoldingCommand with the given model and scanner.
+   * @param model the model to execute the command on
+   * @param scanner the scanner to get the next inputs from
+   * @throws IllegalStateException if the command fails to execute
+   */
   @Override
   public void execute(IModel model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
@@ -25,6 +38,10 @@ public class AddPortfolioHoldingCommand extends AWriterCommand {
     }
   }
 
+  /**
+   * Gets the instructions for the AddPortfolioHoldingCommand.
+   * @return the instructions for the AddPortfolioHoldingCommand
+   */
   @Override
   public String getInstructions() {
     StringBuilder instructions;

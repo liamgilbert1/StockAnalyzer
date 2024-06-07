@@ -12,10 +12,20 @@ import model.IModel;
  */
 public class GainOrLossCommand extends AWriterCommand {
 
+  /**
+   * Constructs a GainOrLossCommand object.
+   * @param out an appendable object to send output to
+   */
   public GainOrLossCommand(Appendable out) {
     super(out);
   }
 
+  /**
+   * Executes the GainOrLossCommand with the given model and scanner.
+   * @param model the model to execute the command on
+   * @param scanner the scanner to get the next inputs from
+   * @throws IllegalStateException if the command fails to execute
+   */
   @Override
   public void execute(IModel model, Scanner scanner) {
     String ticker = getNextString(scanner);
@@ -33,6 +43,10 @@ public class GainOrLossCommand extends AWriterCommand {
     }
   }
 
+  /**
+   * Gets the instructions for the GainOrLossCommand.
+   * @return the instructions for the GainOrLossCommand
+   */
   @Override
   public String getInstructions() {
     StringBuilder instructions;

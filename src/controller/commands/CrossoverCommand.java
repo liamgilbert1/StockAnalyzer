@@ -15,10 +15,20 @@ import model.IModel;
  */
 public class CrossoverCommand extends AWriterCommand {
 
+  /**
+   * Constructs a CrossoverCommand object.
+   * @param out the appendable object to output the results of the command
+   */
   public CrossoverCommand(Appendable out) {
     super(out);
   }
 
+  /**
+   * Executes the CrossoverCommand with the given model and scanner.
+   * @param model the model to execute the command on
+   * @param scanner the scanner to get the next inputs from
+   * @throws IllegalArgumentException if the command fails to execute
+   */
   @Override
   public void execute(IModel model, Scanner scanner) {
     String ticker = getNextString(scanner);
@@ -41,6 +51,10 @@ public class CrossoverCommand extends AWriterCommand {
     }
   }
 
+  /**
+   * Gets the instructions for the CrossoverCommand.
+   * @return the instructions for the CrossoverCommand
+   */
   @Override
   public String getInstructions() {
     StringBuilder instructions;
