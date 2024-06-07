@@ -184,7 +184,7 @@ public class ControllerModelTest {
             "Enter 'menu' to see the instructions again.\n" +
             "Enter 'quit' to quit the program.\n" +
             "\n" +
-            "Number of crossovers: 16\n" +
+            "Number of crossovers: 17\n" +
             "2023-01-31\n" +
             "2023-01-30\n" +
             "2023-01-27\n" +
@@ -200,7 +200,8 @@ public class ControllerModelTest {
             "2023-01-12\n" +
             "2023-01-11\n" +
             "2023-01-10\n" +
-            "2023-01-09\n", output.toString());
+            "2023-01-09\n" +
+            "2023-01-03\n", output.toString());
   }
 
   @Test
@@ -259,7 +260,7 @@ public class ControllerModelTest {
             "Enter 'menu' to see the instructions again.\n" +
             "Enter 'quit' to quit the program.\n" +
             "\n" +
-            "Portfolio Created\n", output.toString());
+            "Portfolio Created: TestPortfolio\n", output.toString());
   }
 
   @Test
@@ -319,8 +320,8 @@ public class ControllerModelTest {
             "Enter 'menu' to see the instructions again.\n" +
             "Enter 'quit' to quit the program.\n" +
             "\n" +
-            "Portfolio Created\n" +
-            "Portfolio holdings updated", output.toString());
+            "Portfolio Created: TestPortfolio\n" +
+            "Portfolio holdings updated\n", output.toString());
   }
 
   @Test
@@ -381,8 +382,10 @@ public class ControllerModelTest {
             "Enter 'menu' to see the instructions again.\n" +
             "Enter 'quit' to quit the program.\n" +
             "\n" +
-            "Portfolio Created\n" +
-            "Portfolio holdings updatedPortfolio value is: 1751.3", output.toString());
+            "Portfolio Created: TestPortfolio\n" +
+            "Portfolio holdings updated\n" +
+            "Portfolio value is: 1751.30\n" +
+            " ", output.toString());
   }
 
 }
