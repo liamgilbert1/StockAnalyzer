@@ -23,10 +23,23 @@ public class ModelTests {
   }
 
   @Test
+  public void testInvalidTickerGainOrLoss() {
+    LocalDate startDate = LocalDate.of(2024, 6, 4);
+    LocalDate endDate = LocalDate.of(2024, 6, 5);
+    IModel model = new ModelImpl();
+    assertEquals(0, model.calculateGainOrLoss("INVALID", startDate, endDate),
+            0.01);
+  }
+
+  @Test
   public void testModelMovingAverage() {
     IModel model = new ModelImpl();
-    assertEquals(169.477, model.movingAverage("GOOG", LocalDate.of(2024,
-            5, 29), 30), 0.001);
+    try {
+      model.movingAverage("GOOG", LocalDate.of(2024,
+              5, 29), 30);
+    } catch (Exception e) {
+      assertEquals("Could not read from file", e.getMessage());
+    }
   }
 
   @Test

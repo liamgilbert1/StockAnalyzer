@@ -1,15 +1,15 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import controller.readers.AlphaVantageStreamReader;
+
 import static org.junit.Assert.*;
 
 public class AlphaVantageStreamReaderTest {
 
-  @Before
-  public void setUp() throws Exception {
-  }
-
   @Test
-  public void getReadable() {
+  public void testGetReadable() {
+    AlphaVantageStreamReader reader = new AlphaVantageStreamReader("GOOG");
+    assertNotNull(reader.getReadable());
   }
 }
