@@ -4,11 +4,7 @@ import java.util.Scanner;
 
 import model.IModel;
 
-/**
- * This class represents a command that can be executed by the controller. This command determines
- * the value of a given portfolio.
- */
-public class GetPortfolioValueCommand extends AWriterCommand {
+public class AddPortfolioHoldingCommand extends AWriterCommand {
   @Override
   public void execute(IModel model, Scanner scanner) {
 

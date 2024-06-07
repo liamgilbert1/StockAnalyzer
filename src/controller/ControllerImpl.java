@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
+import controller.commands.CreatePortfolioCommand;
 import controller.commands.CrossoverCommand;
 import controller.commands.GainOrLossCommand;
 import controller.commands.ICommand;
@@ -25,6 +26,7 @@ public class ControllerImpl implements IController {
     this.commandMap.put("GainOrLoss", () -> new GainOrLossCommand(output));
     this.commandMap.put("MovingAverage", () -> new MovingAverageCommand(output));
     this.commandMap.put("Crossover", () -> new CrossoverCommand(output));
+    this.commandMap.put("CreatePortfolio", () -> new CreatePortfolioCommand(output));
   }
 
   /**
@@ -33,10 +35,10 @@ public class ControllerImpl implements IController {
    */
   @Override
   public void go(IModel model) {
-    for (String command : this.commandMap.keySet()) {
+    for (Supplier<ICommand> command : commandMap.values()) {
       try {
         output.append("\n");
-        output.append(commandMap.get(command).get().getInstructions());
+        output.append(command.get().getInstructions());
       } catch (IOException e) {
         throw new IllegalStateException("Could not append to output.");
       }

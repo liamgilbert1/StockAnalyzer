@@ -37,4 +37,8 @@ public class MockModelImpl implements IModel {
             .append(endDate.toString()).append(" ").append(days);
     return null;
   }
+
+  @Override
+  public void createPortfolio(String name) {
+  }
 }

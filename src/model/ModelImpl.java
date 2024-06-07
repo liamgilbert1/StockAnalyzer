@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.portfolio.IPortfolio;
+import model.portfolio.Portfolio;
 import model.stock.IStock;
 import model.stock.Stock;
 
@@ -93,5 +94,10 @@ public class ModelImpl implements IModel {
     }
 
     return crossovers;
+  }
+
+  @Override
+  public void createPortfolio(String name) {
+    this.portfolios.add(new Portfolio(name));
   }
 }

@@ -38,5 +38,5 @@ public interface IModel {
   List<LocalDate> crossOver(String ticker, LocalDate startDate, LocalDate endDate, int days);
 
 
-
+  void createPortfolio(String name);
 }
