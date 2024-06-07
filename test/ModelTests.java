@@ -95,6 +95,16 @@ public class ModelTests {
     model.addPortfolioHolding("TestPortfolio", "AMZN", 30);
     assertEquals(15452.90, model.getPortfolioValue("TestPortfolio", testDate),
             0.01);
+    assertEquals(15335.40, model.getPortfolioValue("TestPortfolio",
+                    LocalDate.of(2024, 6, 1)), 0.01);
+    assertEquals(15335.40, model.getPortfolioValue("TestPortfolio",
+            LocalDate.of(2024, 5, 31)), 0.01);
+    try {
+      model.getPortfolioValue("TestPortfolio",
+              LocalDate.of(1990, 5, 31));
+    } catch (IllegalArgumentException e) {
+      assertEquals("Most recent date not found", e.getMessage());
+    }
   }
 
   @Test
