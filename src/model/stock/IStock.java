@@ -2,10 +2,6 @@ package model.stock;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-
-import controller.IStockReader;
-import controller.StockDataPoint;
 
 public interface IStock {
   String getTicker();

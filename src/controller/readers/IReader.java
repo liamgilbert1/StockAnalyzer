@@ -1,4 +1,4 @@
-package controller;
+package controller.readers;
 
 
 public interface IReader {

@@ -3,9 +3,8 @@ package model.stock;
 import java.time.LocalDate;
 import java.util.List;
 
-import controller.CSVReader;
-import controller.IStockReader;
-import controller.StockDataPoint;
+import controller.readers.CSVReader;
+import controller.readers.IStockReader;
 
 public class Stock implements IStock {
   private final String ticker;

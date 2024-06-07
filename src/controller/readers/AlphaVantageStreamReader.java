@@ -1,4 +1,4 @@
-package controller;
+package controller.readers;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 import java.io.StringReader;
+
+import controller.readers.IReader;
 
 public class AlphaVantageStreamReader implements IReader {
   private final String ticker;

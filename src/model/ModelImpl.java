@@ -8,7 +8,7 @@ import model.portfolio.IPortfolio;
 import model.stock.IStock;
 import model.stock.Stock;
 
-import static controller.StockDataPoint.CLOSE;
+import static model.stock.StockDataPoint.CLOSE;
 
 public class ModelImpl implements IModel {
 

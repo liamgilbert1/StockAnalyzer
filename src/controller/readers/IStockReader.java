@@ -1,7 +1,9 @@
-package controller;
+package controller.readers;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import model.stock.StockDataPoint;
 
 public interface IStockReader extends IReader {
   /**

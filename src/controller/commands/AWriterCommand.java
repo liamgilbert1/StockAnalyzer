@@ -3,8 +3,8 @@ package controller.commands;
 import java.io.File;
 import java.time.LocalDate;
 
-import controller.AlphaVantageStreamReader;
-import controller.CSVReader;
+import controller.readers.AlphaVantageStreamReader;
+import controller.readers.CSVReader;
 import controller.CSVWriter;
 
 public abstract class AWriterCommand extends ACommand implements ICommand {

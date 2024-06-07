@@ -1,4 +1,4 @@
-package controller;
+package controller.readers;
 
 import java.io.FileReader;
 import java.io.StringReader;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+
+import model.stock.StockDataPoint;
 
 public class CSVReader implements IStockReader {
 

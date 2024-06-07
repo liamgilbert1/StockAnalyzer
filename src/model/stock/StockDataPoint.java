@@ -1,4 +1,4 @@
-package controller;
+package model.stock;
 
 public enum StockDataPoint {
   OPEN {

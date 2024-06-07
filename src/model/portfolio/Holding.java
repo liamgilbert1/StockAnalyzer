@@ -5,8 +5,6 @@ import java.util.Objects;
 
 import model.stock.IStock;
 
-import static controller.StockDataPoint.CLOSE;
-
 public class Holding implements IHolding {
   private final IStock stock;
   private final int quantity;

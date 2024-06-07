@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import model.stock.IStock;
 import model.stock.Stock;
 
-import static controller.StockDataPoint.CLOSE;
 import static org.junit.Assert.*;
 
 public class StockTest {
