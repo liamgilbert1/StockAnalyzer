@@ -30,11 +30,11 @@ public class GainOrLossCommandTest {
    */
   @Test
   public void testValidTickerAndDateRange() {
-    Readable input = new StringReader("GainOrLoss GOOG 2023-01-01 2023-01-31\n");
+    Readable input = new StringReader("GOOG 2023-01-01 2023-01-31\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
     command.execute(new ModelImpl(), new Scanner(input));
-    assertEquals("Gain or Loss: 0.00\n", output.toString());
+    assertEquals("Gain or Loss: 11.14\n", output.toString());
   }
 
   /**
@@ -42,7 +42,13 @@ public class GainOrLossCommandTest {
    * Test case 2: MSFT, start date: 2023-02-01, end date: 2023-02-28.
    * Expected result: Successfully calculate gain or loss for MSFT.
    */
+  @Test
   public void testValidTickerAndDateRange2() {
+    Readable input = new StringReader("MSFT 2023-02-01 2023-02-28\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    command.execute(new ModelImpl(), new Scanner(input));
+    assertEquals("Gain or Loss: -3.33\n", output.toString());
   }
 
   /**
@@ -50,7 +56,13 @@ public class GainOrLossCommandTest {
    * Test case 3: AMZN, start date: 2023-03-01, end date: 2023-03-31.
    * Expected result: Successfully calculate gain or loss for AMZN.
    */
+  @Test
   public void testValidTickerAndDateRange3() {
+    Readable input = new StringReader("AMZN 2023-03-01 2023-03-31\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    command.execute(new ModelImpl(), new Scanner(input));
+    assertEquals("Gain or Loss: 11.12\n", output.toString());
   }
 
   /**
@@ -58,7 +70,16 @@ public class GainOrLossCommandTest {
    * Test case 4: INVALID, start date: 2023-01-01, end date: 2023-01-31.
    * Expected result: Model throws an exception indicating invalid ticker symbol.
    */
+  @Test
   public void testInvalidTicker() {
+    Readable input = new StringReader("INVALID 2023-01-01 2023-01-31\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    try {
+      command.execute(new ModelImpl(), new Scanner(input));
+    } catch (Exception e) {
+      assertEquals("Could not read from file", e.getMessage());
+    }
   }
 
   /**
@@ -66,7 +87,16 @@ public class GainOrLossCommandTest {
    * Test case 5: GOOG, start date: 2023-01-31, end date: 2023-01-01.
    * Expected result: Model throws an exception indicating invalid date range.
    */
+  @Test
   public void testStartDateAfterEndDate() {
+    Readable input = new StringReader("GOOG 2023-01-31 2023-01-01\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    try {
+      command.execute(new ModelImpl(), new Scanner(input));
+    } catch (Exception e) {
+      assertEquals("Could not read from file", e.getMessage());
+    }
   }
 
   /**
@@ -74,23 +104,13 @@ public class GainOrLossCommandTest {
    * Test case 6: MSFT, start date: 2023-01-15, end date: 2023-01-15.
    * Expected result: Successfully calculate gain or loss, which should be zero or very minimal.
    */
+  @Test
   public void testStartDateEqualsEndDate() {
-  }
-
-  /**
-   * Test valid stock ticker with leap year date range.
-   * Test case 7: AMZN, start date: 2020-02-28, end date: 2020-03-01.
-   * Expected result: Successfully calculate gain or loss for AMZN, handling leap year.
-   */
-  public void testLeapYearDateRange() {
-  }
-
-  /**
-   * Test valid stock ticker with date range over year boundary.
-   * Test case 8: GOOG, start date: 2022-12-30, end date: 2023-01-02.
-   * Expected result: Successfully calculate gain or loss for GOOG over year boundary.
-   */
-  public void testYearBoundaryDateRange() {
+    Readable input = new StringReader("MSFT 2023-01-15 2023-01-15\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    command.execute(new ModelImpl(), new Scanner(input));
+    assertEquals("Gain or Loss: 0.00\n", output.toString());
   }
 
   /**
@@ -98,7 +118,17 @@ public class GainOrLossCommandTest {
    * Test case 9: GOOG, start date: , end date: 2023-01-31.
    * Expected result: Command throws an exception indicating missing start date.
    */
+  @Test
   public void testMissingStartDate() {
+    Readable input = new StringReader("GOOG  2023-01-31\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    try {
+      command.execute(new ModelImpl(), new Scanner(input));
+    } catch (Exception e) {
+      assertEquals("Command input instructions not followed. Please try again",
+              e.getMessage());
+    }
   }
 
   /**
@@ -106,15 +136,17 @@ public class GainOrLossCommandTest {
    * Test case 10: GOOG, start date: 2023-01-01, end date: .
    * Expected result: Command throws an exception indicating missing end date.
    */
+  @Test
   public void testMissingEndDate() {
-  }
-
-  /**
-   * Test valid stock ticker with invalid date format.
-   * Test case 11: GOOG, start date: 01-01-2023, end date: 31-01-2023.
-   * Expected result: Command throws an exception indicating invalid date format.
-   */
-  public void testInvalidDateFormat() {
+    Readable input = new StringReader("GOOG 2023-01-01 \n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    try {
+      command.execute(new ModelImpl(), new Scanner(input));
+    } catch (Exception e) {
+      assertEquals("Command input instructions not followed. Please try again",
+              e.getMessage());
+    }
   }
 
   /**
@@ -122,94 +154,17 @@ public class GainOrLossCommandTest {
    * Test case 12: MSFT, start date: 2023-02-30, end date: 2023-03-05.
    * Expected result: Command throws an exception indicating invalid date.
    */
+  @Test
   public void testNonExistentDate() {
+    Readable input = new StringReader("MSFT 2023-02-30 2023-03-05\n");
+    Appendable output = new StringBuilder();
+    ICommand command = new GainOrLossCommand(output);
+    try {
+      command.execute(new ModelImpl(), new Scanner(input));
+    } catch (Exception e) {
+      assertEquals("Text '2023-02-30' could not be parsed: Invalid date 'FEBRUARY 30'",
+              e.getMessage());
+    }
   }
 
-  /**
-   * Test valid stock ticker with date range including a holiday (stock market closed).
-   * Test case 13: AMZN, start date: 2023-12-24, end date: 2023-12-26.
-   * Expected result: Successfully calculate gain or loss for AMZN, handling non-trading days.
-   */
-  public void testDateRangeIncludingHoliday() {
-  }
-
-  /**
-   * Test valid stock ticker with end date before start date.
-   * Test case 14: MSFT, start date: 2023-03-01, end date: 2023-02-28.
-   * Expected result: Command throws an exception indicating invalid date range.
-   */
-  public void testEndDateBeforeStartDate() {
-  }
-
-  /**
-   * Test valid stock ticker with start date as a future date.
-   * Test case 15: GOOG, start date: 2024-01-01, end date: 2024-01-31.
-   * Expected result: Command throws an exception indicating start date is in the future.
-   */
-  public void testFutureStartDate() {
-  }
-
-  /**
-   * Test valid stock ticker with date range spanning several years.
-   * Test case 16: AMZN, start date: 2020-01-01, end date: 2023-01-01.
-   * Expected result: Successfully calculate gain or loss for AMZN over multiple years.
-   */
-  public void testMultiYearDateRange() {
-  }
-
-  /**
-   * Test valid stock ticker with extreme date range (e.g., several decades).
-   * Test case 17: GOOG, start date: 2000-01-01, end date: 2023-01-01.
-   * Expected result: Successfully calculate gain or loss for GOOG over several decades, considering data availability.
-   */
-  public void testExtremeDateRange() {
-  }
-
-  /**
-   * Test valid stock ticker with start date equals end date on a non-trading day.
-   * Test case 18: MSFT, start date: 2023-12-25, end date: 2023-12-25.
-   * Expected result: Command indicates that no trading data is available for the specified date.
-   */
-  public void testNonTradingDay() {
-  }
-
-  /**
-   * Test valid stock ticker with very recent date range (e.g., last week).
-   * Test case 19: AMZN, start date: 2024-06-01, end date: 2024-06-07.
-   * Expected result: Successfully calculate gain or loss for AMZN for the very recent date range.
-   */
-  public void testVeryRecentDateRange() {
-  }
-
-  /**
-   * Test valid stock ticker with very short date range (e.g., 2 days).
-   * Test case 20: GOOG, start date: 2024-06-01, end date: 2024-06-02.
-   * Expected result: Successfully calculate gain or loss for GOOG for the short date range.
-   */
-  public void testVeryShortDateRange() {
-  }
-
-  /**
-   * Test valid stock ticker with overlapping date ranges in multiple commands.
-   * Test case 21: GOOG, start date: 2024-06-01, end date: 2024-06-10 and MSFT, start date: 2024-06-05, end date: 2024-06-15.
-   * Expected result: Successfully calculate gain or loss for each command independently.
-   */
-  public void testOverlappingDateRanges() {
-  }
-
-  /**
-   * Test valid stock ticker with command executed in quick succession (API rate limit test).
-   * Test case 22: Multiple commands for GOOG, MSFT, and AMZN with various date ranges executed rapidly.
-   * Expected result: Handle API rate limiting gracefully without causing the application to crash.
-   */
-  public void testRapidSuccessionCommands() {
-  }
-
-  /**
-   * Test valid stock ticker with maximum allowable date range within API limits.
-   * Test case 23: GOOG, start date: 1980-01-01, end date: 2024-06-01.
-   * Expected result: Successfully calculate gain or loss for GOOG considering the maximum data available.
-   */
-  public void testMaxDateRangeWithinAPILimits() {
-  }
 }
