@@ -6,17 +6,15 @@ import java.util.Objects;
 
 import model.stock.IStock;
 
+
 public class MockModelImpl implements IModel {
   private final StringBuilder log;
+
 
   public MockModelImpl(StringBuilder log) {
     this.log = Objects.requireNonNull(log);
   }
 
-  @Override
-  public void populate(Readable readable) {
-
-  }
 
   @Override
   public double calculateGainOrLoss(String ticker, LocalDate startDate, LocalDate endDate) {
@@ -35,22 +33,25 @@ public class MockModelImpl implements IModel {
   @Override
   public List<LocalDate> crossOver(String ticker, LocalDate startDate, LocalDate endDate,
                                    int days) {
-    log.append("Crossover ").append(ticker).append(" ").append(startDate.toString())
+    log.append("Crossover ").append(ticker).append(" ").append(startDate.toString()).append(" ")
             .append(endDate.toString()).append(" ").append(days);
     return null;
   }
 
   @Override
   public void createPortfolio(String name) {
+    log.append("CreatePortfolio ").append(name);
   }
 
   @Override
   public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
-
+    log.append("AddPortfolioHolding ").append(portfolioName).append(" ").append(ticker).append(" ")
+            .append(quantity);
   }
 
   @Override
   public double getPortfolioValue(String portfolioName, LocalDate date) {
+    log.append("GetPortfolioValue ").append(portfolioName).append(" ").append(date.toString());
     return 0;
   }
 
