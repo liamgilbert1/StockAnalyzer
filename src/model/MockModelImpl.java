@@ -64,4 +64,9 @@ public class MockModelImpl implements IModel {
   public IStock getStock(String ticker) {
     return null;
   }
+
+  @Override
+  public List<String> getPortfolioNames() {
+    return null;
+  }
 }

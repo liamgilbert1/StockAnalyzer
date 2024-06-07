@@ -1,9 +1,13 @@
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import model.IModel;
 import model.ModelImpl;
+import model.portfolio.IPortfolio;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,16 +15,55 @@ public class ModelTests {
 
   @Test
   public void testModelGainOrLoss() {
-    LocalDate startDate = LocalDate.of(2024, 6, 5);
+    LocalDate startDate = LocalDate.of(2024, 6, 4);
+    LocalDate endDate = LocalDate.of(2024, 6, 5);
     IModel model = new ModelImpl();
-    model.calculateGainOrLoss("GOOG", startDate, LocalDate.of(2024, 6, 4));
+    assertEquals(1.94, model.calculateGainOrLoss("GOOG", startDate, endDate),
+            0.01);
   }
 
   @Test
   public void testModelMovingAverage() {
     IModel model = new ModelImpl();
-    assertEquals(175.145, model.movingAverage("GOOG", LocalDate.of(2024,
-            6, 5), 4), 0.01);
-
+    assertEquals(169.477, model.movingAverage("GOOG", LocalDate.of(2024,
+            5, 29), 30), 0.001);
   }
+
+  @Test
+  public void testModelCrossOver() {
+    IModel model = new ModelImpl();
+    List<LocalDate> expectedDates = new ArrayList<>(Arrays.asList(
+            LocalDate.of(2024, 3, 22),
+            LocalDate.of(2024, 3, 21),
+            LocalDate.of(2024, 3, 20),
+            LocalDate.of(2024, 3, 19),
+            LocalDate.of(2024, 3, 18),
+            LocalDate.of(2024, 3, 15),
+            LocalDate.of(2024, 3, 14)));
+    assertEquals(expectedDates, model.crossOver("GOOG",
+            LocalDate.of(2024, 3, 7),
+            LocalDate.of(2024, 3, 22), 30));
+  }
+
+  @Test
+  public void testModelCreatePortfolio() {
+    IModel model = new ModelImpl();
+    model.createPortfolio("TestPortfolio");
+    List<String> portfolios = model.getPortfolioNames();
+    assertEquals(List.of("TestPortfolio"), portfolios);
+
+    model.createPortfolio("TestPortfolio2");
+    portfolios = model.getPortfolioNames();
+    assertEquals(List.of("TestPortfolio", "TestPortfolio2"), portfolios);
+
+    model.createPortfolio("TestPortfolio3");
+    portfolios = model.getPortfolioNames();
+    assertEquals(List.of("TestPortfolio", "TestPortfolio2", "TestPortfolio3"), portfolios);
+  }
+
+  @Test
+  public void testAddPortfolioHolding() {
+  }
+
+
 }

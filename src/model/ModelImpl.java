@@ -135,4 +135,12 @@ public class ModelImpl implements IModel {
     }
     throw new IllegalArgumentException("Portfolio does not exist");
   }
+
+  public List<String> getPortfolioNames() {
+    List<String> portfolioNames = new ArrayList<>();
+    for (IPortfolio portfolio : this.portfolios) {
+      portfolioNames.add(portfolio.getName());
+    }
+    return portfolioNames;
+  }
 }

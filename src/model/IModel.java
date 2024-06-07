@@ -41,4 +41,6 @@ public interface IModel {
   List<String> getStocksInPortfolio(String portfolioName);
 
   IStock getStock(String ticker);
+
+  List<String> getPortfolioNames();
 }
