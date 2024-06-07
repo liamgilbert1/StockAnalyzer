@@ -17,6 +17,12 @@ public class GetPortfolioValueCommand extends AWriterCommand {
     super(out);
   }
 
+  /**
+   * Executes the GetPortfolioValueCommand with the given model and scanner.
+   * @param model the model to execute the command on
+   * @param scanner the scanner to get the next inputs from
+   * @throws IllegalArgumentException if the command fails to execute
+   */
   @Override
   public void execute(IModel model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
@@ -48,6 +54,10 @@ public class GetPortfolioValueCommand extends AWriterCommand {
     }
   }
 
+  /**
+   * Gets the instructions for the GetPortfolioValueCommand.
+   * @return the instructions for the GetPortfolioValueCommand
+   */
   @Override
   public String getInstructions() {
     StringBuilder instructions;

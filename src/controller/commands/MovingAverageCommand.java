@@ -13,10 +13,20 @@ import model.IModel;
  * (Closing prices only).
  */
 public class MovingAverageCommand extends AWriterCommand {
+  /**
+   * Constructs a MovingAverageCommand object.
+   * @param out an appendable object to send output to
+   */
   public MovingAverageCommand(Appendable out) {
     super(out);
   }
 
+  /**
+   * Executes the MovingAverageCommand with the given model and scanner.
+   * @param model the model to execute the command on
+   * @param scanner the scanner to get the next inputs from
+   * @throws IllegalStateException if the command fails to execute
+   */
   @Override
   public void execute(IModel model, Scanner scanner) {
     String ticker = getNextString(scanner);
@@ -33,6 +43,10 @@ public class MovingAverageCommand extends AWriterCommand {
     }
   }
 
+  /**
+   * Gets the instructions for the MovingAverageCommand.
+   * @return the instructions for the MovingAverageCommand
+   */
   @Override
   public String getInstructions() {
     StringBuilder instructions;
