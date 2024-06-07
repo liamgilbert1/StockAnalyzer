@@ -13,10 +13,19 @@ import model.stock.Stock;
 import static model.stock.StockDataPoint.CLOSE;
 import static model.stock.StockDataPoint.DATE;
 
+/**
+ * Represents a model that can be used to calculate the gain or loss of a stock, the moving average
+ * of a stock, and the dates where there was an x-day crossover. The model can also be used to
+ * create a portfolio, add a holding to a portfolio, get the value of a portfolio, and get the
+ * stocks in a portfolio.
+ */
 public class ModelImpl implements IModel {
 
   private final List<IPortfolio> portfolios;
 
+  /**
+   * Constructs a new model with an empty list of portfolios.
+   */
   public ModelImpl() {
     this.portfolios = new ArrayList<>();
   }
@@ -136,6 +145,7 @@ public class ModelImpl implements IModel {
     throw new IllegalArgumentException("Portfolio does not exist");
   }
 
+  @Override
   public List<String> getPortfolioNames() {
     List<String> portfolioNames = new ArrayList<>();
     for (IPortfolio portfolio : this.portfolios) {
