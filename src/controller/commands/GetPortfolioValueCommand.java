@@ -23,11 +23,19 @@ public class GetPortfolioValueCommand extends AWriterCommand {
     String dateEntered = getNextString(scanner);
     LocalDate date = LocalDate.parse(dateEntered);
 
-
-    List<String> tickersInPortfolio = model.getStocksInPortfolio(portfolioName);
     List<IStock> stocks = new ArrayList<>();
-    for (String ticker : tickersInPortfolio) {
-      stocks.add(model.getStock(ticker));
+
+    try {
+      List<String> tickersInPortfolio = model.getStocksInPortfolio(portfolioName);
+      for (String ticker : tickersInPortfolio) {
+        stocks.add(model.getStock(ticker));
+      }
+    } catch (Exception e) {
+      try {
+        this.out.append("Failed to find stocks in portfolio. Please check the portfolio name.");
+      } catch (Exception ex) {
+        throw new IllegalStateException("Failed to append to output.");
+      }
     }
 
     tryWrite(stocks, date);

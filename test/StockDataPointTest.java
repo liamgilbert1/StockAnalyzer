@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class StockDataPointTest {
   @Test
-  public void getIndex() {
+  public void testGetIndex() {
     assertEquals(0, DATE.getIndex());
     assertEquals(1, OPEN.getIndex());
     assertEquals(2, HIGH.getIndex());

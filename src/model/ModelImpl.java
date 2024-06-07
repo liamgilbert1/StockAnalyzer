@@ -100,6 +100,11 @@ public class ModelImpl implements IModel {
 
   @Override
   public void createPortfolio(String name) {
+    for (IPortfolio portfolio : this.portfolios) {
+      if (portfolio.getName().equals(name)) {
+        throw new IllegalArgumentException("Portfolio already exists");
+      }
+    }
     this.portfolios.add(new Portfolio(name));
   }
 
@@ -107,7 +112,9 @@ public class ModelImpl implements IModel {
   public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
     for (IPortfolio portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
-        portfolio.addHolding(new Holding(getStock(ticker), quantity));
+        IPortfolio newPortfolio = portfolio.addHolding(new Holding(getStock(ticker), quantity));
+        this.portfolios.remove(portfolio);
+        this.portfolios.add(newPortfolio);
         return;
       }
     }

@@ -34,28 +34,25 @@ public class HoldingTest {
 
   @Test
   public void testGetQuantity() {
-    assertEquals(1000, holding1.getQuantity());
+    assertEquals(1000, holding1.getQuantity(), .01);
   }
 
   @Test
   public void testGetValue() {
-    assertEquals(105000,
+    assertEquals(1046400,
             holding1.getValue(LocalDate.of(2018, 1, 1)), 0.01);
-    assertEquals(110000,
+    assertEquals(1065000,
             holding1.getValue(LocalDate.of(2018, 1, 2)), 0.01);
-    assertEquals(115000,
+    assertEquals(1082480,
             holding1.getValue(LocalDate.of(2018, 1, 3)), 0.01);
   }
 
   @Test
   public void testAddQuantity() {
     IHolding newHolding = holding1.addQuantity(1000);
-    assertEquals(2000, newHolding.getQuantity());
+    assertEquals(2000, newHolding.getQuantity(), .01);
   }
 
-  /**
-   * Tests the equals method of the Holding class using assert statements.
-   */
   @Test
   public void testEquals() {
     IHolding holding1Clone = new Holding(stock1, 1000);

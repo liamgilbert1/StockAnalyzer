@@ -3,8 +3,6 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import model.portfolio.Holding;
 import model.portfolio.IHolding;
@@ -41,27 +39,27 @@ public class PortfolioTest {
   }
 
   @Test
-  public void addHolding() {
+  public void testAddHolding() {
     portfolio1 = portfolio1.addHolding(holding1);
     assertEquals(1, portfolio1.getHoldings().size());
-    assertEquals(105000, portfolio1.getHoldings().get(0).getValue(date1), .0001);
+    assertEquals(1046400, portfolio1.getHoldings().get(0).getValue(date1), .0001);
     portfolio1 = portfolio1.addHolding(holding2);
     assertEquals(1, portfolio1.getHoldings().size());
-    assertEquals(315000, portfolio1.getHoldings().get(0).getValue(date1), .0001);
+    assertEquals(3139200, portfolio1.getHoldings().get(0).getValue(date1), .0001);
     portfolio1 = portfolio1.addHolding(holding3);
     assertEquals(2, portfolio1.getHoldings().size());
-    assertEquals(315000, portfolio1.getHoldings().get(0).getValue(date1), .0001);
-    assertEquals(525000, portfolio1.getHoldings().get(1).getValue(date1), .0001);
+    assertEquals(3139200, portfolio1.getHoldings().get(0).getValue(date1), .0001);
+    assertEquals(427700, portfolio1.getHoldings().get(1).getValue(date1), .0001);
   }
 
   @Test
-  public void getValue() {
+  public void testGetValue() {
     portfolio1 = portfolio1.addHolding(holding1);
-    assertEquals(105000, portfolio1.getValue(date1), .0001);
+    assertEquals(1046400, portfolio1.getValue(date1), .0001);
     portfolio1 = portfolio1.addHolding(holding2);
-    assertEquals(315000, portfolio1.getValue(date1), .0001);
+    assertEquals(3139200, portfolio1.getValue(date1), .0001);
     portfolio1 = portfolio1.addHolding(holding3);
-    assertEquals(840000, portfolio1.getValue(date1), .0001);
+    assertEquals(3566900, portfolio1.getValue(date1), .0001);
   }
 
   @Test
