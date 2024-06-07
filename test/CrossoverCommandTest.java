@@ -17,7 +17,7 @@ public class CrossoverCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new CrossoverCommand(output);
     command.execute(new ModelImpl(), new Scanner(input));
-    assertEquals("Number of crossovers: 16\n" +
+    assertEquals("Number of crossovers: 17\n" +
             "2023-01-31\n" +
             "2023-01-30\n" +
             "2023-01-27\n" +
@@ -33,7 +33,8 @@ public class CrossoverCommandTest {
             "2023-01-12\n" +
             "2023-01-11\n" +
             "2023-01-10\n" +
-            "2023-01-09\n", output.toString());
+            "2023-01-09\n" +
+            "2023-01-03\n", output.toString());
   }
 
   @Test
@@ -42,7 +43,7 @@ public class CrossoverCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new CrossoverCommand(output);
     command.execute(new ModelImpl(), new Scanner(input));
-    assertEquals("Number of crossovers: 9\n" +
+    assertEquals("Number of crossovers: 10\n" +
             "2023-02-15\n" +
             "2023-02-14\n" +
             "2023-02-13\n" +
@@ -51,7 +52,8 @@ public class CrossoverCommandTest {
             "2023-02-07\n" +
             "2023-02-06\n" +
             "2023-02-03\n" +
-            "2023-02-02\n", output.toString());
+            "2023-02-02\n" +
+            "2023-02-01\n", output.toString());
   }
 
   @Test
