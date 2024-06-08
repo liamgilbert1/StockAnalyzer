@@ -4,6 +4,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
+import controller.IWriter;
 import controller.readers.AlphaVantageStreamReader;
 import controller.readers.CSVReader;
 import controller.CSVWriter;
@@ -18,12 +19,19 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
   }
 
   /**
+   * Gets the writer for this command.
+   * @return the writer for this command
+   */
+  protected IWriter getWriter() {
+    return new CSVWriter();
+  }
+  /**
    * Writes stock data to a CSV file.
    * @param ticker the ticker of the stock
    */
   protected void writeStockData(String ticker) {
     Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
-    new CSVWriter().write(ticker, stockAPIData);
+    getWriter().write(ticker, stockAPIData);
   }
 
   /**
