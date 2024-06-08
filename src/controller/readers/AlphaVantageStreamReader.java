@@ -18,6 +18,7 @@ public class AlphaVantageStreamReader implements IReader {
 
   /**
    * Constructs an object of the AlphaVantageStreamReader with the given ticker symbol.
+   *
    * @param ticker the ticker symbol of the stock.
    */
   public AlphaVantageStreamReader(String ticker) {
@@ -35,9 +36,8 @@ public class AlphaVantageStreamReader implements IReader {
               + ".co/query?function=TIME_SERIES_DAILY"
               + "&outputsize=full"
               + "&symbol"
-              + "=" + stockSymbol + "&apikey="+apiKey+"&datatype=csv");
-    }
-    catch (MalformedURLException e) {
+              + "=" + stockSymbol + "&apikey=" + apiKey + "&datatype=csv");
+    } catch (MalformedURLException e) {
       throw new RuntimeException("the alphavantage API has either changed or "
               + "no longer works");
     }
@@ -47,11 +47,10 @@ public class AlphaVantageStreamReader implements IReader {
     try (InputStream in = url.openStream()) {
       int b;
       while ((b = in.read()) != -1) {
-        output.append(((char)b));
+        output.append(((char) b));
       }
-    }
-    catch (IOException e) {
-      throw new IllegalArgumentException("No price data found for "+stockSymbol);
+    } catch (IOException e) {
+      throw new IllegalArgumentException("No price data found for " + stockSymbol);
     }
     return new StringReader(output.toString());
   }

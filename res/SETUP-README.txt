@@ -28,4 +28,3 @@
 1. Input the command GetPortfolioValue
 2. Input the name of the portfolio you want to get the value of
 3. Input the date you want to get the value of the portfolio for
-

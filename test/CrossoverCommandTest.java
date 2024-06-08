@@ -86,9 +86,10 @@ public class CrossoverCommandTest {
   @Test
   public void testGetInstructions() {
     Appendable output = new StringBuilder();
-    ICommand command = new CrossoverCommand(output);;
+    ICommand command = new CrossoverCommand(output);
     assertEquals("Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a " +
+            "specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +

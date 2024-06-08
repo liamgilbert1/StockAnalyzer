@@ -10,5 +10,5 @@ public interface IController {
    * This method is used to start the controller.
    * @param model the model to be used
    */
-  void go(IModel model);
+  void control(IModel model);
 }

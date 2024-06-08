@@ -7,7 +7,8 @@ import java.io.StringReader;
 import controller.CSVWriter;
 import controller.IWriter;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test cases for CSVWriter.
@@ -15,6 +16,7 @@ import static org.junit.Assert.*;
 public class CSVWriterTest {
   IWriter writer;
   Readable readable;
+
   @Before
   public void setUp() {
     writer = new CSVWriter();

@@ -25,6 +25,7 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
   protected IWriter getWriter() {
     return new CSVWriter();
   }
+
   /**
    * Writes stock data to a CSV file.
    * @param ticker the ticker of the stock

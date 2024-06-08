@@ -21,6 +21,7 @@ public class CSVReader implements IStockReader {
 
   /**
    * Constructs an object of the CSVReader with the given ticker symbol.
+   *
    * @param ticker the ticker symbol of the stock.
    */
   public CSVReader(String ticker) {
@@ -31,8 +32,8 @@ public class CSVReader implements IStockReader {
   public Readable getReadable() {
     String file = ticker + ".csv";
     Appendable stockData = new StringBuilder();
-    try (Scanner scanner = new Scanner(new FileReader(file))){
-      while(scanner.hasNext()) {
+    try (Scanner scanner = new Scanner(new FileReader(file))) {
+      while (scanner.hasNext()) {
         stockData.append(scanner.next());
         stockData.append("\n");
       }
@@ -99,6 +100,7 @@ public class CSVReader implements IStockReader {
   /**
    * Finds the last open date before the given date. If the given date is an open date (a date
    * where the stock market was open), it will return the given date.
+   *
    * @param date the date to find the last open date before.
    * @return the last open date before the given date.
    */
@@ -121,6 +123,7 @@ public class CSVReader implements IStockReader {
   /**
    * Finds the next open date after the given date. If the given date is an open date (a date
    * where the stock market was open), it will return the given date.
+   *
    * @param date the date to find the next open date after.
    * @return the next open date after the given date.
    */
@@ -228,7 +231,7 @@ public class CSVReader implements IStockReader {
         String[] data = line.split(",");
         LocalDate dateInFile = LocalDate.parse(data[0]);
         if (dateInFile.equals(endDate)) {
-          while(dateInFile.isAfter(startDate) || dateInFile.equals(startDate)) {
+          while (dateInFile.isAfter(startDate) || dateInFile.equals(startDate)) {
             prices.add(data[dataPoint.getIndex()]);
             if (!scanner.hasNextLine()) {
               break;

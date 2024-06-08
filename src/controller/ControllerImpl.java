@@ -55,10 +55,10 @@ public class ControllerImpl implements IController {
    * @param model the model to execute the controller on
    */
   @Override
-  public void go(IModel model) {
+  public void control(IModel model) {
     printInstructions();
     Scanner scanner = new Scanner(input);
-    while(scanner.hasNext()) {
+    while (scanner.hasNext()) {
       String command = scanner.next();
       if (command != null) {
         if (command.equals("quit")) {

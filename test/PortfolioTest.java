@@ -29,6 +29,7 @@ public class PortfolioTest {
   LocalDate date3;
 
   IPortfolio portfolio1;
+
   @Before
   public void setUp() {
     date1 = LocalDate.of(2018, 1, 1);

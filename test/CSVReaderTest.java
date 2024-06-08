@@ -8,13 +8,17 @@ import java.util.List;
 import controller.readers.CSVReader;
 
 import static model.stock.StockDataPoint.OPEN;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * Test cases for CSVReader.
  */
 public class CSVReaderTest {
   CSVReader reader;
+
   @Before
   public void setUp() {
     reader = new CSVReader("TEST");
@@ -25,7 +29,7 @@ public class CSVReaderTest {
     Readable readable;
     try {
       readable = reader.getReadable();
-      assertNotNull (readable);
+      assertNotNull(readable);
     } catch (Exception e) {
       fail();
     }

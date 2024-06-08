@@ -20,6 +20,6 @@ public class Main {
     Readable input = new InputStreamReader(System.in);
     Appendable output = System.out;
     IController controller = new ControllerImpl(input, output);
-    controller.go(model);
+    controller.control(model);
   }
 }
