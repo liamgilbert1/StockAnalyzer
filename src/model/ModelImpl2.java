@@ -1,59 +1,53 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.List;
 
+import model.portfolio.Holding;
+import model.portfolio.IPortfolio;
+import model.portfolio.PortfolioWithDates;
 import model.stock.IStock;
+import model.stock.Stock;
 
-public class ModelImpl2 implements IModel2 {
-  private final IModel delegateModel;
+public class ModelImpl2 extends ModelImpl implements IModel2 {
 
-  public ModelImpl2(IModel delegateModel) {
-    this.delegateModel = new ModelImpl();
+  public ModelImpl2() {
+    super();
   }
 
   @Override
-  public double calculateGainOrLoss(String ticker, LocalDate startDate, LocalDate endDate) {
-    return delegateModel.calculateGainOrLoss(ticker, startDate, endDate);
+  public void buyPortfolioHolding(String portfolioName, String ticker, double quantity,
+                                  LocalDate date) {
+    IPortfolio portfolioWithDate = new PortfolioWithDates(portfolioName, date);
+    for (IPortfolio portfolio : portfolios) {
+      if (portfolio.getName().equals(portfolioName)) {
+        IStock stock = new Stock(ticker);
+        Holding holding = new Holding(stock, quantity);
+        IPortfolio newPortfolio = portfolioWithDate.addHolding(holding);
+        portfolios.remove(portfolio);
+        portfolios.add(newPortfolio);
+        return;
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
   }
 
   @Override
-  public double movingAverage(String ticker, LocalDate date, int days) {
-    return delegateModel.movingAverage(ticker, date, days);
+  public void sellPortfolioHolding(String portfolioName, String ticker, double quantity, LocalDate date) {
+
   }
 
   @Override
-  public List<LocalDate> crossOver(String ticker, LocalDate startDate, LocalDate endDate, int days) {
-    return delegateModel.crossOver(ticker, startDate, endDate, days);
+  public String getPortfolioComposition(String portfolioName, LocalDate date) {
+    return "";
   }
 
   @Override
-  public void createPortfolio(String name) {
-    delegateModel.createPortfolio(name);
+  public double getPortfolioValue2(String portfolioName, LocalDate date) {
+    return 0;
   }
 
   @Override
-  public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
-    delegateModel.addPortfolioHolding(portfolioName, ticker, quantity);
-  }
-
-  @Override
-  public double getPortfolioValue(String portfolioName, LocalDate date) {
-    return delegateModel.getPortfolioValue(portfolioName, date);
-  }
-
-  @Override
-  public List<String> getStocksInPortfolio(String portfolioName) {
-    return delegateModel.getStocksInPortfolio(portfolioName);
-  }
-
-  @Override
-  public IStock getStock(String ticker) {
-    return delegateModel.getStock(ticker);
-  }
-
-  @Override
-  public List<String> getPortfolioNames() {
-    return delegateModel.getPortfolioNames();
+  public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
+    return "";
   }
 }

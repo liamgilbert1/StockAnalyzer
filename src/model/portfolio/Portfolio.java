@@ -12,8 +12,8 @@ import java.util.Objects;
  * holding to the portfolio.
  */
 public class Portfolio implements IPortfolio {
-  private final String name;
-  private final List<IHolding> holdings;
+  protected final String name;
+  protected final List<IHolding> holdings;
 
   /**
    * Constructs a portfolio with the given name. The portfolio is initially empty.
@@ -29,7 +29,7 @@ public class Portfolio implements IPortfolio {
    * @param name the name of the portfolio.
    * @param holdings the holdings in the portfolio.
    */
-  private Portfolio(String name, List<IHolding> holdings) {
+  protected Portfolio(String name, List<IHolding> holdings) {
     this.name = name;
     this.holdings = holdings;
   }

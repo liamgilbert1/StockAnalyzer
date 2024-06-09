@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="StocksHomework:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/StocksHomework_jar</output-path>
     <root id="archive" name="StocksHomework.jar">
-      <element id="module-output" name="StocksHomework" />
+      <element id="module-output" name="StocksHW" />
     </root>
   </artifact>
 </component>
