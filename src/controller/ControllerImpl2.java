@@ -1,11 +1,8 @@
 package controller;
 
-import java.util.List;
-
-import controller.commands.GetDistributionOfPortfolioCommand;
-import controller.commands.GetPortfolioCompositionCommand;
-import controller.commands.GetPortfolioValueCommand2;
-import controller.commands.SellPortfolioHoldingCommand;
+import controller.commands.newCommands.GetDistributionOfPortfolioCommand;
+import controller.commands.newCommands.GetPortfolioCompositionCommand;
+import controller.commands.newCommands.GetPortfolioValueCommand2;
 
 public class ControllerImpl2 extends ControllerImpl {
   public ControllerImpl2(Readable input, Appendable output) {
