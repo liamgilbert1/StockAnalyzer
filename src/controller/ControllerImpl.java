@@ -26,9 +26,9 @@ import model.IModel;
  * The controller has a list of ordered commands that are executed in order.
  */
 public class ControllerImpl implements IController {
-  private final Map<String, Supplier<ICommand>> commandMap;
+  protected final Map<String, Supplier<ICommand>> commandMap;
   private final Readable input;
-  private final List<String> orderedCommands;
+  protected List<String> orderedCommands;
   private final Appendable output;
 
   /**
