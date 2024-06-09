@@ -7,6 +7,12 @@ import java.util.Objects;
 import controller.readers.CSVReader;
 import controller.readers.IStockReader;
 
+import static model.stock.StockDataPoint.CLOSE;
+import static model.stock.StockDataPoint.HIGH;
+import static model.stock.StockDataPoint.LOW;
+import static model.stock.StockDataPoint.OPEN;
+import static model.stock.StockDataPoint.VOLUME;
+
 /**
  * This class represents a stock.
  * A stock has a ticker and can be used to get stock data.
@@ -77,7 +83,7 @@ public class Stock implements IStock {
    */
   @Override
   public double getOpenPrice(LocalDate date) {
-    return getStockData(date, StockDataPoint.OPEN);
+    return getStockData(date, OPEN);
   }
 
   /**
@@ -87,7 +93,7 @@ public class Stock implements IStock {
    */
   @Override
   public double getClosePrice(LocalDate date) {
-    return getStockData(date, StockDataPoint.CLOSE);
+    return getStockData(date, CLOSE);
   }
 
   /**
@@ -97,7 +103,7 @@ public class Stock implements IStock {
    */
   @Override
   public double getHighPrice(LocalDate date) {
-    return getStockData(date, StockDataPoint.HIGH);
+    return getStockData(date, HIGH);
   }
 
   /**
@@ -107,7 +113,7 @@ public class Stock implements IStock {
    */
   @Override
   public double getLowPrice(LocalDate date) {
-    return getStockData(date, StockDataPoint.LOW);
+    return getStockData(date, LOW);
   }
 
   /**
@@ -117,7 +123,7 @@ public class Stock implements IStock {
    */
   @Override
   public double getVolume(LocalDate date) {
-    return getStockData(date, StockDataPoint.VOLUME);
+    return getStockData(date, VOLUME);
   }
 
   /**

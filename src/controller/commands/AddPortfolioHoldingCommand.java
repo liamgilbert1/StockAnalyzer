@@ -49,7 +49,7 @@ public class AddPortfolioHoldingCommand extends AWriterCommand {
     instructions.append("Add Portfolio Holding: \n");
     instructions.append("This command adds a holding to an existing portfolio.\n");
     instructions.append("Enter the following parameters separated by spaces:\n");
-    instructions.append("1. Command name (AddPortfolioHolding)\n");
+    instructions.append("1. Command name (BuyPortfolioHolding)\n");
     instructions.append("2. Portfolio name\n");
     instructions.append("3. Stock ticker symbol\n");
     instructions.append("4. Quantity (number of shares)\n");
