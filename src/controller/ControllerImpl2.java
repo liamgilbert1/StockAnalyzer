@@ -1,8 +1,10 @@
 package controller;
 
+import controller.commands.newCommands.BuyPortfolioHoldingCommand;
 import controller.commands.newCommands.GetDistributionOfPortfolioCommand;
 import controller.commands.newCommands.GetPortfolioCompositionCommand;
 import controller.commands.newCommands.GetPortfolioValueCommand2;
+import controller.commands.newCommands.SellPortfolioHoldingCommand;
 
 public class ControllerImpl2 extends ControllerImpl {
   public ControllerImpl2(Readable input, Appendable output) {

@@ -4,10 +4,10 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
-import controller.IWriter;
+import controller.writers.IWriter;
 import controller.readers.AlphaVantageStreamReader;
 import controller.readers.CSVReader;
-import controller.CSVWriter;
+import controller.writers.CSVWriter;
 import model.stock.IStock;
 
 /**

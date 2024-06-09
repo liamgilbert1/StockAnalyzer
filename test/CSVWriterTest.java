@@ -4,8 +4,8 @@ import org.junit.Test;
 import java.io.File;
 import java.io.StringReader;
 
-import controller.CSVWriter;
-import controller.IWriter;
+import controller.writers.CSVWriter;
+import controller.writers.IWriter;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
