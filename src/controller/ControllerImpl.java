@@ -15,6 +15,7 @@ import controller.commands.GetPortfolioValueCommand;
 import controller.commands.ICommand;
 import controller.commands.MovingAverageCommand;
 import model.IModel;
+import model.IModel2;
 
 /**
  * This class represents the controller for the stock market simulator.
@@ -27,9 +28,9 @@ import model.IModel;
  */
 public class ControllerImpl implements IController {
   protected final Map<String, Supplier<ICommand>> commandMap;
-  private final Readable input;
+  protected final Readable input;
   protected List<String> orderedCommands;
-  private final Appendable output;
+  protected final Appendable output;
 
   /**
    * Constructs a ControllerImpl object with the given input and output.
@@ -55,7 +56,7 @@ public class ControllerImpl implements IController {
    * @param model the model to execute the controller on
    */
   @Override
-  public void control(IModel model) {
+  public void control(IModel2 model) {
     printInstructions();
     Scanner scanner = new Scanner(input);
     while (scanner.hasNext()) {

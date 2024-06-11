@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import model.IModel;
+import model.IModel2;
 
 /**
  * This class represents a command that can be executed by the controller. This command determines,
@@ -28,7 +29,7 @@ public class MovingAverageCommand extends AWriterCommand {
    * @throws IllegalStateException if the command fails to execute
    */
   @Override
-  public void execute(IModel model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) {
     String ticker = getNextString(scanner);
     String dateEntered = getNextString(scanner);
     int days = getPositiveInt(scanner);

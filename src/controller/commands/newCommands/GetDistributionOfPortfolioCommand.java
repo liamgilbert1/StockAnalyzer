@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import controller.commands.AWriterCommand;
 import model.IModel;
+import model.IModel2;
 
 public class GetDistributionOfPortfolioCommand extends AWriterCommand {
 
@@ -12,7 +13,7 @@ public class GetDistributionOfPortfolioCommand extends AWriterCommand {
   }
 
   @Override
-  public void execute(IModel model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) {
 
   }
 

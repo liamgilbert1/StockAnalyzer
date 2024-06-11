@@ -9,7 +9,7 @@ import model.stock.IStock;
 /**
  * Represents a mock model implementation. This class is used for testing purposes only.
  */
-public class MockModelImpl implements IModel {
+public class MockModelImpl implements IModel2 {
   private final StringBuilder log;
 
   /**
@@ -124,5 +124,30 @@ public class MockModelImpl implements IModel {
   @Override
   public List<String> getPortfolioNames() {
     return null;
+  }
+
+  @Override
+  public void buyPortfolioHolding(String portfolioName, String ticker, double quantity, LocalDate date) {
+
+  }
+
+  @Override
+  public void sellPortfolioHolding(String portfolioName, String ticker, double quantity, LocalDate date) {
+
+  }
+
+  @Override
+  public String getPortfolioComposition(String portfolioName, LocalDate date) {
+    return "";
+  }
+
+  @Override
+  public double getPortfolioValue2(String portfolioName, LocalDate date) {
+    return 0;
+  }
+
+  @Override
+  public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
+    return "";
   }
 }

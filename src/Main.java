@@ -1,9 +1,11 @@
 import java.io.InputStreamReader;
 import model.IModel;
+import model.IModel2;
 import model.ModelImpl;
 import controller.ControllerImpl;
 
 import controller.IController;
+import model.ModelImpl2;
 
 /**
  * Main class to run the user interface. This class creates a model and controller and runs the
@@ -16,7 +18,7 @@ public class Main {
    * @param args the arguments to run the user interface.
    */
   public static void main(String[] args) {
-    IModel model = new ModelImpl();
+    IModel2 model = new ModelImpl2();
     Readable input = new InputStreamReader(System.in);
     Appendable output = System.out;
     IController controller = new ControllerImpl(input, output);

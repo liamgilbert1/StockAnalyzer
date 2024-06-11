@@ -6,6 +6,7 @@ import java.util.Scanner;
 import controller.commands.CrossoverCommand;
 import controller.commands.ICommand;
 import model.ModelImpl;
+import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +20,7 @@ public class CrossoverCommandTest {
     Readable input = new StringReader("GOOG 2023-01-01 2023-01-31 10\n");
     Appendable output = new StringBuilder();
     ICommand command = new CrossoverCommand(output);
-    command.execute(new ModelImpl(), new Scanner(input));
+    command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Number of crossovers: 17\n" +
             "2023-01-31\n" +
             "2023-01-30\n" +
@@ -45,7 +46,7 @@ public class CrossoverCommandTest {
     Readable input = new StringReader("MSFT 2023-02-01 2023-02-28 5\n");
     Appendable output = new StringBuilder();
     ICommand command = new CrossoverCommand(output);
-    command.execute(new ModelImpl(), new Scanner(input));
+    command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Number of crossovers: 10\n" +
             "2023-02-15\n" +
             "2023-02-14\n" +
@@ -65,7 +66,7 @@ public class CrossoverCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new CrossoverCommand(output);
     try {
-      command.execute(new ModelImpl(), new Scanner(input));
+      command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
       assertEquals("Could not read from file", e.getMessage());
     }
@@ -77,7 +78,7 @@ public class CrossoverCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new CrossoverCommand(output);
     try {
-      command.execute(new ModelImpl(), new Scanner(input));
+      command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
       assertEquals("Days must be greater than 0", e.getMessage());
     }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.IModel;
+import model.IModel2;
 
 /**
  * This class represents the CrossoverCommand class that implements the IController interface.
@@ -29,7 +30,7 @@ public class CrossoverCommand extends AWriterCommand {
    * @throws IllegalArgumentException if the command fails to execute
    */
   @Override
-  public void execute(IModel model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) {
     String ticker = getNextString(scanner);
     String startDateEntered = getNextString(scanner);
     String endDateEntered = getNextString(scanner);

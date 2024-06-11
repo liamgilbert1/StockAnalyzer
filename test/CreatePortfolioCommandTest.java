@@ -7,7 +7,9 @@ import java.util.Scanner;
 import controller.commands.CreatePortfolioCommand;
 import controller.commands.ICommand;
 import model.IModel;
+import model.IModel2;
 import model.ModelImpl;
+import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,13 +19,13 @@ import static org.junit.Assert.assertEquals;
 public class CreatePortfolioCommandTest {
   ICommand command;
   Appendable output;
-  IModel model;
+  IModel2 model;
   Scanner scanner;
   Readable input;
 
   @Before
   public void setUp() {
-    model = new ModelImpl();
+    model = new ModelImpl2();
     output = new StringBuilder();
     command = new CreatePortfolioCommand(output);
   }

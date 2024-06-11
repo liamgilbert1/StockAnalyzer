@@ -3,6 +3,7 @@ package controller.commands;
 import java.util.Scanner;
 
 import model.IModel;
+import model.IModel2;
 
 /**
  * This class represents a command to add a holding to an existing portfolio.
@@ -23,7 +24,7 @@ public class AddPortfolioHoldingCommand extends AWriterCommand {
    * @throws IllegalStateException if the command fails to execute
    */
   @Override
-  public void execute(IModel model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
     String ticker = getNextString(scanner);
     double quantity = getPositiveInt(scanner);
@@ -49,7 +50,7 @@ public class AddPortfolioHoldingCommand extends AWriterCommand {
     instructions.append("Add Portfolio Holding: \n");
     instructions.append("This command adds a holding to an existing portfolio.\n");
     instructions.append("Enter the following parameters separated by spaces:\n");
-    instructions.append("1. Command name (BuyPortfolioHolding)\n");
+    instructions.append("1. Command name (AddPortfolioHolding)\n");
     instructions.append("2. Portfolio name\n");
     instructions.append("3. Stock ticker symbol\n");
     instructions.append("4. Quantity (number of shares)\n");

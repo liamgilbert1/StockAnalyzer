@@ -6,6 +6,7 @@ import java.util.Scanner;
 import controller.commands.GainOrLossCommand;
 import controller.commands.ICommand;
 import model.ModelImpl;
+import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -24,7 +25,7 @@ public class GainOrLossCommandTest {
     Readable input = new StringReader("GOOG 2023-01-01 2023-01-31\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
-    command.execute(new ModelImpl(), new Scanner(input));
+    command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Gain or Loss: 11.14\n", output.toString());
   }
 
@@ -38,7 +39,7 @@ public class GainOrLossCommandTest {
     Readable input = new StringReader("MSFT 2023-02-01 2023-02-28\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
-    command.execute(new ModelImpl(), new Scanner(input));
+    command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Gain or Loss: -3.33\n", output.toString());
   }
 
@@ -52,7 +53,7 @@ public class GainOrLossCommandTest {
     Readable input = new StringReader("AMZN 2023-03-01 2023-03-31\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
-    command.execute(new ModelImpl(), new Scanner(input));
+    command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Gain or Loss: 11.12\n", output.toString());
   }
 
@@ -67,7 +68,7 @@ public class GainOrLossCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
     try {
-      command.execute(new ModelImpl(), new Scanner(input));
+      command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
       assertEquals("Could not read from file", e.getMessage());
     }
@@ -84,7 +85,7 @@ public class GainOrLossCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
     try {
-      command.execute(new ModelImpl(), new Scanner(input));
+      command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
       assertEquals("Could not read from file", e.getMessage());
     }
@@ -100,7 +101,7 @@ public class GainOrLossCommandTest {
     Readable input = new StringReader("MSFT 2023-01-15 2023-01-15\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
-    command.execute(new ModelImpl(), new Scanner(input));
+    command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Gain or Loss: 0.00\n", output.toString());
   }
 
@@ -115,7 +116,7 @@ public class GainOrLossCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
     try {
-      command.execute(new ModelImpl(), new Scanner(input));
+      command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
       assertEquals("Command input instructions not followed. Please try again",
               e.getMessage());
@@ -133,7 +134,7 @@ public class GainOrLossCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
     try {
-      command.execute(new ModelImpl(), new Scanner(input));
+      command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
       assertEquals("Command input instructions not followed. Please try again",
               e.getMessage());
@@ -151,7 +152,7 @@ public class GainOrLossCommandTest {
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
     try {
-      command.execute(new ModelImpl(), new Scanner(input));
+      command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
       assertEquals("Text '2023-02-30' could not be parsed: Invalid date 'FEBRUARY 30'",
               e.getMessage());

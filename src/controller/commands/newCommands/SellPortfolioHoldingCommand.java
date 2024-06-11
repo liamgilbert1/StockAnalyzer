@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import controller.commands.ACommand;
 import model.IModel;
+import model.IModel2;
 
 public class SellPortfolioHoldingCommand extends ACommand {
 
@@ -11,7 +12,7 @@ public class SellPortfolioHoldingCommand extends ACommand {
     super(out);
   }
   @Override
-  public void execute(IModel model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) {
     //TODO
   }
 

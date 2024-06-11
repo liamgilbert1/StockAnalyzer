@@ -2,6 +2,7 @@ package controller.commands;
 
 import java.util.Scanner;
 import model.IModel;
+import model.IModel2;
 
 /**
  * This class represents a command that can be executed by the controller. This command creates a
@@ -24,7 +25,7 @@ public class CreatePortfolioCommand extends ACommand {
    * @throws IllegalArgumentException if the command fails to execute
    */
   @Override
-  public void execute(IModel model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
 
     try {

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import model.IModel;
+import model.IModel2;
 import model.stock.IStock;
 
 /**
@@ -24,7 +25,7 @@ public class GetPortfolioValueCommand extends AWriterCommand {
    * @throws IllegalArgumentException if the command fails to execute
    */
   @Override
-  public void execute(IModel model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
     String dateEntered = getNextString(scanner);
     LocalDate date = LocalDate.parse(dateEntered);

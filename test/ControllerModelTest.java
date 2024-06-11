@@ -5,6 +5,7 @@ import java.io.StringReader;
 import controller.ControllerImpl;
 import controller.IController;
 import model.ModelImpl;
+import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +18,7 @@ public class ControllerModelTest {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("GainOrLoss GOOG 2024-06-04 2024-06-05\n");
     IController controller = new ControllerImpl(input, output);
-    controller.control(new ModelImpl());
+    controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
             "This command calculates the gain or loss of a stock over a given period of time.\n" +
@@ -36,8 +37,7 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a " +
-            "specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -54,7 +54,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (AddPortfolioHolding)\n" +
+            "1. Command name (BuyPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -77,7 +77,7 @@ public class ControllerModelTest {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("MovingAverage GOOG 2023-01-01 30\n");
     IController controller = new ControllerImpl(input, output);
-    controller.control(new ModelImpl());
+    controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
             "This command calculates the gain or loss of a stock over a given period of time.\n" +
@@ -96,8 +96,7 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a " +
-            "specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -114,7 +113,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (AddPortfolioHolding)\n" +
+            "1. Command name (BuyPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -137,7 +136,7 @@ public class ControllerModelTest {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("Crossover GOOG 2023-01-01 2023-01-31 10\n");
     IController controller = new ControllerImpl(input, output);
-    controller.control(new ModelImpl());
+    controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
             "This command calculates the gain or loss of a stock over a given period of time.\n" +
@@ -156,8 +155,7 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a " +
-            "specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -174,7 +172,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (AddPortfolioHolding)\n" +
+            "1. Command name (BuyPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -214,7 +212,7 @@ public class ControllerModelTest {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("CreatePortfolio TestPortfolio\n");
     IController controller = new ControllerImpl(input, output);
-    controller.control(new ModelImpl());
+    controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
             "This command calculates the gain or loss of a stock over a given period of time.\n" +
@@ -233,8 +231,7 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a " +
-            "specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -251,7 +248,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (AddPortfolioHolding)\n" +
+            "1. Command name (BuyPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -275,7 +272,7 @@ public class ControllerModelTest {
     Readable input = new StringReader("CreatePortfolio TestPortfolio\n" +
             "AddPortfolioHolding TestPortfolio GOOG 10\n");
     IController controller = new ControllerImpl(input, output);
-    controller.control(new ModelImpl());
+    controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
             "This command calculates the gain or loss of a stock over a given period of time.\n" +
@@ -294,8 +291,7 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a " +
-            "specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -312,7 +308,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (AddPortfolioHolding)\n" +
+            "1. Command name (BuyPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -338,7 +334,7 @@ public class ControllerModelTest {
             "AddPortfolioHolding TestPortfolio GOOG 10\n" +
             "GetPortfolioValue TestPortfolio 2024-06-04\n");
     IController controller = new ControllerImpl(input, output);
-    controller.control(new ModelImpl());
+    controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
             "This command calculates the gain or loss of a stock over a given period of time.\n" +
@@ -357,8 +353,7 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a " +
-            "specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -375,7 +370,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (AddPortfolioHolding)\n" +
+            "1. Command name (BuyPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
