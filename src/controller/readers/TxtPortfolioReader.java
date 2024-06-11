@@ -38,12 +38,12 @@ public class TxtPortfolioReader implements IPortfolioReader {
   }
 
   @Override
-  public IPortfolio getPortfolio() {
-    Readable readable = new TxtPortfolioReader("myPortfolio.txt").getReadable();
+  public IPortfolio getPortfolio(String name) {
+    Readable readable = new TxtPortfolioReader(name + ".txt").getReadable();
     Scanner scanner = new Scanner(readable);
     LocalDate currentDate = null;
     String currentString;
-    String stockSymbol;
+    String ticker;
     String quantity;
     List<ITransaction> transactions = new ArrayList<>();
     while (scanner.hasNext()) {
@@ -57,33 +57,42 @@ public class TxtPortfolioReader implements IPortfolioReader {
         try {
           quantity = scanner.next();
           scanner.next();
-          stockSymbol = scanner.next();
+          ticker = scanner.next();
         } catch (Exception e2) {
           throw new IllegalStateException("Failed to parse transaction data.");
         }
-        switch (currentString) {
-          case "buy":
-            try {
-              int intQuantity = Math.toIntExact(Math.round(Double.parseDouble(quantity)));
-              transactions.add(new BuyTransaction(new Stock(stockSymbol), intQuantity,
-                      currentDate));
-            } catch (Exception e4) {
-              throw new IllegalStateException("Failed to parse buy transaction.");
-            }
-            break;
-          case "sell":
-            transactions.add(new SellTransaction(new Stock(stockSymbol),
-                    Double.parseDouble(quantity), currentDate));
-            break;
-          default:
-            throw new IllegalStateException("Invalid transaction type.");
-        }
+        transactions.add(parseTransaction(currentString, quantity, ticker, currentDate));
       }
     }
-    IPortfolioWithTransactions portfolio = new PortfolioWithTransactions("testPortfolio");
+    return createPortfolio(name, transactions);
+  }
+
+  private ITransaction parseTransaction(String action, String quantity, String ticker,
+                                        LocalDate currentDate) {
+    switch (action) {
+      case "buy":
+        try {
+          int intQuantity = Math.toIntExact(Math.round(Double.parseDouble(quantity)));
+          return new BuyTransaction(new Stock(ticker), intQuantity,
+                  currentDate);
+        } catch (Exception e4) {
+          throw new IllegalStateException("Failed to parse buy transaction.");
+        }
+      case "sell":
+        return new SellTransaction(new Stock(ticker),
+                Double.parseDouble(quantity), currentDate);
+      default:
+        throw new IllegalStateException("Invalid transaction type.");
+    }
+  }
+
+  private IPortfolio createPortfolio(String name, List<ITransaction> transactions) {
+    IPortfolioWithTransactions portfolio = new PortfolioWithTransactions(name);
     for (ITransaction transaction : transactions) {
       portfolio = portfolio.addTransaction(transaction);
     }
     return portfolio;
   }
 }
+
+
