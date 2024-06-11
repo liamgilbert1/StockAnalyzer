@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.portfolio.BuyTransaction;
-import model.portfolio.IPortfolioWithDates;
+import model.portfolio.IPortfolioWithTransactions;
 
-import model.portfolio.ATransaction;
 import model.portfolio.SellTransaction;
 
 
 public class ModelImpl2 extends ModelImpl implements IModel2 {
-  private final List<IPortfolioWithDates> portfoliosWithDates;
+  private final List<IPortfolioWithTransactions> portfoliosWithDates;
 
   public ModelImpl2() {
     super();
@@ -22,9 +21,9 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   @Override
   public void buyPortfolioHolding(String portfolioName, String ticker, int quantity,
                                   LocalDate date) {
-    for (IPortfolioWithDates portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
-        IPortfolioWithDates newPortfolio = portfolio.addTransaction(
+        IPortfolioWithTransactions newPortfolio = portfolio.addTransaction(
                 new BuyTransaction(getStock(ticker), quantity, date));
         this.portfoliosWithDates.remove(portfolio);
         this.portfoliosWithDates.add(newPortfolio);
@@ -37,10 +36,10 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   @Override
   public void sellPortfolioHolding(String portfolioName, String ticker, double quantity,
                                    LocalDate date) {
-    for (IPortfolioWithDates portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
 
-        IPortfolioWithDates newPortfolio =
+        IPortfolioWithTransactions newPortfolio =
                 portfolio.addTransaction(new SellTransaction(getStock(ticker), quantity, date));
         this.portfoliosWithDates.remove(portfolio);
         this.portfoliosWithDates.add(newPortfolio);
@@ -56,7 +55,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
    */
   @Override
   public String getPortfolioComposition(String portfolioName, LocalDate date) {
-    for (IPortfolioWithDates portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getComposition(date);
       }
@@ -71,12 +70,12 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
    */
   @Override
   public double getPortfolioValue2(String portfolioName, LocalDate date) {
-    for (IPortfolioWithDates portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
         if (portfolio.isDateBeforeFirstTransaction(date)) {
           return 0;
         }
-        return portfolio.getValue();
+        return portfolio.getValue(date);
       }
     }
     throw new IllegalArgumentException("Portfolio does not exist");
@@ -90,7 +89,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
    */
   @Override
   public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
-    for (IPortfolioWithDates portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getValueDistribution(date);
       }

@@ -4,7 +4,7 @@ package controller.writers;
  * This interface represents a writer for the stock market simulator.
 
  */
-public interface IWriter {
+public interface IStockDataWriter {
   /**
    * Writes the data to a file.
    * @param file the file to write to

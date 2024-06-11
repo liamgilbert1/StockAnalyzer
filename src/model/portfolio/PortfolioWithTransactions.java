@@ -4,29 +4,29 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PortfolioWithDates implements IPortfolioWithDates {
+public class PortfolioWithTransactions implements IPortfolioWithTransactions {
   private final String name;
   private final List<ITransaction> transactions;
 
-  public PortfolioWithDates(String name) {
+  public PortfolioWithTransactions(String name) {
     this.name = name;
     this.transactions = new ArrayList<>();
   }
 
-  private PortfolioWithDates(String name, List<ITransaction> transactions) {
+  private PortfolioWithTransactions(String name, List<ITransaction> transactions) {
     this.name = name;
     this.transactions = transactions;
   }
 
   @Override
-  public IPortfolioWithDates addTransaction(ITransaction transaction) {
+  public IPortfolioWithTransactions addTransaction(ITransaction transaction) {
     if (isTransactionBefore(transaction)) {
       throw new IllegalArgumentException("New transaction for this stock can't be before " +
               "the stock's last transaction.");
     }
     List<ITransaction> newTransactions = new ArrayList<>(transactions);
     newTransactions.add(transaction);
-    return new PortfolioWithDates(name, newTransactions);
+    return new PortfolioWithTransactions(name, newTransactions);
   }
 
   private boolean isTransactionBefore(ITransaction transaction) {
@@ -65,10 +65,8 @@ public class PortfolioWithDates implements IPortfolioWithDates {
     return distribution.toString();
   }
 
-
-
   @Override
-  public double getValue() {
+  public double getValue(LocalDate date) {
     double value = 0;
     for (ITransaction transaction : transactions) {
       value += transaction.getValue();
@@ -78,12 +76,16 @@ public class PortfolioWithDates implements IPortfolioWithDates {
 
   @Override
   public List<ITransaction> getTransactions() {
-    return List.of();
+    List<ITransaction> transactionsCopy = new ArrayList<>();
+    for (ITransaction transaction : transactions) {
+      transactionsCopy.add(transaction.getCopy());
+    }
+    return transactionsCopy;
   }
 
   @Override
   public String getName() {
-    return "";
+    return this.name;
   }
 
   @Override
@@ -99,6 +101,11 @@ public class PortfolioWithDates implements IPortfolioWithDates {
       }
     }
     return true;
+  }
+
+  @Override
+  public IPortfolioWithTransactions loadPortfolio() {
+    return null;
   }
 
 }

@@ -162,6 +162,11 @@ public class Stock implements IStock {
     return getReader().getDataAcrossDays(startDate, endDate, dataPoint);
   }
 
+  @Override
+  public IStock getCopy() {
+    return new Stock(ticker);
+  }
+
   /**
    * Gets the data across the given number of days.
    * @param obj the object to compare

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import model.portfolio.Holding;
 import model.portfolio.IHolding;
-import model.portfolio.IPortfolio;
+import model.portfolio.IPortfolioWithHoldings;
 import model.portfolio.Portfolio;
 import model.stock.IStock;
 import model.stock.Stock;
@@ -28,7 +28,7 @@ public class PortfolioTest {
   LocalDate date2;
   LocalDate date3;
 
-  IPortfolio portfolio1;
+  IPortfolioWithHoldings portfolio1;
 
   @Before
   public void setUp() {
@@ -85,8 +85,8 @@ public class PortfolioTest {
 
   @Test
   public void testEquals() {
-    IPortfolio portfolio2 = new Portfolio("MyPortfolio");
-    IPortfolio portfolio3 = new Portfolio("MyOtherPortfolio");
+    IPortfolioWithHoldings portfolio2 = new Portfolio("MyPortfolio");
+    IPortfolioWithHoldings portfolio3 = new Portfolio("MyOtherPortfolio");
     assertNotEquals(portfolio1, portfolio3);
     assertEquals(portfolio1, portfolio2);
     portfolio1 = portfolio1.addHolding(holding1);
@@ -97,7 +97,7 @@ public class PortfolioTest {
 
   @Test
   public void testHashCode() {
-    IPortfolio portfolio2 = new Portfolio("MyPortfolio");
+    IPortfolioWithHoldings portfolio2 = new Portfolio("MyPortfolio");
     assertEquals(portfolio1.hashCode(), portfolio2.hashCode());
     portfolio1 = portfolio1.addHolding(holding1);
     portfolio2 = portfolio2.addHolding(holding1);

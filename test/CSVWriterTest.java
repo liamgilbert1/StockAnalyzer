@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.StringReader;
 
 import controller.writers.CSVWriter;
-import controller.writers.IWriter;
+import controller.writers.IStockDataWriter;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  * Test cases for CSVWriter.
  */
 public class CSVWriterTest {
-  IWriter writer;
+  IStockDataWriter writer;
   Readable readable;
 
   @Before

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.portfolio.Holding;
-import model.portfolio.IPortfolio;
+import model.portfolio.IPortfolioWithHoldings;
 import model.portfolio.Portfolio;
 import model.stock.IStock;
 import model.stock.Stock;
@@ -21,7 +21,7 @@ import static model.stock.StockDataPoint.DATE;
  */
 public class ModelImpl implements IModel {
 
-  private final List<IPortfolio> portfolios;
+  private final List<IPortfolioWithHoldings> portfolios;
 
   /**
    * Constructs a new model with an empty list of portfolios.
@@ -104,7 +104,7 @@ public class ModelImpl implements IModel {
 
   @Override
   public void createPortfolio(String name) {
-    for (IPortfolio portfolio : this.portfolios) {
+    for (IPortfolioWithHoldings portfolio : this.portfolios) {
       if (portfolio.getName().equals(name)) {
         throw new IllegalArgumentException("Portfolio already exists");
       }
@@ -114,9 +114,9 @@ public class ModelImpl implements IModel {
 
   @Override
   public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
-    for (IPortfolio portfolio : this.portfolios) {
+    for (IPortfolioWithHoldings portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
-        IPortfolio newPortfolio = portfolio.addHolding(new Holding(getStock(ticker), quantity));
+        IPortfolioWithHoldings newPortfolio = portfolio.addHolding(new Holding(getStock(ticker), quantity));
         this.portfolios.remove(portfolio);
         this.portfolios.add(newPortfolio);
         return;
@@ -127,7 +127,7 @@ public class ModelImpl implements IModel {
 
   @Override
   public double getPortfolioValue(String portfolioName, LocalDate date) {
-    for (IPortfolio portfolio : this.portfolios) {
+    for (IPortfolioWithHoldings portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getValue(date);
       }
@@ -137,7 +137,7 @@ public class ModelImpl implements IModel {
 
   @Override
   public List<String> getStocksInPortfolio(String portfolioName) {
-    for (IPortfolio portfolio : this.portfolios) {
+    for (IPortfolioWithHoldings portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getStocks();
       }
@@ -148,7 +148,7 @@ public class ModelImpl implements IModel {
   @Override
   public List<String> getPortfolioNames() {
     List<String> portfolioNames = new ArrayList<>();
-    for (IPortfolio portfolio : this.portfolios) {
+    for (IPortfolioWithHoldings portfolio : this.portfolios) {
       portfolioNames.add(portfolio.getName());
     }
     return portfolioNames;

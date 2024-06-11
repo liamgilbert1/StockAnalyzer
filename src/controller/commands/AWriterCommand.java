@@ -4,7 +4,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
-import controller.writers.IWriter;
+import controller.writers.IStockDataWriter;
 import controller.readers.AlphaVantageStreamReader;
 import controller.readers.CSVReader;
 import controller.writers.CSVWriter;
@@ -22,7 +22,7 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
    * Gets the writer for this command.
    * @return the writer for this command
    */
-  protected IWriter getWriter() {
+  protected IStockDataWriter getWriter() {
     return new CSVWriter();
   }
 

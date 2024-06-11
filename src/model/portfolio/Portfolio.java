@@ -11,7 +11,7 @@ import java.util.Objects;
  * calculate the value of the holdings in the portfolio. A portfolio can also be used to add a
  * holding to the portfolio.
  */
-public class Portfolio implements IPortfolio {
+public class Portfolio implements IPortfolioWithHoldings {
   protected final String name;
   protected final List<IHolding> holdings;
 
@@ -35,7 +35,7 @@ public class Portfolio implements IPortfolio {
   }
 
   @Override
-  public IPortfolio addHolding(IHolding holding) {
+  public IPortfolioWithHoldings addHolding(IHolding holding) {
     List<IHolding> newHoldings = new ArrayList<>(holdings);
     String newHoldingTicker = holding.getStock().getTicker();
     for (int i = 0; i < holdings.size(); i++) {

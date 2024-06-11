@@ -5,7 +5,32 @@ import java.time.LocalDate;
 import model.stock.IStock;
 
 public class BuyTransaction extends ATransaction {
+  private final int quantity;
   public BuyTransaction(IStock stock, int quantity, LocalDate date) {
-    super(stock, quantity, date);
+    super(stock, date);
+    checkQuantity(quantity);
+    this.quantity = quantity;
+  }
+
+  @Override
+  public double getQuantity() {
+    return this.quantity;
+  }
+
+  @Override
+  public double getValue() {
+    return this.getStock().getClosePrice(this.getDate()) * this.quantity;
+  }
+
+  @Override
+  public ITransaction getCopy() {
+    return new BuyTransaction(this.getStock().getCopy(), quantity,
+            LocalDate.of(this.getDate().getYear(), this.getDate().getMonth(),
+                    this.getDate().getDayOfMonth()));
+  }
+
+  @Override
+  public String action() {
+    return "buy";
   }
 }

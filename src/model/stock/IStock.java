@@ -88,4 +88,10 @@ public interface IStock {
    * @return the data across the given number of days
    */
   List<String> getDataAcrossDays(LocalDate startDate, LocalDate endDate, StockDataPoint dataPoint);
+
+  /**
+   * Returns a copy of this stock;
+   * @return a copy of this stock;
+   */
+  IStock getCopy();
 }

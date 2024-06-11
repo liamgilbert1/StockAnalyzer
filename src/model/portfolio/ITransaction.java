@@ -13,4 +13,7 @@ public interface ITransaction {
 
   LocalDate getDate();
 
+  ITransaction getCopy();
+
+  String action();
 }

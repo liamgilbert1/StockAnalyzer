@@ -5,18 +5,19 @@ import java.util.Objects;
 
 import model.stock.IStock;
 
-public abstract class ATransaction implements ITransaction{
+public abstract class ATransaction implements ITransaction {
     private final IStock stock;
-    private final double quantity;
     private final LocalDate date;
 
-    public ATransaction(IStock stock, double quantity, LocalDate date) {
-      if (quantity < 0) {
-        throw new IllegalArgumentException("Amount of shares can't be negative");
-      }
+    public ATransaction(IStock stock, LocalDate date) {
       this.stock = Objects.requireNonNull(stock);
-      this.quantity = quantity;
       this.date = Objects.requireNonNull(date);
+    }
+
+    protected void checkQuantity(double quantity) {
+      if (quantity <= 0) {
+        throw new IllegalArgumentException("Transaction quantity must be greater than 0.");
+      }
     }
 
     @Override
@@ -25,17 +26,10 @@ public abstract class ATransaction implements ITransaction{
     }
 
     @Override
-    public double getQuantity() {
-      return this.quantity;
-    }
-
-    @Override
-    public double getValue() {
-      return this.stock.getClosePrice(this.date) * this.quantity;
-    }
-
-    @Override
     public LocalDate getDate() {
       return this.date;
     }
+
+    @Override
+    public abstract ITransaction getCopy();
 }
