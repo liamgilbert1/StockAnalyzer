@@ -9,7 +9,9 @@ import model.IModel2;
 public interface IController {
   /**
    * This method is used to start the controller.
-   * (Changed from original method signature to take in an IModel2 instead of an IModel)
+   * (Changed original method signature to take in an IModel2 instead of an IModel
+   * to allow the new model methods to be used in the controller, along with the old ones.)
+   *
    * @param model the model to be used
    */
   void control(IModel2 model);

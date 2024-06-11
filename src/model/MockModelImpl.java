@@ -8,6 +8,9 @@ import model.stock.IStock;
 
 /**
  * Represents a mock model implementation. This class is used for testing purposes only.
+ * (Changed MockModelImpl to implement IModel2 instead of IModel so we can test the new methods in
+ * IModel2. Since MockModelImpl is only used for testing purposes, we believe this alteration won't
+ * violate the SOLID principles.)
  */
 public class MockModelImpl implements IModel2 {
   private final StringBuilder log;

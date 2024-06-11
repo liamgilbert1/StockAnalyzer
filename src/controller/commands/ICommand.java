@@ -11,7 +11,8 @@ public interface ICommand {
 
   /**
    * Executes the command.
-   * (Changed from original method signature to take in an IModel2 instead of an IModel)
+   * (Changed from original method signature to take in an IModel2 instead of an IModel
+   * to allow the new model methods to be used with the new commands, along with the old ones.)
    * @param model   the model to execute the command on
    * @param scanner the scanner to read input from
    */
