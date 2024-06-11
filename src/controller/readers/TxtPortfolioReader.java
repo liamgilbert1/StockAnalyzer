@@ -16,6 +16,26 @@ import model.portfolio.PortfolioWithTransactions;
 import model.portfolio.SellTransaction;
 import model.stock.Stock;
 
+
+/**
+ * This class represents a TxtPortfolioReader that reads a portfolio from a txt file. The txt file
+ * should be formatted by having the first line be the name of the portfolio, and the transactions
+ * below it. The transactions are formatted by have the date of the transaction yyyy-mm-dd one
+ * line, and all the transactions which occurred on that date below it, each on a new line.
+ * The transactions are formatted by having the action (buy or sell), the number of shares,
+ * "shares", and the ticker symbol of the stock, each separated by a space. For example:
+ *
+ * PortfolioName
+ * 2020-01-01
+ * buy 10 shares AAPL
+ * sell 5 shares AAPL
+ * 2020-01-02
+ * buy 5 shares AAPL
+ * sell 2 shares AAPL
+ *
+ * The transactions and dates may be in any order, but the transactions for a given date must be
+ * grouped together.
+ */
 public class TxtPortfolioReader implements IPortfolioReader {
   private final String fileName;
 
