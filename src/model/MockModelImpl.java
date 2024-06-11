@@ -130,7 +130,7 @@ public class MockModelImpl implements IModel2 {
   }
 
   @Override
-  public void buyPortfolioHolding(String portfolioName, String ticker, double quantity, LocalDate date) {
+  public void buyPortfolioHolding(String portfolioName, String ticker, int quantity, LocalDate date) {
 
   }
 

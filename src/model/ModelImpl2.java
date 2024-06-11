@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.portfolio.BuyTransaction;
 import model.portfolio.IPortfolioWithDates;
 
-import model.portfolio.Transaction;
+import model.portfolio.ATransaction;
+import model.portfolio.SellTransaction;
 
 
 public class ModelImpl2 extends ModelImpl implements IModel2 {
@@ -18,12 +20,12 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   }
 
   @Override
-  public void buyPortfolioHolding(String portfolioName, String ticker, double quantity,
+  public void buyPortfolioHolding(String portfolioName, String ticker, int quantity,
                                   LocalDate date) {
     for (IPortfolioWithDates portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
-        IPortfolioWithDates newPortfolio = portfolio.buyTransaction(
-                new Transaction(getStock(ticker), quantity, date));
+        IPortfolioWithDates newPortfolio = portfolio.addTransaction(
+                new BuyTransaction(getStock(ticker), quantity, date));
         this.portfoliosWithDates.remove(portfolio);
         this.portfoliosWithDates.add(newPortfolio);
         return;
@@ -37,8 +39,9 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
                                    LocalDate date) {
     for (IPortfolioWithDates portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
+
         IPortfolioWithDates newPortfolio =
-                portfolio.sellTransaction(new Transaction(getStock(ticker), quantity, date));
+                portfolio.addTransaction(new SellTransaction(getStock(ticker), quantity, date));
         this.portfoliosWithDates.remove(portfolio);
         this.portfoliosWithDates.add(newPortfolio);
         return;

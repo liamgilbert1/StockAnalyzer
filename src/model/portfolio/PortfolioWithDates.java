@@ -19,32 +19,27 @@ public class PortfolioWithDates implements IPortfolioWithDates {
   }
 
   @Override
-  public IPortfolioWithDates buyTransaction(ITransaction transaction) {
-    List<ITransaction> newTransactions = new ArrayList<>(transactions);
-    String newTransactionTicker = transaction.getStock().getTicker();
-    for (int i = 0; i < transactions.size(); i++) {
-      String transactionTicker = transactions.get(i).getStock().getTicker();
-      if (newTransactionTicker.equals(transactionTicker)) {
-        newTransactions.set(i, transactions.get(i).addQuantity(transaction.getQuantity()));
-        return new PortfolioWithDates(name, newTransactions);
-      }
+  public IPortfolioWithDates addTransaction(ITransaction transaction) {
+    if (isTransactionBefore(transaction)) {
+      throw new IllegalArgumentException("New transaction for this stock can't be before " +
+              "the stock's last transaction.");
     }
+    List<ITransaction> newTransactions = new ArrayList<>(transactions);
     newTransactions.add(transaction);
     return new PortfolioWithDates(name, newTransactions);
   }
 
-  @Override
-  public IPortfolioWithDates sellTransaction(ITransaction transaction) {
-    List<ITransaction> newTransactions = new ArrayList<>(transactions);
+  private boolean isTransactionBefore(ITransaction transaction) {
     String newTransactionTicker = transaction.getStock().getTicker();
-    for (int i = 0; i < transactions.size(); i++) {
-      String transactionTicker = transactions.get(i).getStock().getTicker();
+    for (ITransaction iTransaction : transactions) {
+      String transactionTicker = iTransaction.getStock().getTicker();
       if (newTransactionTicker.equals(transactionTicker)) {
-        newTransactions.set(i, transactions.get(i).removeQuantity(transaction.getQuantity()));
-        return new PortfolioWithDates(name, newTransactions);
+        if (iTransaction.getDate().isAfter(transaction.getDate())) {
+          return true;
+        }
       }
     }
-    throw new IllegalArgumentException("Transaction does not exist");
+    return false;
   }
 
   @Override
@@ -105,4 +100,5 @@ public class PortfolioWithDates implements IPortfolioWithDates {
     }
     return true;
   }
+
 }

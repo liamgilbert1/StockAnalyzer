@@ -10,7 +10,7 @@ public interface IModel2 extends IModel {
    * Purchase a specific number of shares of a specific stock on a specified date, and add them to
    * the portfolio
    */
-  void buyPortfolioHolding(String portfolioName, String ticker, double quantity, LocalDate date);
+  void buyPortfolioHolding(String portfolioName, String ticker, int quantity, LocalDate date);
 
   /**
    * Sells a specific number of shares of a specific stock on a specified date, and remove them from

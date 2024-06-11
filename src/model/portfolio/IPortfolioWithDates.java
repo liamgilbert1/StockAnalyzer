@@ -3,9 +3,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface IPortfolioWithDates {
-  IPortfolioWithDates buyTransaction(ITransaction transaction);
+  IPortfolioWithDates addTransaction(ITransaction transaction);
 
-  IPortfolioWithDates sellTransaction(ITransaction transaction);
 
   String getComposition(LocalDate date);
 
@@ -20,5 +19,6 @@ public interface IPortfolioWithDates {
   List<String> getStocks();
 
   boolean isDateBeforeFirstTransaction(LocalDate date);
+
 
 }

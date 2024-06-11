@@ -17,7 +17,7 @@ public class BuyPortfolioHoldingCommand extends AWriterCommand {
   public void execute(IModel2 model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
     String ticker = getNextString(scanner);
-    double quantity = getPositiveInt(scanner);
+    int quantity = getPositiveInt(scanner);
     LocalDate date = LocalDate.parse(getNextString(scanner));
 
     tryWrite(ticker);
