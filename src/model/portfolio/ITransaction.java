@@ -16,4 +16,6 @@ public interface ITransaction {
   ITransaction getCopy();
 
   String action();
+
+  double realQuantity();
 }

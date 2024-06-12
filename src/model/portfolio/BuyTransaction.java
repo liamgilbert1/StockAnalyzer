@@ -18,8 +18,8 @@ public class BuyTransaction extends ATransaction {
   }
 
   @Override
-  public double getValue() {
-    return this.getStock().getClosePrice(this.getDate()) * this.quantity;
+  public double realQuantity() {
+    return this.quantity;
   }
 
   @Override
