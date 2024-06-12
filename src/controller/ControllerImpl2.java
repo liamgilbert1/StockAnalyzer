@@ -1,7 +1,9 @@
 package controller;
 
+import java.util.List;
+
 import controller.commands.newCommands.BuyPortfolioHoldingCommand;
-import controller.commands.newCommands.GetDistributionOfPortfolioCommand;
+import controller.commands.newCommands.GetPortfolioDistributionCommand;
 import controller.commands.newCommands.GetPortfolioCompositionCommand;
 import controller.commands.newCommands.GetPortfolioValueCommand2;
 import controller.commands.newCommands.SellPortfolioHoldingCommand;
@@ -15,14 +17,10 @@ public class ControllerImpl2 extends ControllerImpl {
     commandMap.put("GetPortfolioComposition" , () -> new GetPortfolioCompositionCommand(output));
     commandMap.remove("GetPortfolioValue");
     commandMap.put("GetPortfolioValue", () -> new GetPortfolioValueCommand2(output));
-    commandMap.put("GetDistributionOfPortfolio",
-            () -> new GetDistributionOfPortfolioCommand(output));
-    orderedCommands.remove("AddPortfolioHolding");
-    orderedCommands.remove("GetPortfolioValue");
-    orderedCommands.add("BuyPortfolioHolding");
-    orderedCommands.add("SellPortfolioHolding");
-    orderedCommands.add("GetPortfolioComposition");
-    orderedCommands.add("GetPortfolioValue");
-    orderedCommands.add("GetDistributionOfPortfolio");
+    commandMap.put("GetPortfolioDistribution",
+            () -> new GetPortfolioDistributionCommand(output));
+    this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover", "CreatePortfolio",
+            "BuyPortfolioHolding", "SellPortfolioHolding", "GetPortfolioValue",
+            "GetPortfolioComposition", "GetPortfolioDistribution");
   }
 }

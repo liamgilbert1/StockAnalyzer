@@ -1,4 +1,6 @@
 import java.io.InputStreamReader;
+
+import controller.ControllerImpl2;
 import model.IModel;
 import model.IModel2;
 import model.ModelImpl;
@@ -21,7 +23,7 @@ public class Main {
     IModel2 model = new ModelImpl2();
     Readable input = new InputStreamReader(System.in);
     Appendable output = System.out;
-    IController controller = new ControllerImpl(input, output);
+    IController controller = new ControllerImpl2(input, output);
     controller.control(model);
   }
 }

@@ -22,7 +22,7 @@ public class BuyPortfolioHoldingCommand extends AWriterCommand {
 
     tryWrite(ticker);
 
-try {
+    try {
       model.buyPortfolioHolding(portfolioName, ticker, quantity, date);
       this.out.append("Portfolio shares have been purchased\n");
     } catch (Exception e) {

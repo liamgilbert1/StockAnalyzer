@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.portfolio.BuyTransaction;
+import model.portfolio.IPortfolioWithHoldings;
 import model.portfolio.IPortfolioWithTransactions;
 
+import model.portfolio.Portfolio;
+import model.portfolio.PortfolioWithTransactions;
 import model.portfolio.SellTransaction;
 
 
@@ -16,6 +19,16 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   public ModelImpl2() {
     super();
     this.portfoliosWithDates = new ArrayList<>();
+  }
+
+  @Override
+  public void createPortfolio(String name) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+      if (portfolio.getName().equals(name)) {
+        throw new IllegalArgumentException("Portfolio already exists");
+      }
+    }
+    this.portfoliosWithDates.add(new PortfolioWithTransactions(name));
   }
 
   @Override
@@ -92,6 +105,16 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
     for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getValueDistribution(date);
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
+  }
+
+  @Override
+  public List<String> getStocksInPortfolio(String portfolioName) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+      if (portfolio.getName().equals(portfolioName)) {
+        return portfolio.getStocks();
       }
     }
     throw new IllegalArgumentException("Portfolio does not exist");

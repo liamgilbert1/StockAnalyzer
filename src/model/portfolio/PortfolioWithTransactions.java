@@ -46,23 +46,45 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
   public String getComposition(LocalDate date) {
     StringBuilder composition = new StringBuilder();
     for (ITransaction transaction : transactions) {
-      if (transaction.getStock().getClosePrice(date) != 0) {
+      if (transaction.getStock().getClosePrice(date) != 0
+      && !composition.toString().contains(transaction.getStock().getTicker())) {
         composition.append(transaction.getStock().getTicker()).append(": ")
-                .append(transaction.getQuantity()).append("\n");
+                .append(String.format("%.2f",getStockQuantity(transaction))).append("\n");
       }
     }
     return composition.toString();
   }
 
+  private double getStockQuantity(ITransaction transaction) {
+    double quantity = 0;
+    for (ITransaction iTransaction : transactions) {
+      if (iTransaction.getStock().getTicker().equals(transaction.getStock().getTicker())) {
+        quantity += iTransaction.realQuantity();
+      }
+    }
+    return quantity;
+  }
+
   public String getValueDistribution(LocalDate date) {
     StringBuilder distribution = new StringBuilder();
     for (ITransaction transaction : transactions) {
-      if (transaction.getStock().getClosePrice(date) != 0) {
+      if (transaction.getStock().getClosePrice(date) != 0
+              && !distribution.toString().contains(transaction.getStock().getTicker())) {
         distribution.append(transaction.getStock().getTicker()).append(": ")
-                .append(transaction.getValue()).append("\n");
+                .append(String.format("%.2f", getStockValue(transaction))).append("\n");
       }
     }
     return distribution.toString();
+  }
+
+  private double getStockValue(ITransaction transaction) {
+    double value = 0;
+    for (ITransaction iTransaction : transactions) {
+      if (iTransaction.getStock().getTicker().equals(transaction.getStock().getTicker())) {
+        value += iTransaction.getValue();
+      }
+    }
+    return value;
   }
 
   @Override
@@ -90,17 +112,23 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
 
   @Override
   public List<String> getStocks() {
-    return List.of();
+    List<String> stocks = new ArrayList<>();
+    for (ITransaction transaction : transactions) {
+      if (!stocks.contains(transaction.getStock().getTicker())) {
+        stocks.add(transaction.getStock().getTicker());
+      }
+    }
+    return stocks;
   }
 
   @Override
   public boolean isDateBeforeFirstTransaction(LocalDate date) {
     for (ITransaction transaction : transactions) {
-      if (transaction.getDate().isBefore(date)) {
-        return false;
+      if (transaction.getDate().isAfter(date)) {
+        return true;
       }
     }
-    return true;
+    return false;
   }
 
   @Override

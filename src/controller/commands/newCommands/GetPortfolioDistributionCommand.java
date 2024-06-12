@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.commands.AWriterCommand;
-import model.IModel;
 import model.IModel2;
 import model.stock.IStock;
 
-public class GetPortfolioCompositionCommand extends AWriterCommand {
+public class GetPortfolioDistributionCommand extends AWriterCommand {
 
-  public GetPortfolioCompositionCommand(Appendable out) {
+  public GetPortfolioDistributionCommand(Appendable out) {
     super(out);
   }
 
@@ -39,7 +38,7 @@ public class GetPortfolioCompositionCommand extends AWriterCommand {
     tryWrite(stocks, date);
 
     try {
-      this.out.append(model.getPortfolioComposition(portfolioName, date));
+      this.out.append(model.getPortfolioValueDistribution(portfolioName, date));
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");
     }
@@ -49,11 +48,11 @@ public class GetPortfolioCompositionCommand extends AWriterCommand {
   public String getInstructions() {
     StringBuilder instructions;
     instructions = new StringBuilder();
-    instructions.append("Get Portfolio Composition Command: \n");
-    instructions.append("This command gets the composition of a portfolio " +
-            "(The stocks and the number of shares in each stock) on a specific date.\n");
+    instructions.append("Get Portfolio Distribution Command: \n");
+    instructions.append("This command gets the distribution of a portfolio " +
+            "(The stocks and each stock's value) on a specific date.\n");
     instructions.append("Enter the following parameters separated by spaces:\n");
-    instructions.append("1. Command name (GetPortfolioComposition)\n");
+    instructions.append("1. Command name (GetPortfolioDistribution)\n");
     instructions.append("2. Portfolio name\n");
     instructions.append("3. Date in the format yyyy-mm-dd\n");
     return instructions.toString();

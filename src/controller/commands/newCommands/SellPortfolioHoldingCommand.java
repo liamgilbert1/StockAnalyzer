@@ -1,24 +1,48 @@
 package controller.commands.newCommands;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import controller.commands.ACommand;
+import controller.commands.AWriterCommand;
 import model.IModel;
 import model.IModel2;
 
-public class SellPortfolioHoldingCommand extends ACommand {
+public class SellPortfolioHoldingCommand extends AWriterCommand {
 
   public SellPortfolioHoldingCommand(Appendable out) {
     super(out);
   }
   @Override
   public void execute(IModel2 model, Scanner scanner) {
-    //TODO
+    String portfolioName = getNextString(scanner);
+    String ticker = getNextString(scanner);
+    int quantity = getPositiveInt(scanner);
+    LocalDate date = LocalDate.parse(getNextString(scanner));
+
+    tryWrite(ticker);
+
+    try {
+      model.sellPortfolioHolding(portfolioName, ticker, quantity, date);
+      this.out.append("Portfolio shares have been sold.\n");
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to process command.");
+    }
   }
 
   @Override
   public String getInstructions() {
-    //TODO
-    return "";
+    StringBuilder instructions;
+    instructions = new StringBuilder();
+    instructions.append("Sell Portfolio Holding's on Date Command: \n");
+    instructions.append("This command sells shares of an existing portfolio on a " +
+            "specific date.\n");
+    instructions.append("Enter the following parameters separated by spaces:\n");
+    instructions.append("1. Command name (SellPortfolioHolding)\n");
+    instructions.append("2. Portfolio name\n");
+    instructions.append("3. Stock ticker symbol\n");
+    instructions.append("4. Quantity (number of shares)\n");
+    instructions.append("5. Date in the format yyyy-mm-dd\n");
+    return instructions.toString();
   }
 }
