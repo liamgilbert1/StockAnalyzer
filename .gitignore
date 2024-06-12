@@ -56,3 +56,4 @@ bin/
 >>>>>>> 49a02dd (Init Commit)
 *.iml
 *.xml
+/.idea/
