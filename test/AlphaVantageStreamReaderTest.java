@@ -1,6 +1,6 @@
 import org.junit.Test;
 
-import controller.readers.AlphaVantageStreamReader;
+import controller.IO.readers.AlphaVantageStreamReader;
 
 import static org.junit.Assert.assertNotNull;
 

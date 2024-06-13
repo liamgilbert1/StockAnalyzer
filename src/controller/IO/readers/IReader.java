@@ -1,4 +1,4 @@
-package controller.readers;
+package controller.IO.readers;
 
 /**
  * Represents a reader that can read data from a source, and return it as a Readable object.

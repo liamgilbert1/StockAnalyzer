@@ -26,5 +26,5 @@ Portfolios contain a list of holdings and have names;
 Holdings contain a ticker and a number of shares.
 The commands in the controller call methods in
 the model to update the state of the application for the user.
-The Main class is the entry point for the application and is responsible for creating the model,
+The main.Main class is the entry point for the application and is responsible for creating the model,
 view, and controller and running the application.

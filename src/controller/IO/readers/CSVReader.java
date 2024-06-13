@@ -1,5 +1,6 @@
-package controller.readers;
+package controller.IO.readers;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.StringReader;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+import controller.IO.IOUtils;
 import model.stock.StockDataPoint;
 
 /**
@@ -30,9 +32,9 @@ public class CSVReader implements IStockReader {
 
   @Override
   public Readable getReadable() {
-    String file = ticker + ".csv";
+    File file = IOUtils.getFile(ticker, ".csv", "stockData");
     Appendable stockData = new StringBuilder();
-    try (Scanner scanner = new Scanner(new FileReader(file))) {
+    try (Scanner scanner = new Scanner(file)) {
       while (scanner.hasNext()) {
         stockData.append(scanner.next());
         stockData.append("\n");

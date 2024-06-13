@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.readers.CSVReader;
+import controller.IO.readers.CSVReader;
 
 import static model.stock.StockDataPoint.OPEN;
 import static org.junit.Assert.assertNotNull;

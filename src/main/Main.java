@@ -1,3 +1,5 @@
+package main;
+
 import java.io.InputStreamReader;
 
 import controller.ControllerImpl2;
@@ -10,13 +12,13 @@ import controller.IController;
 import model.ModelImpl2;
 
 /**
- * Main class to run the user interface. This class creates a model and controller and runs the
+ * main.Main class to run the user interface. This class creates a model and controller and runs the
  * controller with the model. The controller takes in user input and sends it to the model to
  * execute commands.
  */
 public class Main {
   /**
-   * Main method to run the user interface.
+   * main.Main method to run the user interface.
    * @param args the arguments to run the user interface.
    */
   public static void main(String[] args) {

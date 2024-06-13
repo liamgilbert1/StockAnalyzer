@@ -1,4 +1,4 @@
-package controller.readers;
+package controller.IO.readers;
 
 import java.io.IOException;
 import java.io.InputStream;
