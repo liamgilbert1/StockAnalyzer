@@ -27,7 +27,7 @@ public class AlphaVantageStreamReader implements IReader {
 
   @Override
   public Readable getReadable() {
-    String apiKey = "4ZZS6M66PTROODSK";
+    String apiKey = "3FEF7XKMWV6LPTFJ";
     String stockSymbol = this.ticker; //ticker symbol for Google
     URL url;
 

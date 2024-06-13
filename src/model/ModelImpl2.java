@@ -6,7 +6,10 @@ import java.util.List;
 
 import controller.IO.readers.IPortfolioWithTransactionsReader;
 import controller.IO.readers.TxtPortfolioReader;
+import controller.IO.writers.IPortfolioWriter;
+import controller.IO.writers.PortfolioTxtWriter;
 import model.portfolio.BuyTransaction;
+import model.portfolio.IPortfolio;
 import model.portfolio.IPortfolioWithTransactions;
 
 import model.portfolio.PortfolioWithTransactions;
@@ -28,7 +31,19 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
         throw new IllegalArgumentException("Portfolio already exists");
       }
     }
-    this.portfolios.add(new PortfolioWithTransactions(name));
+    IPortfolioWithTransactions newPortfolio = new PortfolioWithTransactions(name);
+    this.portfolios.add(newPortfolio);
+    updatePortfolioFile(name);
+  }
+
+  protected void updatePortfolioFile(String portfolioName) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
+      if (portfolio.getName().equals(portfolioName)) {
+        getPortfolioWriter().write(portfolio);
+        return;
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
   }
 
   @Override
@@ -40,6 +55,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
                 new BuyTransaction(getStock(ticker), quantity, date));
         this.portfolios.remove(portfolio);
         this.portfolios.add(newPortfolio);
+        updatePortfolioFile(portfolioName);
         return;
       }
     }
@@ -56,6 +72,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
                 portfolio.addTransaction(new SellTransaction(getStock(ticker), quantity, date));
         this.portfolios.remove(portfolio);
         this.portfolios.add(newPortfolio);
+        updatePortfolioFile(portfolioName);
         return;
       }
     }
@@ -112,6 +129,10 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
    */
   protected IPortfolioWithTransactionsReader getPortfolioReader(String portfolioName) {
     return new TxtPortfolioReader(portfolioName);
+  }
+
+  protected IPortfolioWriter getPortfolioWriter() {
+    return new PortfolioTxtWriter();
   }
 
   @Override
