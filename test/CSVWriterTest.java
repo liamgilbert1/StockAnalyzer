@@ -4,8 +4,8 @@ import org.junit.Test;
 import java.io.File;
 import java.io.StringReader;
 
-import controller.writers.CSVWriter;
-import controller.writers.IStockDataWriter;
+import controller.IO.writers.CSVWriter;
+import controller.IO.writers.IStockDataWriter;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -25,8 +25,8 @@ public class CSVWriterTest {
 
   @Test
   public void write() {
-    File file = new File("TESTERFILE.csv");
-    writer.write("TESTERFILE", readable);
+    writer.write("TICKER", readable);
+    File file = new File("out/production/stockData/TICKER.csv");
     assertTrue(file.exists());
     boolean deleted = file.delete();
     assertTrue(deleted);

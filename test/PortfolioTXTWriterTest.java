@@ -3,8 +3,8 @@ import org.junit.Test;
 import java.io.File;
 import java.time.LocalDate;
 
-import controller.writers.IPortfolioWriter;
-import controller.writers.PortfolioTxtWriter;
+import controller.IO.writers.IPortfolioWriter;
+import controller.IO.writers.PortfolioTxtWriter;
 import model.portfolio.BuyTransaction;
 import model.portfolio.IPortfolioWithTransactions;
 import model.portfolio.ITransaction;
@@ -32,7 +32,7 @@ public class PortfolioTXTWriterTest {
     portfolio = portfolio.addTransaction(transaction2);
     IPortfolioWriter writer = new PortfolioTxtWriter();
     writer.write(portfolio);
-    File file = new File("myPortfolio.txt");
+    File file = new File("out/production/portfolios/myPortfolio.txt");
     assertTrue(file.exists());
     assertTrue(file.length() > 0);
   }

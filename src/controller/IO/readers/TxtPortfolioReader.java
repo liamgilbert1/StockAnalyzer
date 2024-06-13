@@ -1,6 +1,6 @@
-package controller.readers;
+package controller.IO.readers;
 
-import java.io.FileReader;
+import java.io.File;
 import java.io.StringReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import controller.IO.IOUtils;
 import model.portfolio.BuyTransaction;
 import model.portfolio.IPortfolio;
 import model.portfolio.IPortfolioWithTransactions;
@@ -24,7 +25,6 @@ import model.stock.Stock;
  * line, and all the transactions which occurred on that date below it, each on a new line.
  * The transactions are formatted by having the action (buy or sell), the number of shares,
  * "shares", and the ticker symbol of the stock, each separated by a space. For example:
- *
  * PortfolioName
  * 2020-01-01
  * buy 10 shares AAPL
@@ -32,21 +32,21 @@ import model.stock.Stock;
  * 2020-01-02
  * buy 5 shares AAPL
  * sell 2 shares AAPL
- *
  * The transactions and dates may be in any order, but the transactions for a given date must be
  * grouped together.
  */
 public class TxtPortfolioReader implements IPortfolioReader {
-  private final String fileName;
+  private final String portfolioName;
 
-  public TxtPortfolioReader(String fileName) {
-    this.fileName = fileName;
+  public TxtPortfolioReader(String portfolioName) {
+    this.portfolioName = portfolioName;
   }
 
   @Override
   public Readable getReadable() {
+    File file = IOUtils.getFile(portfolioName, ".txt", "portfolios");
     Appendable portfolioData = new StringBuilder();
-    try (Scanner scanner = new Scanner(new FileReader(fileName))) {
+    try (Scanner scanner = new Scanner(file)) {
       while (scanner.hasNext()) {
         portfolioData.append(scanner.next());
         portfolioData.append("\n");
@@ -58,8 +58,8 @@ public class TxtPortfolioReader implements IPortfolioReader {
   }
 
   @Override
-  public IPortfolio getPortfolio(String name) {
-    Readable readable = new TxtPortfolioReader(name + ".txt").getReadable();
+  public IPortfolio getPortfolio() {
+    Readable readable = getReadable();
     Scanner scanner = new Scanner(readable);
     LocalDate currentDate = null;
     String currentString;
@@ -84,7 +84,7 @@ public class TxtPortfolioReader implements IPortfolioReader {
         transactions.add(parseTransaction(currentString, quantity, ticker, currentDate));
       }
     }
-    return createPortfolio(name, transactions);
+    return createPortfolio(portfolioName, transactions);
   }
 
   private ITransaction parseTransaction(String action, String quantity, String ticker,
