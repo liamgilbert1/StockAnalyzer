@@ -36,15 +36,6 @@ public class PerformanceOverTimeCommand extends AWriterCommand {
       }
     }
 
-//    try {
-//      List<LocalDate> dates = model.getPortfolioPerformanceDates(portfolioName, startDate, endDate);
-//      for (LocalDate date : dates) {
-//        tryWrite(stocks, date);
-//      }
-//    } catch (Exception e) {
-//      throw new IllegalArgumentException("Failed to process command.");
-//    }
-
     try {
       this.out.append(model.getPortfolioPerformanceOverTime(portfolioName, startDate, endDate));
     } catch (Exception e) {
@@ -60,7 +51,7 @@ public class PerformanceOverTimeCommand extends AWriterCommand {
     instructions.append("This command calculates the performance of a portfolio over a " +
             "given period of time.\n");
     instructions.append("Enter the following parameters separated by spaces:\n");
-    instructions.append("1. Command name (GetPortfolioPerformanceOverTime)\n");
+    instructions.append("1. Command name (GetPerformanceOverTime)\n");
     instructions.append("2. Portfolio name\n");
     instructions.append("3. Start date in the format yyyy-mm-dd\n");
     instructions.append("4. End date in the format yyyy-mm-dd\n");

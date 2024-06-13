@@ -153,8 +153,12 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
         String dateStr = String.format("%02d %s %d", date.getDayOfMonth(),
                 date.getMonth().toString().substring(0, 3), date.getYear());
         dateStrings.add(dateStr);
-      } else {
+      }
+      else if (ChronoUnit.DAYS.between(dates.get(0), dates.get(dates.size() - 1)) <= 1830) {
         dateStrings.add(date.getMonth().toString().substring(0, 3) + " " + date.getYear());
+      }
+      else {
+        dateStrings.add(date.getYear() + "");
       }
     }
     return dateStrings;
@@ -177,8 +181,11 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
 
   private String getScale(double maxValue) {
     double scale;
-    if (maxValue < 3000) {
-      scale = Math.ceil(maxValue / 50 / 100) * 100;
+    if (maxValue <= 300) {
+      return "10";
+    }
+    else if (maxValue <= 3000) {
+      return "100";
     }
     else {
       scale = Math.ceil(maxValue / 50 / 1000) * 1000;

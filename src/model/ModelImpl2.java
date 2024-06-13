@@ -78,6 +78,19 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
     }
   }
 
+  @Override
+  public double getPortfolioValue(String portfolioName, LocalDate date) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
+      if (portfolio.getName().equals(portfolioName)) {
+        if (portfolio.isDateBeforeFirstTransaction(date)) {
+          return 0;
+        }
+        return portfolio.getValue(date);
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
+  }
+
   /**
    * Determines the composition of a portfolio at a specific date. Note that the composition may
    * change over time. The composition must include (a) the list of stocks and (b) the number of
