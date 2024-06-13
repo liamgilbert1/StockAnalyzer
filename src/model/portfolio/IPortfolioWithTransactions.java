@@ -14,4 +14,10 @@ public interface IPortfolioWithTransactions extends IPortfolio {
   boolean isDateBeforeFirstTransaction(LocalDate date);
 
   IPortfolioWithTransactions loadPortfolio();
+
+  String getPerformanceOverTime(LocalDate startDate, LocalDate endDate);
+
+  List<LocalDate> getPerformanceDates(LocalDate startDate, LocalDate endDate);
+
+  boolean isTransactionBefore(ITransaction transaction);
 }

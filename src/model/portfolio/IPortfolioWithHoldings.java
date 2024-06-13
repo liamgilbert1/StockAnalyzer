@@ -22,4 +22,5 @@ public interface IPortfolioWithHoldings extends IPortfolio {
    * @return the holdings in the portfolio.
    */
   List<IHolding> getHoldings();
+
 }

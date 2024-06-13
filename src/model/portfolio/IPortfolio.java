@@ -22,4 +22,5 @@ public interface IPortfolio {
    * @return the stocks in the portfolio.
    */
   List<String> getStocks();
+
 }

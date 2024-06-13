@@ -144,13 +144,19 @@ public class MockModelImpl implements IModel2 {
     return "";
   }
 
-  @Override
-  public double getPortfolioValue2(String portfolioName, LocalDate date) {
-    return 0;
-  }
 
   @Override
   public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
     return "";
+  }
+
+  @Override
+  public String getPortfolioPerformanceOverTime(String portfolioName, LocalDate startDate, LocalDate endDate) {
+    return "";
+  }
+
+  @Override
+  public List<LocalDate> getPortfolioPerformanceDates(String portfolioName, LocalDate startDate, LocalDate endDate) {
+    return null;
   }
 }

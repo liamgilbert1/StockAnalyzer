@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface IModel2 extends IModel {
   //TODO
@@ -25,12 +26,7 @@ public interface IModel2 extends IModel {
    */
   String getPortfolioComposition(String portfolioName, LocalDate date);
 
-  /**
-   * Determine the value of a portfolio on a specific date (to be exact, the end of that day).
-   * The value for a portfolio before the date of its first purchase would be 0, since each stock
-   * in the portfolio now was purchased at a specific point in time.
-   */
-  double getPortfolioValue2(String portfolioName, LocalDate date);
+
 
   /**
    * The distribution of value of a portfolio on a specific date (to be exact, the end of that day).
@@ -39,6 +35,11 @@ public interface IModel2 extends IModel {
    * portfolio on that date.
    */
   String getPortfolioValueDistribution(String portfolioName, LocalDate date);
+
+  String getPortfolioPerformanceOverTime(String portfolioName, LocalDate startDate,
+                                         LocalDate endDate);
+
+  List<LocalDate> getPortfolioPerformanceDates(String portfolioName, LocalDate startDate, LocalDate endDate);
 
 
 

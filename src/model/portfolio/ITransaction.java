@@ -18,4 +18,5 @@ public interface ITransaction {
   String action();
 
   double realQuantity();
+
 }

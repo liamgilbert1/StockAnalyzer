@@ -39,7 +39,7 @@ public class GetPortfolioValueCommand2 extends AWriterCommand {
 
     tryWrite(stocks, date);
     try {
-      double portfolioValue = model.getPortfolioValue2(portfolioName, date);
+      double portfolioValue = model.getPortfolioValue(portfolioName, date);
 
       this.out.append(String.format("Portfolio value is: %.2f\n ", portfolioValue));
     } catch (Exception e) {

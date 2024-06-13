@@ -21,7 +21,7 @@ import static model.stock.StockDataPoint.DATE;
  */
 public class ModelImpl implements IModel {
 
-  private final List<IPortfolioWithHoldings> portfolios;
+  protected final List<IPortfolioWithHoldings> portfolios;
 
   /**
    * Constructs a new model with an empty list of portfolios.
