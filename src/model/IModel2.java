@@ -41,6 +41,10 @@ public interface IModel2 extends IModel {
 
   List<LocalDate> getPortfolioPerformanceDates(String portfolioName, LocalDate startDate, LocalDate endDate);
 
-
-
+  /**
+   * Load a portfolio from a file placed in the "portfolios" directory. The file should be named as
+   * the portfolio name.
+   * @param portfolioName is the name of the portfolio to be loaded into the model.
+   */
+  void loadPortfolio(String portfolioName);
 }

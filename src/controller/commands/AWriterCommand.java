@@ -31,8 +31,12 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
    * @param ticker the ticker of the stock
    */
   protected void writeStockData(String ticker) {
-    Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
-    getWriter().write(ticker, stockAPIData);
+    try {
+      Readable stockAPIData = new AlphaVantageStreamReader(ticker).getReadable();
+      getWriter().write(ticker, stockAPIData);
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to write stock data.");
+    }
   }
 
   /**

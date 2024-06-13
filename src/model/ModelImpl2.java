@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.IO.readers.IPortfolioWithTransactionsReader;
+import controller.IO.readers.TxtPortfolioReader;
 import model.portfolio.BuyTransaction;
-import model.portfolio.Holding;
-import model.portfolio.IPortfolio;
 import model.portfolio.IPortfolioWithHoldings;
 import model.portfolio.IPortfolioWithTransactions;
 
@@ -25,12 +25,12 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
 
   @Override
   public void createPortfolio(String name) {
-    for (IPortfolio portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(name)) {
         throw new IllegalArgumentException("Portfolio already exists");
       }
     }
-    this.portfoliosWithDates.add(new PortfolioWithTransactions(name));;
+    this.portfoliosWithDates.add(new PortfolioWithTransactions(name));
   }
 
   @Override
@@ -48,12 +48,12 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
     throw new IllegalArgumentException("Portfolio does not exist");
   }
 
-
   @Override
   public void sellPortfolioHolding(String portfolioName, String ticker, double quantity,
                                    LocalDate date) {
     for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
+
         IPortfolioWithTransactions newPortfolio =
                 portfolio.addTransaction(new SellTransaction(getStock(ticker), quantity, date));
         this.portfoliosWithDates.remove(portfolio);
@@ -84,7 +84,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
    * in the portfolio now was purchased at a specific point in time.
    */
   @Override
-  public double getPortfolioValue(String portfolioName, LocalDate date) {
+  public double getPortfolioValue2(String portfolioName, LocalDate date) {
     for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
       if (portfolio.getName().equals(portfolioName)) {
         if (portfolio.isDateBeforeFirstTransaction(date)) {
@@ -120,6 +120,17 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
       }
     }
     throw new IllegalArgumentException("Portfolio does not exist");
+  }
+
+  /**
+   * Get the portfolio reader for the given portfolio name. This implementation of IModel2 uses
+   * a TxtPortfolioReader to read portfolios. This can be overridden in a subclass to use a
+   * different portfolio reader.
+   * @param portfolioName the name of the portfolio to get the reader for.
+   * @return the portfolio reader for the given portfolio name.
+   */
+  protected IPortfolioWithTransactionsReader getPortfolioReader(String portfolioName) {
+    return new TxtPortfolioReader(portfolioName);
   }
 
   @Override

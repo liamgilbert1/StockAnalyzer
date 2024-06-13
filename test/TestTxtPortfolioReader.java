@@ -2,7 +2,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import controller.IO.readers.IPortfolioReader;
+import controller.IO.readers.IPortfolioWithTransactionsReader;
 import model.portfolio.IPortfolio;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +13,7 @@ public class TestTxtPortfolioReader {
 
   @Test
   public void testGetPortfolio() {
-     IPortfolioReader reader = new TxtPortfolioReader("myPortfolio");
+     IPortfolioWithTransactionsReader reader = new TxtPortfolioReader("myPortfolio");
      IPortfolio portfolio = reader.getPortfolio();
      assertNotNull(portfolio);
      assertEquals("myPortfolio", portfolio.getName());

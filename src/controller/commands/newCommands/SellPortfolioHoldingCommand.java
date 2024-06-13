@@ -20,7 +20,7 @@ public class SellPortfolioHoldingCommand extends AWriterCommand {
     int quantity = getPositiveInt(scanner);
     LocalDate date = LocalDate.parse(getNextString(scanner));
 
-    tryWrite(ticker);
+    writeStockData(ticker);
 
     try {
       model.sellPortfolioHolding(portfolioName, ticker, quantity, date);

@@ -144,10 +144,13 @@ public class MockModelImpl implements IModel2 {
     return "";
   }
 
-
   @Override
   public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
     return "";
+  }
+
+  @Override
+  public void loadPortfolio(String portfolioName) {
   }
 
   @Override

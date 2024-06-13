@@ -36,7 +36,9 @@ public class GetPortfolioCompositionCommand extends AWriterCommand {
       }
     }
 
-    tryWrite(stocks, date);
+    for (IStock stock : stocks) {
+      writeStockData(stock.getTicker());
+    }
 
     try {
       this.out.append(model.getPortfolioComposition(portfolioName, date));

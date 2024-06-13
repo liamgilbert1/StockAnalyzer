@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import controller.IO.IOUtils;
 import model.portfolio.BuyTransaction;
-import model.portfolio.IPortfolio;
 import model.portfolio.IPortfolioWithTransactions;
 import model.portfolio.ITransaction;
 import model.portfolio.PortfolioWithTransactions;
@@ -35,7 +34,7 @@ import model.stock.Stock;
  * The transactions and dates may be in any order, but the transactions for a given date must be
  * grouped together.
  */
-public class TxtPortfolioReader implements IPortfolioReader {
+public class TxtPortfolioReader implements IPortfolioWithTransactionsReader {
   private final String portfolioName;
 
   public TxtPortfolioReader(String portfolioName) {
@@ -58,7 +57,7 @@ public class TxtPortfolioReader implements IPortfolioReader {
   }
 
   @Override
-  public IPortfolio getPortfolio() {
+  public IPortfolioWithTransactions getPortfolio() {
     Readable readable = getReadable();
     Scanner scanner = new Scanner(readable);
     LocalDate currentDate = null;
@@ -106,7 +105,7 @@ public class TxtPortfolioReader implements IPortfolioReader {
     }
   }
 
-  private IPortfolio createPortfolio(String name, List<ITransaction> transactions) {
+  private IPortfolioWithTransactions createPortfolio(String name, List<ITransaction> transactions) {
     IPortfolioWithTransactions portfolio = new PortfolioWithTransactions(name);
     for (ITransaction transaction : transactions) {
       portfolio = portfolio.addTransaction(transaction);

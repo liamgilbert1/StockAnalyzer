@@ -37,7 +37,10 @@ public class GetPortfolioValueCommand2 extends AWriterCommand {
       }
     }
 
-    tryWrite(stocks, date);
+    for (IStock stock : stocks) {
+      writeStockData(stock.getTicker());
+    }
+
     try {
       double portfolioValue = model.getPortfolioValue(portfolioName, date);
 
