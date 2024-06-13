@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.commands.AWriterCommand;
-import controller.readers.CSVReader;
-import controller.readers.IReader;
-import model.IModel;
 import model.IModel2;
 import model.stock.IStock;
 
