@@ -7,41 +7,39 @@ import java.util.List;
 import controller.IO.readers.IPortfolioWithTransactionsReader;
 import controller.IO.readers.TxtPortfolioReader;
 import model.portfolio.BuyTransaction;
-import model.portfolio.IPortfolioWithHoldings;
 import model.portfolio.IPortfolioWithTransactions;
 
-import model.portfolio.Portfolio;
 import model.portfolio.PortfolioWithTransactions;
 import model.portfolio.SellTransaction;
 
 
 public class ModelImpl2 extends ModelImpl implements IModel2 {
-  private final List<IPortfolioWithTransactions> portfoliosWithDates;
+  private final List<IPortfolioWithTransactions> portfolios;
 
   public ModelImpl2() {
     super();
-    this.portfoliosWithDates = new ArrayList<>();
+    this.portfolios = new ArrayList<>();
   }
 
   @Override
   public void createPortfolio(String name) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(name)) {
         throw new IllegalArgumentException("Portfolio already exists");
       }
     }
-    this.portfoliosWithDates.add(new PortfolioWithTransactions(name));
+    this.portfolios.add(new PortfolioWithTransactions(name));
   }
 
   @Override
   public void buyPortfolioHolding(String portfolioName, String ticker, int quantity,
                                   LocalDate date) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         IPortfolioWithTransactions newPortfolio = portfolio.addTransaction(
                 new BuyTransaction(getStock(ticker), quantity, date));
-        this.portfoliosWithDates.remove(portfolio);
-        this.portfoliosWithDates.add(newPortfolio);
+        this.portfolios.remove(portfolio);
+        this.portfolios.add(newPortfolio);
         return;
       }
     }
@@ -51,13 +49,13 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   @Override
   public void sellPortfolioHolding(String portfolioName, String ticker, double quantity,
                                    LocalDate date) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
 
         IPortfolioWithTransactions newPortfolio =
                 portfolio.addTransaction(new SellTransaction(getStock(ticker), quantity, date));
-        this.portfoliosWithDates.remove(portfolio);
-        this.portfoliosWithDates.add(newPortfolio);
+        this.portfolios.remove(portfolio);
+        this.portfolios.add(newPortfolio);
         return;
       }
     }
@@ -70,7 +68,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
    */
   @Override
   public String getPortfolioComposition(String portfolioName, LocalDate date) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getComposition(date);
       }
@@ -78,23 +76,6 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
     throw new IllegalArgumentException("Portfolio does not exist");
   }
 
-  /**
-   * Determine the value of a portfolio on a specific date (to be exact, the end of that day).
-   * The value for a portfolio before the date of its first purchase would be 0, since each stock
-   * in the portfolio now was purchased at a specific point in time.
-   */
-  @Override
-  public double getPortfolioValue2(String portfolioName, LocalDate date) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
-      if (portfolio.getName().equals(portfolioName)) {
-        if (portfolio.isDateBeforeFirstTransaction(date)) {
-          return 0;
-        }
-        return portfolio.getValue(date);
-      }
-    }
-    throw new IllegalArgumentException("Portfolio does not exist");
-  }
 
   /**
    * The distribution of value of a portfolio on a specific date (to be exact, the end of that day).
@@ -104,7 +85,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
    */
   @Override
   public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getValueDistribution(date);
       }
@@ -114,7 +95,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
 
   @Override
   public List<String> getStocksInPortfolio(String portfolioName) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getStocks();
       }
@@ -136,7 +117,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   @Override
   public String getPortfolioPerformanceOverTime(String portfolioName, LocalDate startDate,
                                          LocalDate endDate) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getPerformanceOverTime(startDate, endDate);
       }
@@ -147,11 +128,17 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   @Override
   public List<LocalDate> getPortfolioPerformanceDates(String portfolioName, LocalDate startDate,
                                              LocalDate endDate) {
-    for (IPortfolioWithTransactions portfolio : this.portfoliosWithDates) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
         return portfolio.getPerformanceDates(startDate, endDate);
       }
     }
     throw new IllegalArgumentException("Portfolio does not exist");
+  }
+
+  @Override
+  public void loadPortfolio(String portfolioName) {
+    portfolios.removeIf(portfolio -> portfolio.getName().equals(portfolioName));
+    portfolios.add(getPortfolioReader(portfolioName).getPortfolio());
   }
 }
