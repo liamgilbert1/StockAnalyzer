@@ -1,20 +1,9 @@
 # How to Run Program
 
-A text description (SETUP-README.txt) in the res folder of how exactly to run your program from the
-JAR file. If you require the jar file to be in a specific folder, or require other files with it,
-please include these directions here. You should also include detailed instructions on how to run
-your program to create a portfolio, purchase stocks of at least 3 different companies in that
-portfolio at different dates and then query the value and cost basis of that portfolio on two
-specific dates. We will run your program with this data to begin grading. You should also include
-a list of stocks that your program supports, along with dates on which its value can be determined
-(if there are restrictions in your program about which data is available).
-
-
-
-## How to Run Jar
+Run the Jar
 1. Download the jar file from the release page
 2. Open a command-prompt/terminal and navigate to that folder
-3. Now type java -jar NameOfJARFile.jar and press ENTER
+3. Now type java -jar NameOfJARFile.jar and press ENTER or RETURN
 
 ## How to Create Portfolio with 3 stocks and then query the value of the portfolio on two specific
    dates
@@ -36,6 +25,8 @@ portfolio can be determined on any date that the stock is available on the Alpha
 ## Additional Notes: The program will be storing your portfolios in a folder called portfolios, and
 the stock data in a folder called stockData. If you want to load in a portfolio, you can do so by
 inputting the command LoadPortfolio followed by the name of the portfolio you want to load in, after
-having formatted a valid portfolio file in the "portfolios" folder. The program will then load in the
-portfolio and you can query the value of the portfolio on any date that the stock data is available
-on the Alpha Vantage API.
+having formatted a valid portfolio file in the "portfolios" folder. The "portfolios" folder will be
+inside the same directory as the jar. If the folder does not exist yet, and you would like to load a
+portfolio in, you may create the folder yourself but it must be named "portfolios". The program will
+then load in the portfolio, and you can query the value of the portfolio on any date that the stock
+data is available on the Alpha Vantage API.
