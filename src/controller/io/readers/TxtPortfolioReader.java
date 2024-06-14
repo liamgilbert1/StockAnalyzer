@@ -1,4 +1,4 @@
-package controller.IO.readers;
+package controller.io.readers;
 
 import java.io.File;
 import java.io.StringReader;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import controller.IO.IOUtils;
+import controller.io.IOUtils;
 import model.portfolio.BuyTransaction;
 import model.portfolio.IPortfolioWithTransactions;
 import model.portfolio.ITransaction;

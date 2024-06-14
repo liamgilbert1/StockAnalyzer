@@ -1,4 +1,4 @@
-package controller.IO.writers;
+package controller.io.writers;
 
 import model.portfolio.IPortfolioWithTransactions;
 

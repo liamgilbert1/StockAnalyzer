@@ -1,4 +1,4 @@
-package controller.IO.readers;
+package controller.io.readers;
 
 import model.portfolio.IPortfolioWithTransactions;
 

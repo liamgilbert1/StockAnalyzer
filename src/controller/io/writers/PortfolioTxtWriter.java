@@ -1,10 +1,11 @@
-package controller.IO.writers;
+package controller.io.writers;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import controller.IO.IOUtils;
+
+import controller.io.IOUtils;
 
 import model.portfolio.IPortfolioWithTransactions;
 import model.portfolio.ITransaction;
@@ -19,6 +20,7 @@ public class PortfolioTxtWriter implements IPortfolioWriter {
   /**
    * Writes the given portfolio to a txt file. The file will be named after the portfolio and will
    * be saved in the "portfolios" directory.
+   *
    * @param portfolio the portfolio to write.
    */
   @Override
@@ -37,7 +39,7 @@ public class PortfolioTxtWriter implements IPortfolioWriter {
                 + transaction.getStock().getTicker());
       }
     } catch (IOException e) {
-        throw new IllegalStateException("Could not write portfolio to txt file.");
+      throw new IllegalStateException("Could not write portfolio to txt file.");
     }
   }
 }

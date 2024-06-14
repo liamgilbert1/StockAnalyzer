@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import controller.IO.readers.IPortfolioWithTransactionsReader;
-import controller.IO.readers.TxtPortfolioReader;
-import controller.IO.writers.IPortfolioWriter;
-import controller.IO.writers.PortfolioTxtWriter;
+import controller.io.readers.IPortfolioWithTransactionsReader;
+import controller.io.readers.TxtPortfolioReader;
+import controller.io.writers.IPortfolioWriter;
+import controller.io.writers.PortfolioTxtWriter;
 import model.portfolio.BuyTransaction;
 import model.portfolio.IPortfolioWithTransactions;
 

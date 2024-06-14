@@ -1,11 +1,11 @@
-package controller.IO.writers;
+package controller.io.writers;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Scanner;
-import controller.IO.IOUtils;
+import controller.io.IOUtils;
 
 /**
  * This class represents a CSVWriter object. It writes the data to a CSV file.

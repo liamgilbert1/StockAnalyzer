@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,13 +10,13 @@ import java.util.Map;
 public interface IModel2 extends IModel {
   /**
    * Purchase a specific number of shares of a specific stock on a specified date, and add them to
-   * the portfolio
+   * the portfolio.
    */
   void buyPortfolioHolding(String portfolioName, String ticker, int quantity, LocalDate date);
 
   /**
    * Sells a specific number of shares of a specific stock on a specified date, and remove them from
-   * the portfolio
+   * the portfolio.
    */
   void sellPortfolioHolding(String portfolioName, String ticker, double quantity, LocalDate date);
 

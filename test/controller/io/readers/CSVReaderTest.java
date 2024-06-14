@@ -1,4 +1,4 @@
-package controller.IO.readers;
+package controller.io.readers;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,8 +6,6 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import controller.IO.readers.CSVReader;
 
 import static model.stock.StockDataPoint.OPEN;
 import static org.junit.Assert.assertNotNull;

@@ -1,4 +1,4 @@
-package controller.IO.writers;
+package controller.io.writers;
 
 /**
  * This interface represents a writer for the stock market simulator.

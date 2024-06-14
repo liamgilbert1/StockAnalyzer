@@ -1,7 +1,6 @@
-package controller.IO.readers;
+package controller.io.readers;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.StringReader;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import controller.IO.IOUtils;
+import controller.io.IOUtils;
 import model.stock.StockDataPoint;
 
 /**

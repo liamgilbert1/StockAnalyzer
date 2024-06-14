@@ -1,12 +1,10 @@
-package controller.IO.writers;
+package controller.io.writers;
 
 import org.junit.Test;
 
 import java.io.File;
 import java.time.LocalDate;
 
-import controller.IO.writers.IPortfolioWriter;
-import controller.IO.writers.PortfolioTxtWriter;
 import model.portfolio.BuyTransaction;
 import model.portfolio.IPortfolioWithTransactions;
 import model.portfolio.ITransaction;

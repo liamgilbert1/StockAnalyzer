@@ -1,4 +1,4 @@
-package controller.IO.readers;
+package controller.io.readers;
 
 import java.time.LocalDate;
 import java.util.List;

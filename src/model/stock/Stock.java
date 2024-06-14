@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-import controller.IO.readers.CSVReader;
-import controller.IO.readers.IStockReader;
+import controller.io.readers.CSVReader;
+import controller.io.readers.IStockReader;
 
 import static model.stock.StockDataPoint.CLOSE;
 import static model.stock.StockDataPoint.HIGH;

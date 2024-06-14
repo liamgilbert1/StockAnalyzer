@@ -1,13 +1,10 @@
-package controller.IO.writers;
+package controller.io.writers;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.StringReader;
-
-import controller.IO.writers.CSVWriter;
-import controller.IO.writers.IStockDataWriter;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
