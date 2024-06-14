@@ -3,7 +3,7 @@ package view;
 import java.io.IOException;
 
 public class ViewImpl implements IView {
-  Appendable output;
+  private final Appendable output;
 
   public ViewImpl(Appendable output) {
     this.output = output;
@@ -24,5 +24,10 @@ public class ViewImpl implements IView {
   public Appendable append(char c) throws IOException {
     output.append(c);
     return this;
+  }
+
+  @Override
+  public Appendable getOutput() {
+    return output;
   }
 }
