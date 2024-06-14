@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import controller.IO.IOUtils;
+import controller.IO.readers.IStockReader;
 import controller.IO.writers.IStockDataWriter;
 import controller.IO.readers.AlphaVantageStreamReader;
 import controller.IO.readers.CSVReader;
@@ -26,6 +27,10 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
    */
   protected IStockDataWriter getWriter() {
     return new CSVWriter();
+  }
+
+  protected IStockReader getReader(String ticker) {
+    return new CSVReader(ticker);
   }
 
   /**
@@ -53,8 +58,8 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
     LocalDate date = LocalDate.parse(dateEntered);
     File file = IOUtils.getFile(ticker, ".csv", "stockData");
     if (!file.exists()
-            || new CSVReader(ticker).getMostRecentDate().isBefore(date)
-            || !new CSVReader(ticker).checkContainsDates(date, days)) {
+            || getReader(ticker).getMostRecentDate().isBefore(date)
+            || !getReader(ticker).checkContainsDates(date, days)) {
       writeStockData(ticker);
     }
   }
@@ -71,8 +76,8 @@ public abstract class AWriterCommand extends ACommand implements ICommand {
     LocalDate endDate = LocalDate.parse(endDateEntered);
     File file = IOUtils.getFile(ticker, ".csv", "stockData");
     if (!file.exists()
-            || new CSVReader(ticker).getMostRecentDate().isBefore(endDate)
-            || !new CSVReader(ticker).checkContainsDateRange(startDate, endDate)) {
+            || getReader(ticker).getMostRecentDate().isBefore(endDate)
+            || !getReader(ticker).checkContainsDateRange(startDate, endDate)) {
       writeStockData(ticker);
     }
   }
