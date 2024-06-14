@@ -126,6 +126,170 @@ public class ModelTests {
   }
 
   @Test
+  public void testBuyPortfolioHolding() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
+    assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
+    String composition = model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 4));
+    assertEquals("GOOG: 10.00\n" +
+            "MSFT: 20.00\n" +
+            "AMZN: 30.00\n", composition);
+
+    try {
+      model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+              LocalDate.of(2024, 6, 3));
+    } catch (IllegalArgumentException e) {
+      assertEquals("Transaction date is before previous transaction date.",
+              e.getMessage());
+    }
+  }
+
+  @Test
+  public void testSellPortfolioHolding() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    model.sellPortfolioHolding("TestPortfolio", "GOOG", 5,
+            LocalDate.of(2024, 6, 5));
+    model.sellPortfolioHolding("TestPortfolio", "MSFT", 10,
+            LocalDate.of(2024, 6, 5));
+    model.sellPortfolioHolding("TestPortfolio", "AMZN", 15,
+            LocalDate.of(2024, 6, 5));
+    List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
+    assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
+    String composition = model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 5));
+    assertEquals("GOOG: 5.00\n" +
+            "MSFT: 10.00\n" +
+            "AMZN: 15.00\n", composition);
+
+    try {
+      model.sellPortfolioHolding("TestPortfolio", "GOOG", 10,
+              LocalDate.of(2024, 6, 3));
+    } catch (IllegalArgumentException e) {
+      assertEquals("Transaction date is before previous transaction date.",
+              e.getMessage());
+    }
+  }
+
+  @Test
+  public void testGetPortfolioValue2() {
+    IModel2 model = new ModelImpl2();
+    LocalDate testDate = LocalDate.of(2024, 6, 4);
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    assertEquals(15452.90, model.getPortfolioValue("TestPortfolio", testDate),
+            0.01);
+    assertEquals(0, model.getPortfolioValue("TestPortfolio",
+            LocalDate.of(2024, 6, 1)), 0.01);
+  }
+
+  @Test
+  public void testGetPortfolioComposition() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    String composition = model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 4));
+    assertEquals("GOOG: 10.00\n" +
+            "MSFT: 20.00\n" +
+            "AMZN: 30.00\n", composition);
+
+    String composition2 = model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 3));
+    assertEquals("", composition2);
+  }
+
+  @Test
+  public void testGetValueDistribution() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    String distribution = model.getPortfolioValueDistribution("TestPortfolio",
+            LocalDate.of(2024, 6, 4));
+    assertEquals("GOOG: 1751.30\n" +
+            "MSFT: 8321.40\n" +
+            "AMZN: 5380.20\n", distribution);
+
+    assertEquals("", model.getPortfolioValueDistribution("TestPortfolio",
+            LocalDate.of(2024, 6, 3)));
+  }
+
+  @Test
+  public void testGetStocksInPortfolio2() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
+    assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
+  }
+
+  @Test
+  public void testGetPerformanceOverTime() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    String performance = model.getPortfolioPerformanceOverTime("TestPortfolio",
+            LocalDate.of(2024, 6, 4),
+            LocalDate.of(2024, 6, 5));
+    assertEquals("Performance of TestPortfolio from 2024-06-04 to 2024-06-05\n" +
+            "\n" +
+            "04 JUN 2024: ***************\n" +
+            "05 JUN 2024: ****************\n" +
+            "\n" +
+            "Scale: * = 1000\n", performance);
+
+    String performance2 = model.getPortfolioPerformanceOverTime("TestPortfolio",
+            LocalDate.of(2024, 6, 2),
+            LocalDate.of(2024, 6, 3));
+
+    assertEquals("Performance of TestPortfolio from 2024-06-02 to 2024-06-03\n" +
+            "\n" +
+            "02 JUN 2024: \n" +
+            "03 JUN 2024: \n" +
+            "\n" +
+            "Scale: * = 10\n", performance2);
+  }
+
+  @Test
   public void testRebalancePortfolio() {
     IModel2 model = new ModelImpl2();
     model.createPortfolio("TestPortfolio");

@@ -41,8 +41,8 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
   public String getComposition(LocalDate date) {
     StringBuilder composition = new StringBuilder();
     for (ITransaction transaction : transactions) {
-      if (transaction.getStock().getClosePrice(date) != 0
-              && !composition.toString().contains(transaction.getStock().getTicker())) {
+      if (!composition.toString().contains(transaction.getStock().getTicker())
+              && (transaction.getDate().isBefore(date) || transaction.getDate().isEqual(date))) {
         composition.append(transaction.getStock().getTicker()).append(": ")
                 .append(String.format("%.2f", getStockQuantity(transaction))).append("\n");
       }
