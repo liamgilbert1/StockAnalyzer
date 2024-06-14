@@ -49,7 +49,7 @@ public class GetPortfolioValueCommand extends AWriterCommand {
     try {
       double portfolioValue = model.getPortfolioValue(portfolioName, date);
 
-      this.out.append(String.format("Portfolio value is: %.2f\n ", portfolioValue));
+      this.out.append(String.format("Portfolio value is: $%.2f\n ", portfolioValue));
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");
     }

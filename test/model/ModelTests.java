@@ -235,9 +235,9 @@ public class ModelTests {
             LocalDate.of(2024, 6, 4));
     String distribution = model.getPortfolioValueDistribution("TestPortfolio",
             LocalDate.of(2024, 6, 4));
-    assertEquals("GOOG: 1751.30\n" +
-            "MSFT: 8321.40\n" +
-            "AMZN: 5380.20\n", distribution);
+    assertEquals("GOOG: $1751.30\n" +
+            "MSFT: $8321.40\n" +
+            "AMZN: $5380.20\n", distribution);
 
     assertEquals("", model.getPortfolioValueDistribution("TestPortfolio",
             LocalDate.of(2024, 6, 3)));
@@ -275,7 +275,7 @@ public class ModelTests {
             "04 JUN 2024: ***************\n" +
             "05 JUN 2024: ****************\n" +
             "\n" +
-            "Scale: * = 1000\n", performance);
+            "Scale: * = $1000\n", performance);
 
     String performance2 = model.getPortfolioPerformanceOverTime("TestPortfolio",
             LocalDate.of(2024, 6, 2),
@@ -286,7 +286,7 @@ public class ModelTests {
             "02 JUN 2024: \n" +
             "03 JUN 2024: \n" +
             "\n" +
-            "Scale: * = 10\n", performance2);
+            "Scale: * = $10\n", performance2);
   }
 
   @Test

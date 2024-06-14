@@ -339,7 +339,7 @@ public class ControllerModel2Test {
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
-            "Portfolio value is: 885.35\n" +
+            "Portfolio value is: $885.35\n" +
             " ", output.toString());
   }
   @Test
@@ -449,7 +449,7 @@ public class ControllerModel2Test {
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
-            "Portfolio value is: 0.00\n" +
+            "Portfolio value is: $0.00\n" +
             " ", output.toString());
   }
 
@@ -675,8 +675,8 @@ public class ControllerModel2Test {
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
             "Portfolio shares have been purchased\n" +
-            "GOOG: 66851.00\n" +
-            "AMZN: 18478.40\n", output.toString());
+            "GOOG: $66851.00\n" +
+            "AMZN: $18478.40\n", output.toString());
   }
 
   @Test
@@ -833,7 +833,7 @@ public class ControllerModel2Test {
             "29 JAN 2020: ************************************\n" +
             "30 JAN 2020: ************************************\n" +
             "\n" +
-            "Scale: * = 2000\n", output.toString());
+            "Scale: * = $2000\n", output.toString());
   }
 
   @Test
