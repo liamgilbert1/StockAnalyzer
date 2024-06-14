@@ -131,40 +131,55 @@ public class MockModelImpl implements IModel2 {
   }
 
   @Override
-  public void buyPortfolioHolding(String portfolioName, String ticker, int quantity, LocalDate date) {
-
+  public void buyPortfolioHolding(String portfolioName, String ticker, int quantity,
+                                  LocalDate date) {
+    log.append("BuyPortfolioHolding ").append(portfolioName).append(" ").append(ticker).append(" ")
+            .append(quantity).append(" ").append(date.toString());
   }
 
   @Override
-  public void sellPortfolioHolding(String portfolioName, String ticker, double quantity, LocalDate date) {
-
+  public void sellPortfolioHolding(String portfolioName, String ticker, double quantity,
+                                   LocalDate date) {
+    log.append("SellPortfolioHolding ").append(portfolioName).append(" ").append(ticker).append(" ")
+            .append(quantity).append(" ").append(date.toString());
   }
 
   @Override
   public String getPortfolioComposition(String portfolioName, LocalDate date) {
+    log.append("GetPortfolioComposition ").append(portfolioName).append(" ")
+            .append(date.toString());
     return "";
   }
 
   @Override
   public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
+    log.append("GetPortfolioDistribution ").append(portfolioName).append(" ")
+            .append(date.toString());
     return "";
   }
 
   @Override
   public void loadPortfolio(String portfolioName) {
+    log.append("LoadPortfolio ").append(portfolioName);
   }
 
   @Override
-  public void rebalancePortfolio(String portfolioName, LocalDate date, Map<String, Integer> stockWeights) {
+  public void rebalancePortfolio(String portfolioName, LocalDate date,
+                                 Map<String, Integer> stockWeights) {
+    log.append("RebalancePortfolio ").append(portfolioName).append(" ").append(date.toString());
   }
 
   @Override
-  public String getPortfolioPerformanceOverTime(String portfolioName, LocalDate startDate, LocalDate endDate) {
+  public String getPortfolioPerformanceOverTime(String portfolioName, LocalDate startDate,
+                                                LocalDate endDate) {
+    log.append("GetPerformanceOverTime ").append(portfolioName).append(" ")
+            .append(startDate.toString()).append(" ").append(endDate.toString());
     return "";
   }
 
   @Override
-  public List<LocalDate> getPortfolioPerformanceDates(String portfolioName, LocalDate startDate, LocalDate endDate) {
+  public List<LocalDate> getPortfolioPerformanceDates(String portfolioName, LocalDate startDate,
+                                                      LocalDate endDate) {
     return null;
   }
 }
