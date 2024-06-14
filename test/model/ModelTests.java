@@ -309,4 +309,16 @@ public class ModelTests {
             "AMZN: 51.70\n", model.getPortfolioComposition("TestPortfolio",
             LocalDate.of(2024, 6, 4)));
   }
+
+  @Test
+  public void testLoadPortfolio() {
+    IModel2 model = new ModelImpl2();
+    model.loadPortfolio("TestPortfolio");
+    List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
+    assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
+    assertEquals("GOOG: 10.00\n" +
+            "MSFT: 20.00\n" +
+            "AMZN: 30.00\n", model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 4)));
+  }
 }
