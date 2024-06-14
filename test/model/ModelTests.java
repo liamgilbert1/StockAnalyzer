@@ -34,7 +34,7 @@ public class ModelTests {
     LocalDate endDate = LocalDate.of(2024, 6, 5);
     IModel model = new ModelImpl();
     try {
-      model.calculateGainOrLoss("INVALID", startDate, endDate);
+      model.calculateGainOrLoss("", startDate, endDate);
     } catch (IllegalStateException e) {
       assertEquals("Could not read from file", e.getMessage());
     }
@@ -147,7 +147,7 @@ public class ModelTests {
       model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
               LocalDate.of(2024, 6, 3));
     } catch (IllegalArgumentException e) {
-      assertEquals("Transaction date is before previous transaction date.",
+      assertEquals("Date is before latest transaction",
               e.getMessage());
     }
   }
@@ -176,13 +176,22 @@ public class ModelTests {
             "MSFT: 10.00\n" +
             "AMZN: 15.00\n", composition);
 
+    model.sellPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 6));
+    String composition2 = model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 6));
+    assertEquals("GOOG: 0.00\n" +
+            "MSFT: 10.00\n" +
+            "AMZN: 15.00\n", composition2);
+
     try {
       model.sellPortfolioHolding("TestPortfolio", "GOOG", 10,
               LocalDate.of(2024, 6, 3));
     } catch (IllegalArgumentException e) {
-      assertEquals("Transaction date is before previous transaction date.",
+      assertEquals("Date is before latest transaction",
               e.getMessage());
     }
+
   }
 
   @Test

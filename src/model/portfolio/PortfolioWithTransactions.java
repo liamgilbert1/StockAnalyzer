@@ -32,7 +32,7 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
       throw new IllegalArgumentException("Transaction date is before previous transaction date.");
     }
     if (transaction.action().equals("sell") && getStocksQuantity(transaction.getStock().getTicker(),
-            transaction.getDate()) < transaction.realQuantity()) {
+            transaction.getDate()) < transaction.getQuantity()) {
       List<ITransaction> newTransactions = new ArrayList<>(transactions);
       newTransactions.add(new SellTransaction(transaction.getStock(),
               getStocksQuantity(transaction.getStock().getTicker(), transaction.getDate()),
