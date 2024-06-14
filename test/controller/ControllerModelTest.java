@@ -1,3 +1,5 @@
+package controller;
+
 import org.junit.Test;
 
 import java.io.StringReader;

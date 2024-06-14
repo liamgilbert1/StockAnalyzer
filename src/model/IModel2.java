@@ -2,11 +2,9 @@ package model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface IModel2 extends IModel {
-  //TODO
-  // add new methods
-
   /**
    * Purchase a specific number of shares of a specific stock on a specified date, and add them to
    * the portfolio
@@ -47,4 +45,7 @@ public interface IModel2 extends IModel {
    * @param portfolioName is the name of the portfolio to be loaded into the model.
    */
   void loadPortfolio(String portfolioName);
+
+  void rebalancePortfolio(String portfolioName, LocalDate date,
+                          Map<String, Integer> stockWeights);
 }

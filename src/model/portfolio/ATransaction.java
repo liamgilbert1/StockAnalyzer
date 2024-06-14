@@ -9,15 +9,24 @@ public abstract class ATransaction implements ITransaction {
   private final IStock stock;
   private final LocalDate date;
 
-  public ATransaction(IStock stock, LocalDate date) {
+  protected final double quantity;
+
+  public ATransaction(IStock stock, LocalDate date, double quantity) {
     this.stock = Objects.requireNonNull(stock);
     this.date = Objects.requireNonNull(date);
+    checkQuantity(quantity);
+    this.quantity = quantity;
   }
 
   protected void checkQuantity(double quantity) {
     if (quantity <= 0) {
       throw new IllegalArgumentException("Transaction quantity must be greater than 0.");
     }
+  }
+
+  @Override
+  public double getQuantity() {
+    return this.quantity;
   }
 
   @Override
@@ -31,10 +40,11 @@ public abstract class ATransaction implements ITransaction {
   }
 
   @Override
-  public abstract ITransaction getCopy();
-
-  @Override
-  public abstract double getQuantity();
+  public ITransaction getCopy() {
+    return new SellTransaction(this.getStock().getCopy(), this.getQuantity(),
+            LocalDate.of(this.getDate().getYear(), this.getDate().getMonth(),
+                    this.getDate().getDayOfMonth()));
+  }
 
   @Override
   public double getValue() {

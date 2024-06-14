@@ -3,13 +3,13 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import controller.IO.readers.IPortfolioWithTransactionsReader;
 import controller.IO.readers.TxtPortfolioReader;
 import controller.IO.writers.IPortfolioWriter;
 import controller.IO.writers.PortfolioTxtWriter;
 import model.portfolio.BuyTransaction;
-import model.portfolio.IPortfolio;
 import model.portfolio.IPortfolioWithTransactions;
 
 import model.portfolio.PortfolioWithTransactions;
@@ -174,5 +174,18 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   public void loadPortfolio(String portfolioName) {
     portfolios.removeIf(portfolio -> portfolio.getName().equals(portfolioName));
     portfolios.add(getPortfolioReader(portfolioName).getPortfolio());
+  }
+
+  @Override
+  public void rebalancePortfolio(String portfolioName, LocalDate date,
+                                 Map<String, Integer> stockWeights) {
+    for (IPortfolioWithTransactions portfolio : this.portfolios) {
+      if (portfolio.getName().equals(portfolioName)) {
+        portfolio.rebalance(date, stockWeights);
+        updatePortfolioFile(portfolioName);
+        return;
+      }
+    }
+    throw new IllegalArgumentException("Portfolio does not exist");
   }
 }

@@ -1,6 +1,7 @@
 package model.portfolio;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 public interface IPortfolioWithTransactions extends IPortfolio {
   IPortfolioWithTransactions addTransaction(ITransaction transaction);
@@ -13,10 +14,9 @@ public interface IPortfolioWithTransactions extends IPortfolio {
 
   boolean isDateBeforeFirstTransaction(LocalDate date);
 
-  IPortfolioWithTransactions loadPortfolio();
-
   String getPerformanceOverTime(LocalDate startDate, LocalDate endDate);
 
   List<LocalDate> getPerformanceDates(LocalDate startDate, LocalDate endDate);
 
+  void rebalance(LocalDate date, Map<String, Integer> stockWeights);
 }

@@ -5,7 +5,9 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import model.stock.IStock;
@@ -25,28 +27,14 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
     this.transactions = transactions;
   }
 
-
   @Override
   public IPortfolioWithTransactions addTransaction(ITransaction transaction) {
-    if (isTransactionBefore(transaction)) {
+    if (transaction.getDate().isBefore(getLatestTransactionDate())) {
       throw new IllegalArgumentException("Transaction date is before previous transaction date.");
     }
     List<ITransaction> newTransactions = new ArrayList<>(transactions);
     newTransactions.add(transaction);
     return new PortfolioWithTransactions(name, newTransactions);
-  }
-
-  private boolean isTransactionBefore(ITransaction transaction) {
-    String newTransactionTicker = transaction.getStock().getTicker();
-    for (ITransaction iTransaction : transactions) {
-      String transactionTicker = iTransaction.getStock().getTicker();
-      if (newTransactionTicker.equals(transactionTicker)) {
-        if (iTransaction.getDate().isAfter(transaction.getDate())) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   @Override
@@ -121,6 +109,37 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
       return this.addMonthsOccurrence(startDate, endDate, dates, 3);
     }
     return this.addYearOccurrence(startDate, endDate, dates);
+  }
+
+  @Override
+  public void rebalance(LocalDate date, Map<String, Integer> stockWeights) {
+    if (date.isBefore(getLatestTransactionDate())) {
+      throw new IllegalArgumentException("Rebalance date is before latest transaction date.");
+    }
+    int totalWeight = 0;
+    for (int stockWeight : stockWeights.values()) {
+      totalWeight += stockWeight;
+    }
+    if (totalWeight != 100) {
+      throw new IllegalArgumentException("Stock weights must add up to 100.");
+    }
+    double currentPortfolioValue = getValue(date);
+    for (String stock : getStocksOnDate(date)) {
+      if (!stockWeights.containsKey(stock)) {
+        transactions.add(new SellTransaction(getStock(stock),
+                getStocksQuantity(stock, date), date));
+      }
+    }
+    for (String stock : stockWeights.keySet()) {
+      double stockQuantity = getStocksQuantity(stock, date);
+      double quantityToBuy = currentPortfolioValue * (stockWeights.get(stock) / 100.0) - stockQuantity;
+      if (quantityToBuy > 0) {
+        transactions.add(new BuyTransaction(getStock(stock), quantityToBuy, date));
+      }
+      else if (quantityToBuy < 0) {
+        transactions.add(new SellTransaction(getStock(stock), -quantityToBuy, date));
+      }
+    }
   }
 
   private List<LocalDate> addDaysOccurrence(LocalDate startDate, LocalDate endDate, List<LocalDate> dates,
@@ -274,9 +293,14 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
     return false;
   }
 
-  @Override
-  public IPortfolioWithTransactions loadPortfolio() {
-    return null;
+  private LocalDate getLatestTransactionDate() {
+    LocalDate latestTransactionDate = null;
+    for (ITransaction transaction : transactions) {
+      if (latestTransactionDate == null || transaction.getDate().isAfter(latestTransactionDate)) {
+        latestTransactionDate = transaction.getDate();
+      }
+    }
+    return latestTransactionDate;
   }
 
   @Override
