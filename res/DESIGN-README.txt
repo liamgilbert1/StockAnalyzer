@@ -1,5 +1,47 @@
 This project was designed using a model-view-controller architecture.
 
+CHANGES FROM PREVIOUS SUBMISSION
+
+Signature of control in IController: Changed original method signature to take in an IModel2 instead
+of an IModel. Did this so the controller can work with the new commands as well as the old one.
+We did not feel it was necessary to implement a whole new controller with similar functionality, so
+we changed our control methods signature.
+
+Changed signature of the execute method in ICommand for all the old commands to take in a IModel2
+instead of an IModel. Did this so the all the old commands can now work with the controller, as well
+as the new commands. Did not feel it was necessary to write new command classes for the old commands
+since the functionality would be almost identical.
+
+Changed MockModelImpl to implement IModel2 instead of IModel and added our new methods from
+ModelImpl2 to MockModelIpl. MockModelImpl is only used for testing purposes, so we did not feel it
+was needed to write a new mock model.
+
+We added a higher level portfolio interface to encapsulate shared behavior over multiple portfolios.
+Since the new portfolio implementation held transactions rather than holdings, they had some
+differences, but the similarities were enough to warrant a higher level interface.
+
+We added some getCopy methods in the model to return copies of the objects rather than the objects
+themselves. This is more secure and prevents clients from modifying the objects directly.
+
+We made changes to the readers and writers so the program works in a jar. Before, the readers and
+writers were working only within the ide, but now they work relative to the location of the jar and
+read and write files within the user’s file system. These changes were necessary to make the program
+work in a jar.
+
+New API key added. High volume api key put into AlphaVantageStreamReader. This is to prevent the
+program from being rate limited by the api.
+
+We had to fix bugs in the tryWrite method in the AWriterCommand class. The method was not writing
+when it was supposed to due to a bug in the method. We fixed the bug and now the method writes when
+it is supposed to. This was a critical bug that needed to be fixed.
+
+We added a getReader method in the AWriterCommand class. This method returns the reader that the
+command is using. This is useful for extensibility and allows the command to be easily extended to
+use a different reader in the future.
+
+
+OVERVIEW OF THE ARCHITECTURE
+
 Controller:
      The controller is responsible for handling user input and updating the model. The controller
         uses the command pattern to handle user input. The controller stores ICommands in a map,
