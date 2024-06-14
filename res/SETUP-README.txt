@@ -25,6 +25,8 @@ portfolio can be determined on any date that the stock is available on the Alpha
 ## Additional Notes: The program will be storing your portfolios in a folder called portfolios, and
 the stock data in a folder called stockData. If you want to load in a portfolio, you can do so by
 inputting the command LoadPortfolio followed by the name of the portfolio you want to load in, after
-having formatted a valid portfolio file in the "portfolios" folder. The program will then load in
-the portfolio, and you can query the value of the portfolio on any date that the stock data is
-available on the Alpha Vantage API.
+having formatted a valid portfolio file in the "portfolios" folder. The "portfolios" folder will be
+inside the same directory as the jar. If the folder does not exist yet, and you would like to load a
+portfolio in, you may create the folder yourself but it must be named "portfolios". The program will
+then load in the portfolio, and you can query the value of the portfolio on any date that the stock
+data is available on the Alpha Vantage API.
