@@ -21,7 +21,7 @@ public class ATransactionTest {
   @Before
   public void setUp() throws Exception {
     LocalDate date = LocalDate.of(2024, 6, 5);
-     transaction = new BuyTransaction(new Stock("GOOG") ,1, date);
+    transaction = new BuyTransaction(new Stock("GOOG") ,1, date);
   }
 
 

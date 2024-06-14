@@ -2,13 +2,13 @@ package controller;
 
 import java.util.List;
 
-import controller.commands.newCommands.BuyPortfolioHoldingCommand;
-import controller.commands.newCommands.GetPortfolioDistributionCommand;
-import controller.commands.newCommands.GetPortfolioCompositionCommand;
-import controller.commands.newCommands.LoadPortfolioCommand;
-import controller.commands.newCommands.PerformanceOverTimeCommand;
-import controller.commands.newCommands.RebalancePortfolioCommand;
-import controller.commands.newCommands.SellPortfolioHoldingCommand;
+import controller.commands.newcommands.BuyPortfolioHoldingCommand;
+import controller.commands.newcommands.GetPortfolioDistributionCommand;
+import controller.commands.newcommands.GetPortfolioCompositionCommand;
+import controller.commands.newcommands.LoadPortfolioCommand;
+import controller.commands.newcommands.PerformanceOverTimeCommand;
+import controller.commands.newcommands.RebalancePortfolioCommand;
+import controller.commands.newcommands.SellPortfolioHoldingCommand;
 
 /**
  * This class extends the controller for the stock market simulator to support new commands.

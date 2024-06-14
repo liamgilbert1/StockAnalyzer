@@ -1,4 +1,4 @@
-package controller.commands.newCommands;
+package controller.commands.newcommands;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,7 +48,8 @@ public class GetPortfolioDistributionCommandTest {
   public void getInstructions() {
     String instructions = command.getInstructions();
     assertEquals("Get Portfolio Distribution Command: \n" +
-            "This command gets the distribution of a portfolio (The stocks and each stock's value) on a specific date.\n" +
+            "This command gets the distribution of a portfolio " +
+            "(The stocks and each stock's value) on a specific date.\n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (GetPortfolioDistribution)\n" +
             "2. Portfolio name\n" +

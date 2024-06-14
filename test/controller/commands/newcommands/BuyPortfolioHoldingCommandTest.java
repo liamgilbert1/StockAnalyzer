@@ -1,11 +1,12 @@
-package controller.commands.newCommands;
+package controller.commands.newcommands;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.StringReader;
-import java.time.LocalDate;
+
 import java.util.Scanner;
+
 
 import controller.commands.ICommand;
 import model.IModel2;
@@ -14,9 +15,9 @@ import model.ModelImpl2;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test class for the SellPortfolioHoldingCommand.
+ * Test class for the BuyPortfolioHoldingCommand.
  */
-public class SellPortfolioHoldingCommandTest {
+public class BuyPortfolioHoldingCommandTest {
   ICommand command;
   Appendable output;
   IModel2 model;
@@ -28,27 +29,25 @@ public class SellPortfolioHoldingCommandTest {
   public void setUp() {
     model = new ModelImpl2();
     output = new StringBuilder();
-    command = new SellPortfolioHoldingCommand(output);
+    command = new BuyPortfolioHoldingCommand(output);
     model.createPortfolio("myPortfolio");
-    model.buyPortfolioHolding("myPortfolio", "GOOG", 5,
-            LocalDate.of(2024, 6, 5));
   }
 
   @Test
   public void execute() {
-    input = new StringReader("myPortfolio GOOG 3 2024-06-05");
+    input = new StringReader("myPortfolio GOOG 5 2024-06-05");
     scanner = new Scanner(input);
     command.execute(model, scanner);
-    assertEquals("Portfolio shares have been sold.\n", output.toString());
+    assertEquals("Portfolio shares have been purchased\n", output.toString());
   }
 
   @Test
   public void getInstructions() {
     String instructions = command.getInstructions();
-    assertEquals("Sell Portfolio Holding's on Date Command: \n" +
-            "This command sells shares of an existing portfolio on a specific date.\n" +
+    assertEquals("Buy Portfolio Holding's on Date Command: \n" +
+            "This command purchases shares to an existing portfolio on a specific date.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (SellPortfolioHolding)\n" +
+            "1. Command name (BuyPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +

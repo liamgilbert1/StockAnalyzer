@@ -4,12 +4,7 @@ import org.junit.Test;
 
 import java.io.StringReader;
 import java.time.LocalDate;
-import java.util.Scanner;
 
-import controller.ControllerImpl;
-import controller.ControllerImpl2;
-import controller.IController;
-import controller.commands.newCommands.RebalancePortfolioCommand;
 import model.IModel2;
 import model.ModelImpl2;
 

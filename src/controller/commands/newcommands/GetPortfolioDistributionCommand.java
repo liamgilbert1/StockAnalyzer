@@ -1,4 +1,4 @@
-package controller.commands.newCommands;
+package controller.commands.newcommands;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,31 +10,30 @@ import model.IModel2;
 import model.stock.IStock;
 
 /**
- * This class represents a command to get the performance of a portfolio over a specific period of
- * time. The user must provide the portfolio name, start date, and end date. The command will then
- * return the performance of the portfolio over the specified period of time.
+ * This class represents a command to get the distribution of a portfolio on a specific date.
+ * The user must provide the portfolio name and the date.
+ * The command will then return the distribution of the portfolio on the specified date.
  */
-public class PerformanceOverTimeCommand extends AWriterCommand {
+public class GetPortfolioDistributionCommand extends AWriterCommand {
 
   /**
-   * Constructs a PerformanceOverTimeCommand object.
+   * Constructs a GetPortfolioDistributionCommand object.
    * @param out the appendable object to output messages to
    */
-  public PerformanceOverTimeCommand(Appendable out) {
+  public GetPortfolioDistributionCommand(Appendable out) {
     super(out);
   }
 
   /**
-   * Executes the PerformanceOverTimeCommand. This command calculates the performance of a portfolio
-   * over a given period of time.
+   * Executes the GetPortfolioDistributionCommand. This command gets the distribution of a portfolio
+   * on a specific date.
    * @param model the model to perform the command on
    * @param scanner the scanner object to read user input from
    */
   @Override
   public void execute(IModel2 model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
-    LocalDate startDate = LocalDate.parse(getNextString(scanner));
-    LocalDate endDate = LocalDate.parse(getNextString(scanner));
+    LocalDate date = LocalDate.parse(getNextString(scanner));
 
     List<IStock> stocks = new ArrayList<>();
 
@@ -51,8 +50,12 @@ public class PerformanceOverTimeCommand extends AWriterCommand {
       }
     }
 
+    for (IStock stock : stocks) {
+      writeStockData(stock.getTicker());
+    }
+
     try {
-      this.out.append(model.getPortfolioPerformanceOverTime(portfolioName, startDate, endDate));
+      this.out.append(model.getPortfolioValueDistribution(portfolioName, date));
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");
     }
@@ -66,14 +69,13 @@ public class PerformanceOverTimeCommand extends AWriterCommand {
   public String getInstructions() {
     StringBuilder instructions;
     instructions = new StringBuilder();
-    instructions.append("Get Portfolio Performance Over Time: \n");
-    instructions.append("This command calculates the performance of a portfolio over a " +
-            "given period of time.\n");
+    instructions.append("Get Portfolio Distribution Command: \n");
+    instructions.append("This command gets the distribution of a portfolio " +
+            "(The stocks and each stock's value) on a specific date.\n");
     instructions.append("Enter the following parameters separated by spaces:\n");
-    instructions.append("1. Command name (GetPerformanceOverTime)\n");
+    instructions.append("1. Command name (GetPortfolioDistribution)\n");
     instructions.append("2. Portfolio name\n");
-    instructions.append("3. Start date in the format yyyy-mm-dd\n");
-    instructions.append("4. End date in the format yyyy-mm-dd\n");
+    instructions.append("3. Date in the format yyyy-mm-dd\n");
     return instructions.toString();
   }
 }

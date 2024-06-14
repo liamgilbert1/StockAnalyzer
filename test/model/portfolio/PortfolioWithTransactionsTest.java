@@ -7,14 +7,9 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import model.portfolio.BuyTransaction;
-import model.portfolio.IPortfolioWithTransactions;
-import model.portfolio.ITransaction;
-import model.portfolio.PortfolioWithTransactions;
-import model.portfolio.SellTransaction;
 import model.stock.Stock;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test cases for PortfolioWithTransactions.
@@ -123,9 +118,5 @@ public class PortfolioWithTransactionsTest {
   public void isDateBeforeFirstTransaction() {
     assertEquals(false, portfolio.isDateBeforeFirstTransaction(LocalDate.of(2024, 6, 6)));
     assertEquals(true, portfolio2.isDateBeforeFirstTransaction(LocalDate.of(2024, 6, 2)));
-  }
-
-  @Test
-  public void loadPortfolio() {
   }
 }

@@ -1,4 +1,4 @@
-package controller.commands.newCommands;
+package controller.commands.newcommands;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,8 +58,8 @@ public class PerformanceOverTimeCommandTest {
   public void getInstructions() {
     String instructions = command.getInstructions();
     assertEquals("Get Portfolio Performance Over Time: \n" +
-            "This command calculates the performance of a portfolio over a given period of time.\n" +
-            "Enter the following parameters separated by spaces:\n" +
+            "This command calculates the performance of a portfolio over a given period of " +
+            "time.\nEnter the following parameters separated by spaces:\n" +
             "1. Command name (GetPerformanceOverTime)\n" +
             "2. Portfolio name\n" +
             "3. Start date in the format yyyy-mm-dd\n" +

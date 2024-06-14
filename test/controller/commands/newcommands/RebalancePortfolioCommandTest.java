@@ -1,4 +1,4 @@
-package controller.commands.newCommands;
+package controller.commands.newcommands;
 
 import org.junit.Test;
 
@@ -38,14 +38,17 @@ public class RebalancePortfolioCommandTest {
 
   @Test
   public void testGetInstructions() {
-    RebalancePortfolioCommand rebalancePortfolioCommand = new RebalancePortfolioCommand(new StringBuilder());
+    RebalancePortfolioCommand rebalancePortfolioCommand =
+            new RebalancePortfolioCommand(new StringBuilder());
     assertEquals("Rebalance Portfolio: \n" +
             "This command rebalances the portfolio to the given stock weights.\n" +
-            "Whatever stocks you give weight will be purchased and whatever stocks you do not will be sold, regardless of the current portfolio holdings.\n" +
+            "Whatever stocks you give weight will be purchased and whatever stocks you do not " +
+            "will be sold, regardless of the current portfolio holdings.\n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (RebalancePortfolio)\n" +
             "2. Portfolio name\n" +
             "3. Date (yyyy-mm-dd)\n" +
-            "4. Stock weights (stock1 weight1 stock2 weight2 ...)\n", rebalancePortfolioCommand.getInstructions());
+            "4. Stock weights (stock1 weight1 stock2 weight2 ...)\n",
+            rebalancePortfolioCommand.getInstructions());
   }
 }

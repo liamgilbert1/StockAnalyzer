@@ -1,4 +1,4 @@
-package controller.commands.newCommands;
+package controller.commands.newcommands;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,22 +10,22 @@ import model.IModel2;
 import model.stock.IStock;
 
 /**
- * This class represents a command to get the distribution of a portfolio on a specific date.
+ * This class represents a command to get the composition of a portfolio on a specific date.
  * The user must provide the portfolio name and the date.
- * The command will then return the distribution of the portfolio on the specified date.
+ * The command will then return the composition of the portfolio on the specified date.
  */
-public class GetPortfolioDistributionCommand extends AWriterCommand {
+public class GetPortfolioCompositionCommand extends AWriterCommand {
 
   /**
-   * Constructs a GetPortfolioDistributionCommand object.
+   * Constructs a GetPortfolioCompositionCommand object.
    * @param out the appendable object to output messages to
    */
-  public GetPortfolioDistributionCommand(Appendable out) {
+  public GetPortfolioCompositionCommand(Appendable out) {
     super(out);
   }
 
   /**
-   * Executes the GetPortfolioDistributionCommand. This command gets the distribution of a portfolio
+   * Executes the GetPortfolioCompositionCommand. This command gets the composition of a portfolio
    * on a specific date.
    * @param model the model to perform the command on
    * @param scanner the scanner object to read user input from
@@ -55,7 +55,7 @@ public class GetPortfolioDistributionCommand extends AWriterCommand {
     }
 
     try {
-      this.out.append(model.getPortfolioValueDistribution(portfolioName, date));
+      this.out.append(model.getPortfolioComposition(portfolioName, date));
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");
     }
@@ -69,11 +69,11 @@ public class GetPortfolioDistributionCommand extends AWriterCommand {
   public String getInstructions() {
     StringBuilder instructions;
     instructions = new StringBuilder();
-    instructions.append("Get Portfolio Distribution Command: \n");
-    instructions.append("This command gets the distribution of a portfolio " +
-            "(The stocks and each stock's value) on a specific date.\n");
+    instructions.append("Get Portfolio Composition Command: \n");
+    instructions.append("This command gets the composition of a portfolio " +
+            "(The stocks and the number of shares in each stock) on a specific date.\n");
     instructions.append("Enter the following parameters separated by spaces:\n");
-    instructions.append("1. Command name (GetPortfolioDistribution)\n");
+    instructions.append("1. Command name (GetPortfolioComposition)\n");
     instructions.append("2. Portfolio name\n");
     instructions.append("3. Date in the format yyyy-mm-dd\n");
     return instructions.toString();

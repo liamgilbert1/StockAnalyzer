@@ -5,11 +5,9 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 
-import model.portfolio.BuyTransaction;
-import model.portfolio.ITransaction;
 import model.stock.Stock;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test cases for BuyTransaction.

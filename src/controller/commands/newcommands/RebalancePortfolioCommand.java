@@ -1,4 +1,4 @@
-package controller.commands.newCommands;
+package controller.commands.newcommands;
 
 import java.time.LocalDate;
 import java.util.HashMap;
