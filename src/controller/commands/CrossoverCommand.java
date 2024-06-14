@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-import model.IModel;
 import model.IModel2;
 
 /**
@@ -17,6 +16,7 @@ public class CrossoverCommand extends AWriterCommand {
 
   /**
    * Constructs a CrossoverCommand object.
+   *
    * @param out the appendable object to output the results of the command
    */
   public CrossoverCommand(Appendable out) {
@@ -25,7 +25,8 @@ public class CrossoverCommand extends AWriterCommand {
 
   /**
    * Executes the CrossoverCommand with the given model and scanner.
-   * @param model the model to execute the command on
+   *
+   * @param model   the model to execute the command on
    * @param scanner the scanner to get the next inputs from
    * @throws IllegalArgumentException if the command fails to execute
    */
@@ -53,6 +54,7 @@ public class CrossoverCommand extends AWriterCommand {
 
   /**
    * Gets the instructions for the CrossoverCommand.
+   *
    * @return the instructions for the CrossoverCommand
    */
   @Override

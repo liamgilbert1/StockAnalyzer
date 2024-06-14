@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import model.IModel;
 import model.IModel2;
 import model.stock.IStock;
 

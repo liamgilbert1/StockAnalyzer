@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +14,7 @@ import controller.commands.GainOrLossCommand;
 import controller.commands.GetPortfolioValueCommand;
 import controller.commands.ICommand;
 import controller.commands.MovingAverageCommand;
-import model.IModel;
 import model.IModel2;
-import model.portfolio.IPortfolioWithTransactions;
-import model.portfolio.PortfolioWithTransactions;
 
 /**
  * This class represents the controller for the stock market simulator.

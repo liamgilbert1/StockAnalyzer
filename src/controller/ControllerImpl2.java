@@ -2,13 +2,13 @@ package controller;
 
 import java.util.List;
 
-import controller.commands.newCommands.BuyPortfolioHoldingCommand;
-import controller.commands.newCommands.GetPortfolioDistributionCommand;
-import controller.commands.newCommands.GetPortfolioCompositionCommand;
-import controller.commands.newCommands.LoadPortfolioCommand;
-import controller.commands.newCommands.PerformanceOverTimeCommand;
-import controller.commands.newCommands.RebalancePortfolioCommand;
-import controller.commands.newCommands.SellPortfolioHoldingCommand;
+import controller.commands.newcommands.BuyPortfolioHoldingCommand;
+import controller.commands.newcommands.GetPortfolioDistributionCommand;
+import controller.commands.newcommands.GetPortfolioCompositionCommand;
+import controller.commands.newcommands.LoadPortfolioCommand;
+import controller.commands.newcommands.PerformanceOverTimeCommand;
+import controller.commands.newcommands.RebalancePortfolioCommand;
+import controller.commands.newcommands.SellPortfolioHoldingCommand;
 
 /**
  * This class extends the controller for the stock market simulator to support new commands.
@@ -23,7 +23,8 @@ public class ControllerImpl2 extends ControllerImpl {
 
   /**
    * Constructs a ControllerImpl2 object with the given input and output.
-   * @param input the input to be used
+   *
+   * @param input  the input to be used
    * @param output the output to be used
    */
   public ControllerImpl2(Readable input, Appendable output) {
@@ -31,10 +32,10 @@ public class ControllerImpl2 extends ControllerImpl {
     commandMap.remove("AddPortfolioHolding");
     commandMap.put("BuyPortfolioHolding", () -> new BuyPortfolioHoldingCommand(output));
     commandMap.put("SellPortfolioHolding", () -> new SellPortfolioHoldingCommand(output));
-    commandMap.put("GetPortfolioComposition" , () -> new GetPortfolioCompositionCommand(output));
+    commandMap.put("GetPortfolioComposition", () -> new GetPortfolioCompositionCommand(output));
     commandMap.put("GetPortfolioDistribution",
             () -> new GetPortfolioDistributionCommand(output));
-    commandMap.put("RebalancePortfolio" , () -> new RebalancePortfolioCommand(output));
+    commandMap.put("RebalancePortfolio", () -> new RebalancePortfolioCommand(output));
     commandMap.put("GetPerformanceOverTime",
             () -> new PerformanceOverTimeCommand(output));
     commandMap.put("LoadPortfolio", () -> new LoadPortfolioCommand(output));
