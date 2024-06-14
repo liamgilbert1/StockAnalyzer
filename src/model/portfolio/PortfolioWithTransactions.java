@@ -29,7 +29,7 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
 
   @Override
   public IPortfolioWithTransactions addTransaction(ITransaction transaction) {
-    if (transaction.getDate().isBefore(getLatestTransactionDate())) {
+    if (!transactions.isEmpty() && transaction.getDate().isBefore(getLatestTransactionDate())) {
       throw new IllegalArgumentException("Transaction date is before previous transaction date.");
     }
     List<ITransaction> newTransactions = new ArrayList<>(transactions);

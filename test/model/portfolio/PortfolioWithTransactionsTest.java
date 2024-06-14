@@ -26,13 +26,13 @@ public class PortfolioWithTransactionsTest {
 
   @Before
   public void setUp() throws Exception {
-    portfolio = new PortfolioWithTransactions("test");
     transaction1 = new BuyTransaction(new Stock("GOOG"), 5,
             LocalDate.of(2024, 6, 5));
     transaction2 = new SellTransaction(new Stock("GOOG"), 2,
             LocalDate.of(2024, 6, 6));
     transaction3 = new BuyTransaction(new Stock("AAPL"), 5,
             LocalDate.of(2024, 6, 6));
+    portfolio = new PortfolioWithTransactions("test");
     portfolio2 = new PortfolioWithTransactions("test2",
             Arrays.asList(transaction1, transaction2));
     portfolio3 = new PortfolioWithTransactions("test3", List.of(transaction1, transaction3));
