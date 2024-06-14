@@ -19,4 +19,6 @@ public interface IPortfolioWithTransactions extends IPortfolio {
   List<LocalDate> getPerformanceDates(LocalDate startDate, LocalDate endDate);
 
   void rebalance(LocalDate date, Map<String, Integer> stockWeights);
+
+  LocalDate getLatestTransactionDate();
 }

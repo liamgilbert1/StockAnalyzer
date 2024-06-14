@@ -40,13 +40,6 @@ public abstract class ATransaction implements ITransaction {
   }
 
   @Override
-  public ITransaction getCopy() {
-    return new SellTransaction(this.getStock().getCopy(), this.getQuantity(),
-            LocalDate.of(this.getDate().getYear(), this.getDate().getMonth(),
-                    this.getDate().getDayOfMonth()));
-  }
-
-  @Override
   public double getValue() {
     return this.getStock().getClosePrice(this.getDate()) * this.realQuantity();
   }

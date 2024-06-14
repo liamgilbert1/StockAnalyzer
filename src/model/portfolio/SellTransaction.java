@@ -34,6 +34,13 @@ public class SellTransaction extends ATransaction {
   }
 
   @Override
+  public ITransaction getCopy() {
+    return new SellTransaction(this.getStock().getCopy(), this.getQuantity(),
+            LocalDate.of(this.getDate().getYear(), this.getDate().getMonth(),
+                    this.getDate().getDayOfMonth()));
+  }
+
+  @Override
   public int hashCode() {
     return Objects.hash(this.getStock(), this.getDate(), this.quantity);
   }

@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -31,6 +30,14 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
   public IPortfolioWithTransactions addTransaction(ITransaction transaction) {
     if (!transactions.isEmpty() && transaction.getDate().isBefore(getLatestTransactionDate())) {
       throw new IllegalArgumentException("Transaction date is before previous transaction date.");
+    }
+    if (transaction.action().equals("sell") && getStocksQuantity(transaction.getStock().getTicker(),
+            transaction.getDate()) < transaction.realQuantity()) {
+      List<ITransaction> newTransactions = new ArrayList<>(transactions);
+      newTransactions.add(new SellTransaction(transaction.getStock(),
+              getStocksQuantity(transaction.getStock().getTicker(), transaction.getDate()),
+              transaction.getDate()));
+      return new PortfolioWithTransactions(name, newTransactions);
     }
     List<ITransaction> newTransactions = new ArrayList<>(transactions);
     newTransactions.add(transaction);
@@ -295,7 +302,8 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
     return false;
   }
 
-  private LocalDate getLatestTransactionDate() {
+  @Override
+  public LocalDate getLatestTransactionDate() {
     LocalDate latestTransactionDate = null;
     for (ITransaction transaction : transactions) {
       if (latestTransactionDate == null || transaction.getDate().isAfter(latestTransactionDate)) {

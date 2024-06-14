@@ -2,9 +2,9 @@ package controller.commands.newCommands;
 
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
-import controller.commands.newCommands.LoadPortfolioCommand;
 import model.IModel2;
 import model.ModelImpl2;
 
@@ -18,9 +18,13 @@ public class LoadPortfolioCommandTest {
     Appendable out = new StringBuilder();
     LoadPortfolioCommand loadPortfolioCommand = new LoadPortfolioCommand(out);
     IModel2 model = new ModelImpl2();
-    Scanner scanner = new Scanner("myPortfolio");
+    Scanner scanner = new Scanner("TestPortfolio");
     loadPortfolioCommand.execute(model, scanner);
-    assertEquals("Portfolio loaded successfully.", out.toString());
+    assertEquals("Portfolio loaded successfully.\n", out.toString());
+    assertEquals("GOOG: 8.82\n" +
+            "MSFT: 11.14\n" +
+            "AMZN: 52.00\n",model.getPortfolioComposition("TestPortfolio", LocalDate.of(2024, 6,
+            4)));
   }
 
   @Test

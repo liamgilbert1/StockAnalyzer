@@ -57,6 +57,10 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
                                   LocalDate date) {
     for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
+        if (!(portfolio.getTransactions().isEmpty())
+                && portfolio.getLatestTransactionDate().isAfter(date)) {
+          throw new IllegalArgumentException("Date is before latest transaction");
+        }
         IPortfolioWithTransactions newPortfolio = portfolio.addTransaction(
                 new BuyTransaction(getStock(ticker), quantity, date));
         this.portfolios.remove(portfolio);
@@ -71,9 +75,13 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   @Override
   public void sellPortfolioHolding(String portfolioName, String ticker, double quantity,
                                    LocalDate date) {
+
     for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
-
+        if (!(portfolio.getTransactions().isEmpty())
+                && portfolio.getLatestTransactionDate().isAfter(date)) {
+          throw new IllegalArgumentException("Date is before latest transaction");
+        }
         IPortfolioWithTransactions newPortfolio =
                 portfolio.addTransaction(new SellTransaction(getStock(ticker), quantity, date));
         this.portfolios.remove(portfolio);
