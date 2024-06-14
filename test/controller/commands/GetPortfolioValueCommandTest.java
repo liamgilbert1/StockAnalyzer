@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.StringReader;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import model.IModel2;
@@ -44,7 +45,8 @@ public class GetPortfolioValueCommandTest {
   @Test
   public void testExecute2() {
     input = new StringReader("myPortfolio 2023-01-01\n");
-    model.addPortfolioHolding("myPortfolio", "GOOG", 10);
+    model.buyPortfolioHolding("myPortfolio", "GOOG", 10,
+            LocalDate.of(2023, 1, 1));
     scanner = new Scanner(input);
     command.execute(model, scanner);
     assertEquals("Portfolio value is: 887.30\n ", output.toString());
@@ -53,9 +55,12 @@ public class GetPortfolioValueCommandTest {
   @Test
   public void testExecute3() {
     input = new StringReader("myPortfolio 2023-01-01\n");
-    model.addPortfolioHolding("myPortfolio", "GOOG", 10);
-    model.addPortfolioHolding("myPortfolio", "GOOG", 20);
-    model.addPortfolioHolding("myPortfolio", "GOOG", 30);
+    model.buyPortfolioHolding("myPortfolio", "GOOG", 10,
+            LocalDate.of(2023, 1, 1));
+    model.buyPortfolioHolding("myPortfolio", "GOOG", 20,
+            LocalDate.of(2023, 1, 1));
+    model.buyPortfolioHolding("myPortfolio", "GOOG", 30,
+            LocalDate.of(2023, 1, 1));
     scanner = new Scanner(input);
     command.execute(model, scanner);
     assertEquals("Portfolio value is: 5323.80\n ", output.toString());

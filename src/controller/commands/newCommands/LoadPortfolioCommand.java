@@ -19,7 +19,7 @@ public class LoadPortfolioCommand extends AWriterCommand implements ICommand {
 
     try {
       model.loadPortfolio(portfolioName);
-      out.append("Portfolio loaded successfully.");
+      out.append("Portfolio loaded successfully.\n");
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to load portfolio.");
     }
