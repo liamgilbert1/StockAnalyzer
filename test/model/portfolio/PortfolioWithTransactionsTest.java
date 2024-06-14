@@ -16,6 +16,9 @@ import model.stock.Stock;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test cases for PortfolioWithTransactions.
+ */
 public class PortfolioWithTransactionsTest {
   IPortfolioWithTransactions portfolio;
   IPortfolioWithTransactions portfolio2;

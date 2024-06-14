@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * This interface represents a stock in the stock market simulator.
+ * A stock has a ticker, open price, close price, high price, low price, and volume.
+ * A stock can be used to get the data across a given number of days.
  */
 public interface IStock {
   /**

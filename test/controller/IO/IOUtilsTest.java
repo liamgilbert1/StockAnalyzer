@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test cases for IOUtils.
+ */
 public class IOUtilsTest {
 
   @Test

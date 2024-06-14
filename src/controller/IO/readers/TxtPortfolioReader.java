@@ -37,10 +37,20 @@ import model.stock.Stock;
 public class TxtPortfolioReader implements IPortfolioWithTransactionsReader {
   private final String portfolioName;
 
+  /**
+   * Constructs a TxtPortfolioReader object with the given portfolio name.
+   *
+   * @param portfolioName the name of the portfolio to read
+   */
   public TxtPortfolioReader(String portfolioName) {
     this.portfolioName = portfolioName;
   }
 
+  /**
+   * Gets the readable object from the reader.
+   *
+   * @return the readable object from the reader
+   */
   @Override
   public Readable getReadable() {
     File file = IOUtils.getFile(portfolioName, ".txt", "portfolios");
@@ -56,6 +66,11 @@ public class TxtPortfolioReader implements IPortfolioWithTransactionsReader {
     return new StringReader(portfolioData.toString());
   }
 
+  /**
+   * Gets the portfolio with transactions from the reader.
+   *
+   * @return the portfolio with transactions from the reader
+   */
   @Override
   public IPortfolioWithTransactions getPortfolio() {
     Readable readable = getReadable();
@@ -86,6 +101,15 @@ public class TxtPortfolioReader implements IPortfolioWithTransactionsReader {
     return createPortfolio(portfolioName, transactions);
   }
 
+  /**
+   * Parses a transaction from the given data.
+   *
+   * @param action      the action of the transaction
+   * @param quantity    the quantity of the transaction
+   * @param ticker      the ticker of the stock
+   * @param currentDate the date of the transaction
+   * @return the transaction parsed from the given data
+   */
   private ITransaction parseTransaction(String action, String quantity, String ticker,
                                         LocalDate currentDate) {
     switch (action) {
@@ -105,6 +129,13 @@ public class TxtPortfolioReader implements IPortfolioWithTransactionsReader {
     }
   }
 
+  /**
+   * Creates a portfolio with the given name and transactions.
+   *
+   * @param name         the name of the portfolio
+   * @param transactions the transactions of the portfolio
+   * @return the portfolio with the given name and transactions
+   */
   private IPortfolioWithTransactions createPortfolio(String name, List<ITransaction> transactions) {
     IPortfolioWithTransactions portfolio = new PortfolioWithTransactions(name);
     for (ITransaction transaction : transactions) {

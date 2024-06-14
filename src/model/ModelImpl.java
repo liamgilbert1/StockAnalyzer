@@ -20,7 +20,6 @@ import static model.stock.StockDataPoint.DATE;
  * stocks in a portfolio.
  */
 public class ModelImpl implements IModel {
-
   protected final List<IPortfolioWithHoldings> portfolios;
 
   /**
@@ -30,6 +29,11 @@ public class ModelImpl implements IModel {
     this.portfolios = new ArrayList<>();
   }
 
+  /**
+   * Get the stock with the given ticker.
+   * @param ticker the ticker of the stock.
+   * @return the stock with the given ticker.
+   */
   @Override
   public IStock getStock(String ticker) {
     return new Stock(ticker);
@@ -102,6 +106,10 @@ public class ModelImpl implements IModel {
     return crossovers;
   }
 
+  /**
+   * Create and store a portfolio with the given name.
+   * @param name the name of the portfolio.
+   */
   @Override
   public void createPortfolio(String name) {
     for (IPortfolioWithHoldings portfolio : this.portfolios) {
@@ -112,6 +120,12 @@ public class ModelImpl implements IModel {
     this.portfolios.add(new Portfolio(name));
   }
 
+  /**
+   * Add a holding of the given stock to the portfolio with the given name of the given quantity.
+   * @param portfolioName the name of the portfolio.
+   * @param ticker the ticker of the stock.
+   * @param quantity the quantity of the stock.
+   */
   @Override
   public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
     for (IPortfolioWithHoldings portfolio : this.portfolios) {
@@ -125,6 +139,12 @@ public class ModelImpl implements IModel {
     throw new IllegalArgumentException("Portfolio does not exist");
   }
 
+  /**
+   * Get the value of the portfolio with the given name on the given date.
+   * @param portfolioName the name of the portfolio.
+   * @param date the date to get the value of the portfolio on.
+   * @return the value of the portfolio on the given date.
+   */
   @Override
   public double getPortfolioValue(String portfolioName, LocalDate date) {
     for (IPortfolioWithHoldings portfolio : this.portfolios) {
@@ -135,6 +155,11 @@ public class ModelImpl implements IModel {
     throw new IllegalArgumentException("Portfolio does not exist");
   }
 
+  /**
+   * Get the stocks in the portfolio with the given name.
+   * @param portfolioName the name of the portfolio.
+   * @return the stocks in the portfolio.
+   */
   @Override
   public List<String> getStocksInPortfolio(String portfolioName) {
     for (IPortfolioWithHoldings portfolio : this.portfolios) {
@@ -145,6 +170,10 @@ public class ModelImpl implements IModel {
     throw new IllegalArgumentException("Portfolio does not exist");
   }
 
+  /**
+   * Get the names of the portfolios.
+   * @return the names of the portfolios.
+   */
   @Override
   public List<String> getPortfolioNames() {
     List<String> portfolioNames = new ArrayList<>();

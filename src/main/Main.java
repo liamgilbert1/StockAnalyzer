@@ -11,7 +11,7 @@ import view.IView;
 import view.ViewImpl;
 
 /**
- * main.Main class to run the user interface. This class creates a model and controller and runs the
+ * Main class to run the user interface. This class creates a model and controller and runs the
  * controller with the model. The controller takes in user input and sends it to the model to
  * execute commands.
  */

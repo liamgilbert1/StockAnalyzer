@@ -3,6 +3,11 @@ package model.portfolio;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Represents a portfolio that contains a list of stocks and the value of the portfolio on a given
+ * date.
+ * Parent interface for the Portfolio classes.
+ */
 public interface IPortfolio {
   /**
    * Gets the value of the portfolio on the given date.

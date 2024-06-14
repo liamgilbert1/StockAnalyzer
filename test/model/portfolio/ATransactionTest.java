@@ -12,6 +12,9 @@ import model.stock.Stock;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test cases for ATransaction.
+ */
 public class ATransactionTest {
   ATransaction transaction;
 

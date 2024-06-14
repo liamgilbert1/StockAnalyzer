@@ -9,6 +9,9 @@ import model.portfolio.IPortfolio;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * Test cases for TxtPortfolioReader.
+ */
 public class TxtPortfolioReaderTest {
 
   @Test

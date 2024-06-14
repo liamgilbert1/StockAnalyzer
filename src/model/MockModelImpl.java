@@ -130,6 +130,13 @@ public class MockModelImpl implements IModel2 {
     return null;
   }
 
+  /**
+   * Gets the log of the mock model implementation for the buy portfolio holding.
+   * @param portfolioName the name of the portfolio.
+   * @param ticker the ticker of the stock.
+   * @param quantity the quantity of the stock.
+   * @param date the date of the stock.
+   */
   @Override
   public void buyPortfolioHolding(String portfolioName, String ticker, int quantity,
                                   LocalDate date) {
@@ -137,6 +144,13 @@ public class MockModelImpl implements IModel2 {
             .append(quantity).append(" ").append(date.toString());
   }
 
+  /**
+   * Gets the log of the mock model implementation for the sell portfolio holding.
+   * @param portfolioName the name of the portfolio.
+   * @param ticker the ticker of the stock.
+   * @param quantity the quantity of the stock.
+   * @param date the date of the stock.
+   */
   @Override
   public void sellPortfolioHolding(String portfolioName, String ticker, double quantity,
                                    LocalDate date) {
@@ -144,6 +158,12 @@ public class MockModelImpl implements IModel2 {
             .append(quantity).append(" ").append(date.toString());
   }
 
+  /**
+   * Gets the log of the mock model implementation for the get portfolio composition.
+   * @param portfolioName the name of the portfolio.
+   * @param date the date of the stock.
+   * @return null;
+   */
   @Override
   public String getPortfolioComposition(String portfolioName, LocalDate date) {
     log.append("GetPortfolioComposition ").append(portfolioName).append(" ")
@@ -151,6 +171,12 @@ public class MockModelImpl implements IModel2 {
     return "";
   }
 
+  /**
+   * Gets the log of the mock model implementation for the get portfolio value distribution.
+   * @param portfolioName the name of the portfolio.
+   * @param date the date of the stock.
+   * @return null;
+   */
   @Override
   public String getPortfolioValueDistribution(String portfolioName, LocalDate date) {
     log.append("GetPortfolioDistribution ").append(portfolioName).append(" ")
@@ -158,17 +184,34 @@ public class MockModelImpl implements IModel2 {
     return "";
   }
 
+  /**
+   * Gets the log of the mock model implementation for the load portfolio.
+   * @param portfolioName is the name of the portfolio to be loaded into the model.
+   */
   @Override
   public void loadPortfolio(String portfolioName) {
     log.append("LoadPortfolio ").append(portfolioName);
   }
 
+  /**
+   * Gets the log of the mock model implementation for the rebalance portfolio.
+   * @param portfolioName the name of the portfolio.
+   * @param date the date to re-balance the portfolio.
+   * @param stockWeights the weights of the stocks in the portfolio.
+   */
   @Override
   public void rebalancePortfolio(String portfolioName, LocalDate date,
                                  Map<String, Integer> stockWeights) {
     log.append("RebalancePortfolio ").append(portfolioName).append(" ").append(date.toString());
   }
 
+  /**
+   * Gets the log of the mock model implementation for the get performance over time.
+   * @param portfolioName the name of the portfolio.
+   * @param startDate the start date.
+   * @param endDate the end date.
+   * @return null;
+   */
   @Override
   public String getPortfolioPerformanceOverTime(String portfolioName, LocalDate startDate,
                                                 LocalDate endDate) {
@@ -177,9 +220,5 @@ public class MockModelImpl implements IModel2 {
     return "";
   }
 
-  @Override
-  public List<LocalDate> getPortfolioPerformanceDates(String portfolioName, LocalDate startDate,
-                                                      LocalDate endDate) {
-    return null;
-  }
+
 }
