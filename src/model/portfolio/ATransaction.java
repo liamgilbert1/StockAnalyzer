@@ -43,4 +43,16 @@ public abstract class ATransaction implements ITransaction {
 
   @Override
   public abstract double realQuantity();
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof ATransaction)) {
+      return false;
+    }
+    ATransaction that = (ATransaction) o;
+    return this.getStock().equals(that.getStock()) && this.getDate().equals(that.getDate());
+  }
 }

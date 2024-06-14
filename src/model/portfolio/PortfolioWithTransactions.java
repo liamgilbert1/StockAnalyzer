@@ -6,6 +6,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import model.stock.IStock;
 import model.stock.Stock;
@@ -35,8 +36,7 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
     return new PortfolioWithTransactions(name, newTransactions);
   }
 
-  @Override
-  public boolean isTransactionBefore(ITransaction transaction) {
+  private boolean isTransactionBefore(ITransaction transaction) {
     String newTransactionTicker = transaction.getStock().getTicker();
     for (ITransaction iTransaction : transactions) {
       String transactionTicker = iTransaction.getStock().getTicker();
@@ -98,7 +98,8 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
     for (int i = 0; i < dates.size(); i++) {
       performance.append(dates.get(i)).append(": ").append(asterisks.get(i)).append("\n");
     }
-    performance.append("\n").append("Scale: * = ").append(getScale(Collections.max(values)));
+    performance.append("\n").append("Scale: * = ").append(getScale(Collections.max(values)))
+            .append("\n");
     return performance.toString();
   }
 
@@ -108,15 +109,15 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
     long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
     if (daysBetween < 0) {
       throw new IllegalArgumentException("End date must be after start date.");
-    } else if (daysBetween <= 30) {
+    } else if (daysBetween < 30) {
       return this.addDaysOccurrence(startDate, endDate, dates, 1);
-    } else if (daysBetween <= 90) {
+    } else if (daysBetween < 90) {
       return this.addDaysOccurrence(startDate, endDate, dates, 3);
-    } else if (daysBetween <= 180) {
+    } else if (daysBetween < 180) {
       return this.addDaysOccurrence(startDate, endDate, dates, 7);
-    } else if (daysBetween <= 730) {
+    } else if (daysBetween < 730) {
       return this.addMonthsOccurrence(startDate, endDate, dates, 1);
-    } else if (daysBetween <= 1830) {
+    } else if (daysBetween < 1830) {
       return this.addMonthsOccurrence(startDate, endDate, dates, 3);
     }
     return this.addYearOccurrence(startDate, endDate, dates);
@@ -124,7 +125,8 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
 
   private List<LocalDate> addDaysOccurrence(LocalDate startDate, LocalDate endDate, List<LocalDate> dates,
                                             int daysToAdd) {
-    for (LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(daysToAdd)) {
+    for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1));
+         date = date.plusDays(daysToAdd)) {
       dates.add(date);
     }
     return dates;
@@ -275,6 +277,23 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
   @Override
   public IPortfolioWithTransactions loadPortfolio() {
     return null;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof PortfolioWithTransactions)) {
+      return false;
+    }
+    PortfolioWithTransactions that = (PortfolioWithTransactions) o;
+    return name.equals(that.name) && transactions.equals(that.transactions);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, transactions);
   }
 
 }

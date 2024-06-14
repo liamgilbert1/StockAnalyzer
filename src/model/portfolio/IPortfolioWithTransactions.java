@@ -19,5 +19,4 @@ public interface IPortfolioWithTransactions extends IPortfolio {
 
   List<LocalDate> getPerformanceDates(LocalDate startDate, LocalDate endDate);
 
-  boolean isTransactionBefore(ITransaction transaction);
 }
