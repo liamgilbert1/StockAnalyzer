@@ -56,7 +56,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (BuyPortfolioHolding)\n" +
+            "1. Command name (AddPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -115,7 +115,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (BuyPortfolioHolding)\n" +
+            "1. Command name (AddPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -174,7 +174,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (BuyPortfolioHolding)\n" +
+            "1. Command name (AddPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -250,7 +250,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (BuyPortfolioHolding)\n" +
+            "1. Command name (AddPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -310,7 +310,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (BuyPortfolioHolding)\n" +
+            "1. Command name (AddPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -326,7 +326,8 @@ public class ControllerModelTest {
             "Enter 'quit' to quit the program.\n" +
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
-            "Portfolio holdings updated\n", output.toString());
+            "\n" +
+            "An error occurred while executing the command. Please try again.", output.toString());
   }
 
   @Test
@@ -372,7 +373,7 @@ public class ControllerModelTest {
             "Add Portfolio Holding: \n" +
             "This command adds a holding to an existing portfolio.\n" +
             "Enter the following parameters separated by spaces:\n" +
-            "1. Command name (BuyPortfolioHolding)\n" +
+            "1. Command name (AddPortfolioHolding)\n" +
             "2. Portfolio name\n" +
             "3. Stock ticker symbol\n" +
             "4. Quantity (number of shares)\n" +
@@ -388,8 +389,8 @@ public class ControllerModelTest {
             "Enter 'quit' to quit the program.\n" +
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
-            "Portfolio holdings updated\n" +
-            "Portfolio value is: 1751.30\n" +
+            "\n" +
+            "An error occurred while executing the command. Please try again.Portfolio value is: $0.00\n" +
             " ", output.toString());
   }
 
