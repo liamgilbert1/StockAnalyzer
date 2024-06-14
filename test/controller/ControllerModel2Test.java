@@ -3,10 +3,14 @@ package controller;
 import org.junit.Test;
 
 import java.io.StringReader;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 import controller.ControllerImpl;
 import controller.ControllerImpl2;
 import controller.IController;
+import controller.commands.newCommands.RebalancePortfolioCommand;
+import model.IModel2;
 import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
@@ -948,6 +952,25 @@ public class ControllerModel2Test {
             "Portfolio loaded successfully.\n", output.toString());
   }
 
+  @Test
+  public void testRebalancePortfolioCommand() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    IController controller = new ControllerImpl2(new StringReader("RebalancePortfolio TestPortfolio" +
+            " 2024-06-04 GOOG 10 MSFT 30 AMZN 60"),
+            new StringBuilder());
+    controller.control(model);
 
+    assertEquals("GOOG: 8.82\n" +
+            "MSFT: 11.14\n" +
+            "AMZN: 51.70\n", model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 4)));
+  }
 }
 

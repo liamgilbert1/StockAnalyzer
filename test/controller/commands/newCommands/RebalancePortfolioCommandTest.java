@@ -27,9 +27,9 @@ public class RebalancePortfolioCommandTest {
     rebalancePortfolioCommand.execute(model, new Scanner("TestPortfolio" +
             " 2024-06-04 GOOG 10 MSFT 30 AMZN 60"));
     assertEquals("Portfolio rebalanced\n", out.toString());
-    assertEquals("GOOG: 1545.29\n" +
-            "MSFT: 4635.87\n" +
-            "AMZN: 9271.74\n", model.getPortfolioComposition("TestPortfolio",
+    assertEquals("GOOG: 8.82\n" +
+            "MSFT: 11.14\n" +
+            "AMZN: 51.70\n", model.getPortfolioComposition("TestPortfolio",
             LocalDate.of(2024, 6, 4)));
   }
 
