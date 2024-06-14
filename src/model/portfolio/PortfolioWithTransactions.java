@@ -131,13 +131,15 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
       }
     }
     for (String stock : stockWeights.keySet()) {
-      double stockQuantity = getStocksQuantity(stock, date);
-      double quantityToBuy = currentPortfolioValue * (stockWeights.get(stock) / 100.0) - stockQuantity;
+      double stockValue = getStocksQuantity(stock, date) * getStock(stock).getClosePrice(date);
+      double targetValue = currentPortfolioValue * (stockWeights.get(stock) / 100.0);
+      double quantityToBuy = targetValue - stockValue;
+      double quantityInShares = quantityToBuy / getStock(stock).getClosePrice(date);
       if (quantityToBuy > 0) {
-        transactions.add(new BuyTransaction(getStock(stock), quantityToBuy, date));
+        transactions.add(new BuyTransaction(getStock(stock), quantityInShares, date));
       }
       else if (quantityToBuy < 0) {
-        transactions.add(new SellTransaction(getStock(stock), -quantityToBuy, date));
+        transactions.add(new SellTransaction(getStock(stock), -quantityInShares, date));
       }
     }
   }

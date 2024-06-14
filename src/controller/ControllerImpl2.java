@@ -18,8 +18,6 @@ public class ControllerImpl2 extends ControllerImpl {
     commandMap.put("BuyPortfolioHolding", () -> new BuyPortfolioHoldingCommand(output));
     commandMap.put("SellPortfolioHolding", () -> new SellPortfolioHoldingCommand(output));
     commandMap.put("GetPortfolioComposition" , () -> new GetPortfolioCompositionCommand(output));
-  //  commandMap.remove("GetPortfolioValue");
-  //  commandMap.put("GetPortfolioValue", () -> new GetPortfolioValueCommand2(output));
     commandMap.put("GetPortfolioDistribution",
             () -> new GetPortfolioDistributionCommand(output));
     commandMap.put("RebalancePortfolio" , () -> new RebalancePortfolioCommand(output));

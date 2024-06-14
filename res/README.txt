@@ -6,6 +6,7 @@ The program gets the stock prices for the given dates and calculates the gain or
 
 Status: Complete and functional.
 
+
 ## X-Day Moving Average Calculation
 Description: Allows a user to examine the x-day moving average of a stock for a specified date and a
 specified value of x.
@@ -14,6 +15,7 @@ How it Works: The user enters the ticker symbol of the stock, the date, and the 
 The program gets the stock prices for the given date and calculates the x-day moving average.
 
 Status: Complete and functional.
+
 
 ## X-Day Crossover Detection
 Description: Allows a user to determine which days are x-day crossovers for a specified stock over
@@ -24,6 +26,7 @@ value of x. The program finds the days where the closing price is greater than t
 average, signaling a "buy" opportunity.
 
 Status: Complete and functional.
+
 
 ## Portfolio Creation and Valuation
 Description: Allows a user to create one or more portfolios with shares of one or more stock, and
@@ -36,6 +39,7 @@ portfolio.
 
 Status: Complete and functional.
 
+
 ## User Interface and Interactivity
 Description: A text-based interactive interface that allows users to use all the features mentioned
 above.
@@ -46,6 +50,7 @@ input data, and receive results interactively.
 Status: Complete and functional. The interface is designed to handle user inputs gracefully,
 including error handling for invalid inputs.
 
+
 ## Data Retrieval from Alpha Vantage API
 Description: Integration with the Alpha Vantage API to fetch real-time and historical stock data.
 
@@ -55,6 +60,8 @@ S
 Status: Complete and functional. Includes handling API rate limits and caching data to minimize
 API calls.
 
+
+
 ## Testing
 
 Description: Testing of all parts of the program to ensure reliability and correctness.
@@ -62,6 +69,8 @@ Description: Testing of all parts of the program to ensure reliability and corre
 How it Works: Many Junit tests covering all features.
 
 Status: Complete and functional. All tests pass successfully.
+
+
 
 ## Documentation
 Description: Detailed documentation for all code, explaining the design and functionality.
