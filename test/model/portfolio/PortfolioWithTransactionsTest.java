@@ -64,7 +64,7 @@ public class PortfolioWithTransactionsTest {
   @Test
   public void getValueDistribution() {
     String dist = portfolio2.getValueDistribution(LocalDate.of(2024, 6, 6));
-    assertEquals("GOOG: 535.05\n", dist);
+    assertEquals("GOOG: $535.05\n", dist);
   }
 
   @Test
@@ -85,7 +85,7 @@ public class PortfolioWithTransactionsTest {
             "09 JUN 2024: \n" +
             "10 JUN 2024: \n" +
             "\n" +
-            "Scale: * = 10\n", perf);
+            "Scale: * = $10\n", perf);
   }
 
   @Test
