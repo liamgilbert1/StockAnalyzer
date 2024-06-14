@@ -44,7 +44,7 @@ public class CrossoverCommandTest {
   public void testValidTickerAndDateRange2() {
     Readable input = new StringReader("MSFT 2023-02-01 2023-02-28 5\n");
     Appendable output = new StringBuilder();
-    ICommand1 command = new CrossoverCommand(output);
+    ICommand command = new CrossoverCommand(output);
     command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Number of crossovers: 10\n" +
             "2023-02-15\n" +
