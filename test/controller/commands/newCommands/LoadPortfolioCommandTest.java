@@ -1,4 +1,4 @@
-package controller;
+package controller.commands.newCommands;
 
 import org.junit.Test;
 

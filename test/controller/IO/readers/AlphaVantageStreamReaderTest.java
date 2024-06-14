@@ -1,4 +1,4 @@
-package controller;
+package controller.IO.readers;
 
 import org.junit.Test;
 

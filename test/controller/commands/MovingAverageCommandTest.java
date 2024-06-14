@@ -1,13 +1,10 @@
-package controller;
+package controller.commands;
 
 import org.junit.Test;
 
 import java.io.StringReader;
 import java.util.Scanner;
 
-import controller.commands.ICommand;
-import controller.commands.MovingAverageCommand;
-import model.ModelImpl;
 import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;

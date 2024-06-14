@@ -1,4 +1,4 @@
-package controller;
+package controller.IO.writers;
 
 import org.junit.Before;
 import org.junit.Test;

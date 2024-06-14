@@ -1,17 +1,15 @@
-package controller;
+package controller.IO.readers;
 
 import org.junit.Test;
 
 import java.time.LocalDate;
 
-import controller.IO.readers.IPortfolioWithTransactionsReader;
 import model.portfolio.IPortfolio;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import controller.IO.readers.TxtPortfolioReader;
 
-public class TestTxtPortfolioReader {
+public class TxtPortfolioReaderTest {
 
   @Test
   public void testGetPortfolio() {

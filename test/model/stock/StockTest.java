@@ -1,4 +1,4 @@
-package model;
+package model.stock;
 
 import org.junit.Before;
 import org.junit.Test;

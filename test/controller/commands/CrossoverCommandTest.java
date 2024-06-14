@@ -1,13 +1,10 @@
-package controller;
+package controller.commands;
 
 import org.junit.Test;
 
 import java.io.StringReader;
 import java.util.Scanner;
 
-import controller.commands.CrossoverCommand;
-import controller.commands.ICommand;
-import model.ModelImpl;
 import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
@@ -47,7 +44,7 @@ public class CrossoverCommandTest {
   public void testValidTickerAndDateRange2() {
     Readable input = new StringReader("MSFT 2023-02-01 2023-02-28 5\n");
     Appendable output = new StringBuilder();
-    ICommand command = new CrossoverCommand(output);
+    ICommand1 command = new CrossoverCommand(output);
     command.execute(new ModelImpl2(), new Scanner(input));
     assertEquals("Number of crossovers: 10\n" +
             "2023-02-15\n" +
@@ -66,7 +63,7 @@ public class CrossoverCommandTest {
   public void testInvalidTicker() {
     Readable input = new StringReader("INVALID 2023-01-01 2023-01-31 10\n");
     Appendable output = new StringBuilder();
-    ICommand command = new CrossoverCommand(output);
+    ICommand1 command = new CrossoverCommand(output);
     try {
       command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
@@ -78,7 +75,7 @@ public class CrossoverCommandTest {
   public void testInvalidDays() {
     Readable input = new StringReader("GOOG 2023-01-01 2023-01-31 0\n");
     Appendable output = new StringBuilder();
-    ICommand command = new CrossoverCommand(output);
+    ICommand1 command = new CrossoverCommand(output);
     try {
       command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
@@ -89,7 +86,7 @@ public class CrossoverCommandTest {
   @Test
   public void testGetInstructions() {
     Appendable output = new StringBuilder();
-    ICommand command = new CrossoverCommand(output);
+    ICommand1 command = new CrossoverCommand(output);
     assertEquals("Crossovers: \n" +
             "This command determines which days are x-day crossovers for a given stock, over a " +
             "specified time period \n" +

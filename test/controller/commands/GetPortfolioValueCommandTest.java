@@ -1,4 +1,4 @@
-package controller;
+package controller.commands;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -6,11 +6,7 @@ import org.junit.Test;
 import java.io.StringReader;
 import java.util.Scanner;
 
-import controller.commands.GetPortfolioValueCommand;
-import controller.commands.ICommand;
-import model.IModel;
 import model.IModel2;
-import model.ModelImpl;
 import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;

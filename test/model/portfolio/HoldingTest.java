@@ -1,4 +1,4 @@
-package model;
+package model.portfolio;
 
 import org.junit.Before;
 import org.junit.Test;

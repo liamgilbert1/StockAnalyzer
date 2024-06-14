@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import model.stock.IStock;
@@ -151,6 +152,10 @@ public class MockModelImpl implements IModel2 {
 
   @Override
   public void loadPortfolio(String portfolioName) {
+  }
+
+  @Override
+  public void rebalancePortfolio(String portfolioName, LocalDate date, Map<String, Integer> stockWeights) {
   }
 
   @Override
