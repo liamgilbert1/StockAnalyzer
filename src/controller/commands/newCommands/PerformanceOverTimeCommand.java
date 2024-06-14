@@ -9,12 +9,27 @@ import controller.commands.AWriterCommand;
 import model.IModel2;
 import model.stock.IStock;
 
+/**
+ * This class represents a command to get the performance of a portfolio over a specific period of
+ * time. The user must provide the portfolio name, start date, and end date. The command will then
+ * return the performance of the portfolio over the specified period of time.
+ */
 public class PerformanceOverTimeCommand extends AWriterCommand {
 
+  /**
+   * Constructs a PerformanceOverTimeCommand object.
+   * @param out the appendable object to output messages to
+   */
   public PerformanceOverTimeCommand(Appendable out) {
     super(out);
   }
 
+  /**
+   * Executes the PerformanceOverTimeCommand. This command calculates the performance of a portfolio
+   * over a given period of time.
+   * @param model the model to perform the command on
+   * @param scanner the scanner object to read user input from
+   */
   @Override
   public void execute(IModel2 model, Scanner scanner) {
     String portfolioName = getNextString(scanner);
@@ -43,6 +58,10 @@ public class PerformanceOverTimeCommand extends AWriterCommand {
     }
   }
 
+  /**
+   * Gets the command instructions.
+   * @return the instructions for the user
+   */
   @Override
   public String getInstructions() {
     StringBuilder instructions;
