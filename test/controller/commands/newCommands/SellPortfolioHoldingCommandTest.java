@@ -13,6 +13,9 @@ import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for the SellPortfolioHoldingCommand.
+ */
 public class SellPortfolioHoldingCommandTest {
   ICommand command;
   Appendable output;

@@ -9,6 +9,8 @@ import controller.IO.IOUtils;
 
 /**
  * This class represents a CSVWriter object. It writes the data to a CSV file.
+ * The data is written in the format of a CSV file.
+ * The data is written to a file with the ticker as the name of the file.
  */
 public class CSVWriter implements IStockDataWriter {
   /**

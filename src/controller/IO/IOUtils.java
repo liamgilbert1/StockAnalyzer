@@ -5,6 +5,10 @@ import java.net.URISyntaxException;
 
 import main.Main;
 
+/**
+ * This class represents a utility class for IO operations.
+ * It provides methods to get the directory of the JAR file and to get a file in a directory.
+ */
 public class IOUtils {
   /**
    * Gets the directory of the JAR file.

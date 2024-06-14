@@ -16,6 +16,9 @@ import model.stock.Stock;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test cases for PortfolioTxtWriter.
+ */
 public class PortfolioTXTWriterTest {
 
 

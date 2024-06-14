@@ -15,6 +15,9 @@ import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test cases for ControllerImpl2.
+ */
 public class ControllerModel2Test {
 
   @Test

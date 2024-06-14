@@ -9,6 +9,11 @@ import controller.IO.IOUtils;
 import model.portfolio.IPortfolioWithTransactions;
 import model.portfolio.ITransaction;
 
+/**
+ * This class represents a PortfolioTxtWriter that writes a portfolio to a txt file. The txt file
+ * will be named after the portfolio and will be saved in the "portfolios" directory.
+ * The portfolio is written in the format of a txt file.
+ */
 public class PortfolioTxtWriter implements IPortfolioWriter {
 
   /**

@@ -6,6 +6,7 @@ import model.IModel2;
 
 /**
  * This interface represents a command that can be executed by the controller.
+ * The command can be executed on the model and can take in user input from the scanner.
  */
 public interface ICommand {
 

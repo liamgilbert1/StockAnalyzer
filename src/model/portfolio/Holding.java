@@ -23,27 +23,50 @@ public class Holding implements IHolding {
     this.quantity = quantity;
   }
 
+  /**
+   * Gets the stock of the holding for the user.
+   * @return the stock of the holding.
+   */
   @Override
   public IStock getStock() {
     return stock;
   }
 
+  /**
+   * Gets the quantity of the holding for the user.
+   * @return the quantity of the holding.
+   */
   @Override
   public double getQuantity() {
     return quantity;
   }
 
+  /**
+   * Gets the value of the holding on the given date.
+   * @param date the date to get the value of the holding on.
+   * @return the value of the holding on the given date.
+   */
   @Override
   public double getValue(LocalDate date) {
     return stock.getClosePrice(date) * quantity;
   }
 
+  /**
+   * Adds the given quantity to the holding.
+   * @param quantity the quantity to add.
+   * @return the holding with the added quantity.
+   */
   @Override
   public IHolding addQuantity(double quantity) {
     return new Holding(stock,
             this.quantity + quantity);
   }
 
+  /**
+   * Determines if this holding is equal to the given object.
+   * @param obj the object to compare.
+   * @return true if the holding is equal to the given object, false otherwise.
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -56,6 +79,10 @@ public class Holding implements IHolding {
     return quantity == holding.quantity && stock.equals(holding.stock);
   }
 
+  /**
+   * Gets the hashcode of the holding.
+   * @return the hashcode of the holding.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(stock, quantity);

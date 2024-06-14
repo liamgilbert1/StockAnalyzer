@@ -11,6 +11,9 @@ import model.ModelImpl2;
 import static org.junit.Assert.assertEquals;
 
 
+/**
+ * Test class for the LoadPortfolioCommand.
+ */
 public class LoadPortfolioCommandTest {
 
   @Test

@@ -4,16 +4,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.StringReader;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
-import controller.commands.AddPortfolioHoldingCommand;
+
 import controller.commands.ICommand;
 import model.IModel2;
 import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for the BuyPortfolioHoldingCommand.
+ */
 public class BuyPortfolioHoldingCommandTest {
   ICommand command;
   Appendable output;

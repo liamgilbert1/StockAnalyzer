@@ -1,10 +1,10 @@
 package controller;
 
-import model.IModel;
 import model.IModel2;
 
 /**
  * This interface represents a controller for the stock market simulator.
+ * The controller takes in user input and sends it to the model to execute commands.
  */
 public interface IController {
   /**

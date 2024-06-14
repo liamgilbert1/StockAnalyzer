@@ -34,6 +34,11 @@ public class Portfolio implements IPortfolioWithHoldings {
     this.holdings = holdings;
   }
 
+  /**
+   * Adds the given holding to the portfolio. If the holding is already in the portfolio, the
+   * @param holding the holding to add.
+   * @return the portfolio with the given holding added.
+   */
   @Override
   public IPortfolioWithHoldings addHolding(IHolding holding) {
     List<IHolding> newHoldings = new ArrayList<>(holdings);
@@ -49,6 +54,11 @@ public class Portfolio implements IPortfolioWithHoldings {
     return new Portfolio(name, newHoldings);
   }
 
+  /**
+   * Gets the value of the portfolio on the given date.
+   * @param date the date to get the value of the portfolio on.
+   * @return the value of the portfolio on the given date.
+   */
   @Override
   public double getValue(LocalDate date) {
     double value = 0;
@@ -58,16 +68,28 @@ public class Portfolio implements IPortfolioWithHoldings {
     return value;
   }
 
+  /**
+   * Gets the holdings in the portfolio.
+   * @return the holdings in the portfolio.
+   */
   @Override
   public List<IHolding> getHoldings() {
     return new ArrayList<>(holdings);
   }
 
+  /**
+   * Gets the name of the portfolio.
+   * @return the name of the portfolio.
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the stocks in the portfolio.
+   * @return the stocks in the portfolio.
+   */
   @Override
   public List<String> getStocks() {
     List<String> stocks = new ArrayList<>();
@@ -77,6 +99,11 @@ public class Portfolio implements IPortfolioWithHoldings {
     return stocks;
   }
 
+  /**
+   * Determines if this portfolio is equal to the given object.
+   * @param obj the object to compare.
+   * @return true if the portfolio is equal to the given object, false otherwise.
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -89,6 +116,10 @@ public class Portfolio implements IPortfolioWithHoldings {
     return name.equals(portfolio.name) && holdings.equals(portfolio.holdings);
   }
 
+  /**
+   * Gets the hash code of the portfolio.
+   * @return the hash code of the portfolio.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(name, holdings);

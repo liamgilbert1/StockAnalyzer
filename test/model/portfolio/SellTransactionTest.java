@@ -11,6 +11,9 @@ import model.stock.Stock;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test cases for SellTransaction.
+ */
 public class SellTransactionTest {
   ITransaction transaction;
 

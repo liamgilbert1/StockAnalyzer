@@ -12,6 +12,9 @@ import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for the PerformanceOverTimeCommand.
+ */
 public class PerformanceOverTimeCommandTest {
   ICommand command;
   Appendable output;
