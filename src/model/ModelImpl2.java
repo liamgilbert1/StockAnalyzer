@@ -25,6 +25,12 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   }
 
   @Override
+  public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
+    throw new UnsupportedOperationException("This method is not supported in this model. Use the "
+            + "buyPortfolioHolding method instead.");
+  }
+
+  @Override
   public void createPortfolio(String name) {
     for (IPortfolioWithTransactions portfolio : this.portfolios) {
       if (portfolio.getName().equals(name)) {

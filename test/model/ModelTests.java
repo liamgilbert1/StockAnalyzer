@@ -5,7 +5,9 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.IModel;
 import model.ModelImpl;
@@ -121,5 +123,26 @@ public class ModelTests {
     model.addPortfolioHolding("TestPortfolio", "AMZN", 30);
     List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
     assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
+  }
+
+  @Test
+  public void testRebalancePortfolio() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    model.rebalancePortfolio("TestPortfolio",
+            LocalDate.of(2024, 6, 4),
+            new HashMap<>(Map.of("GOOG", 10, "MSFT", 30, "AMZN", 60)));
+    List<String> stocks = model.getStocksInPortfolio("TestPortfolio");
+    assertEquals(List.of("GOOG", "MSFT", "AMZN"), stocks);
+    assertEquals("GOOG: 1545.29\n" +
+            "MSFT: 4635.87\n" +
+    "AMZN: 9271.74\n", model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 4)));
   }
 }

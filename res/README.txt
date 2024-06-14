@@ -66,7 +66,7 @@ Status: Complete and functional. All tests pass successfully.
 ## Documentation
 Description: Detailed documentation for all code, explaining the design and functionality.
 
-How it Works: Documentation is provided in the form of comments within the code, as well as separate
-HTML documentation files.
+How it Works: Documentation is provided in the form of comments within the code, as well as the
+README files, and the class diagram.
 
 Status: Complete and functional.
