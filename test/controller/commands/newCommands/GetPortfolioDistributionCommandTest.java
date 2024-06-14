@@ -37,8 +37,8 @@ public class GetPortfolioDistributionCommandTest {
     input = new StringReader("myPortfolio 2024-06-05");
     scanner = new Scanner(input);
     command.execute(model, scanner);
-    assertEquals("GOOG: 885.35\n" +
-            "MSFT: 4240.10\n", output.toString());
+    assertEquals("GOOG: $885.35\n" +
+            "MSFT: $4240.10\n", output.toString());
   }
 
   @Test

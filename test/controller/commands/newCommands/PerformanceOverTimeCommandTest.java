@@ -48,7 +48,7 @@ public class PerformanceOverTimeCommandTest {
             "11 JUN 2024: *****\n" +
             "12 JUN 2024: *****\n" +
             "\n" +
-            "Scale: * = 1000\n", output.toString());
+            "Scale: * = $1000\n", output.toString());
   }
 
   @Test

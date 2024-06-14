@@ -71,7 +71,7 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
   public String getValueDistribution(LocalDate date) {
     StringBuilder distribution = new StringBuilder();
     for (IHolding holding : getPortfolioWithHoldings(date).getHoldings()) {
-      distribution.append(holding.getStock().getTicker()).append(": ")
+      distribution.append(holding.getStock().getTicker()).append(": $")
               .append(String.format("%.2f", holding.getValue(date))).append("\n");
     }
     return distribution.toString();
@@ -93,7 +93,7 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
     for (int i = 0; i < dates.size(); i++) {
       performance.append(dates.get(i)).append(": ").append(asterisks.get(i)).append("\n");
     }
-    performance.append("\n").append("Scale: * = ").append(getScale(Collections.max(values)))
+    performance.append("\n").append("Scale: * = $").append(getScale(Collections.max(values)))
             .append("\n");
     return performance.toString();
   }

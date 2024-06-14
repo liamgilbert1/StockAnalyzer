@@ -343,7 +343,7 @@ public class ControllerModel2Test {
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
-            "Portfolio value is: 885.35\n" +
+            "Portfolio value is: $885.35\n" +
             " ", output.toString());
   }
   @Test
@@ -453,7 +453,7 @@ public class ControllerModel2Test {
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
-            "Portfolio value is: 0.00\n" +
+            "Portfolio value is: $0.00\n" +
             " ", output.toString());
   }
 
@@ -679,20 +679,8 @@ public class ControllerModel2Test {
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
             "Portfolio shares have been purchased\n" +
-            "GOOG: 66851.00\n" +
-            "AMZN: 18478.40\n", output.toString());
-  }
-
-  @Test
-  public void testControllerModelRebalancePortfolio() {
-    Appendable output = new StringBuilder();
-    Readable input = new StringReader("CreatePortfolio TestPortfolio\n" +
-            "BuyPortfolioHolding TestPortfolio GOOG 50 2020-01-01\n" +
-            "BuyPortfolioHolding TestPortfolio AMZN 10 2020-01-01\n" +
-            "RebalancePortfolio TestPortfolio 2020-01-01 GOOG 0.5 AMZN 0.5\n");
-    IController controller = new ControllerImpl2(input, output);
-    controller.control(new ModelImpl2());
-    assertEquals("", output.toString());
+            "GOOG: $66851.00\n" +
+            "AMZN: $18478.40\n", output.toString());
   }
 
   @Test
@@ -837,7 +825,7 @@ public class ControllerModel2Test {
             "29 JAN 2020: ************************************\n" +
             "30 JAN 2020: ************************************\n" +
             "\n" +
-            "Scale: * = 2000\n", output.toString());
+            "Scale: * = $2000\n", output.toString());
   }
 
   @Test

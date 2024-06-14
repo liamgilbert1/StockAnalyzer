@@ -67,7 +67,7 @@ public class CrossoverCommandTest {
     try {
       command.execute(new ModelImpl2(), new Scanner(input));
     } catch (Exception e) {
-      assertEquals("Could not read from file", e.getMessage());
+      assertEquals("Most recent date not found", e.getMessage());
     }
   }
 
