@@ -960,5 +960,25 @@ public class ControllerModel2Test {
             "AMZN: 51.70\n", model.getPortfolioComposition("TestPortfolio",
             LocalDate.of(2024, 6, 4)));
   }
+
+  @Test
+  public void LoadPortfolioTest() {
+    IModel2 model = new ModelImpl2();
+    model.createPortfolio("TestPortfolio");
+    model.buyPortfolioHolding("TestPortfolio", "GOOG", 10,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "MSFT", 20,
+            LocalDate.of(2024, 6, 4));
+    model.buyPortfolioHolding("TestPortfolio", "AMZN", 30,
+            LocalDate.of(2024, 6, 4));
+    IController controller = new ControllerImpl2(new StringReader("LoadPortfolio TestPortfolio"),
+            new StringBuilder());
+    controller.control(model);
+
+    assertEquals("GOOG: 10.00\n" +
+            "MSFT: 20.00\n" +
+            "AMZN: 30.00\n", model.getPortfolioComposition("TestPortfolio",
+            LocalDate.of(2024, 6, 4)));
+  }
 }
 
