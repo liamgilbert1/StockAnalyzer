@@ -30,3 +30,19 @@ inside the same directory as the jar. If the folder does not exist yet, and you 
 portfolio in, you may create the folder yourself but it must be named "portfolios". The program will
 then load in the portfolio, and you can query the value of the portfolio on any date that the stock
 data is available on the Alpha Vantage API.
+
+## Formatting of Portfolio Files
+The txt file should be formatted by having the first line be the name of the portfolio, and the
+transactions below it. The transactions are formatted by have the date of the transaction
+yyyy-mm-dd one line, and all the transactions which occurred on that date below it, each on a new
+line. The transactions are formatted by having the action (buy or sell), the number of shares,
+"shares", and the ticker symbol of the stock, each separated by a space. For example:
+PortfolioName
+2020-01-01
+buy 10 shares AAPL
+sell 5 shares AAPL
+2020-01-02
+buy 5 shares AAPL
+sell 2 shares AAPL
+The transactions and dates may be in any order, but the transactions for a given date must be
+grouped together.
