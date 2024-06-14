@@ -25,9 +25,4 @@ public class ViewImpl implements IView {
     output.append(c);
     return this;
   }
-
-  @Override
-  public Appendable getOutput() {
-    return output;
-  }
 }
