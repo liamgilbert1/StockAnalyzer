@@ -6,15 +6,29 @@ import java.util.Map;
 import java.util.Scanner;
 
 import controller.commands.AWriterCommand;
-import model.IModel;
 import model.IModel2;
 
+/**
+ * This class represents a command to rebalance a portfolio to the given stock weights.
+ * The user must provide the portfolio name, date, and stock weights.
+ * The command will then rebalance the portfolio to the given stock weights.
+ */
 public class RebalancePortfolioCommand extends AWriterCommand {
 
+  /**
+   * Constructs a RebalancePortfolioCommand object.
+   * @param out the appendable object to output messages to
+   */
   public RebalancePortfolioCommand(Appendable out) {
     super(out);
   }
 
+  /**
+   * Executes the RebalancePortfolioCommand. This command rebalances the portfolio to the given
+   * stock weights.
+   * @param model the model to perform the command on
+   * @param scanner the scanner object to read user input from
+   */
   @Override
   public void execute(IModel2 model, Scanner scanner) {
     String portfolioName = scanner.next();
@@ -38,6 +52,10 @@ public class RebalancePortfolioCommand extends AWriterCommand {
     }
   }
 
+  /**
+   * Gets the command instructions.
+   * @return the instructions for the user
+   */
   @Override
   public String getInstructions() {
     return "Rebalance Portfolio: \n"
