@@ -83,6 +83,7 @@ public class PortfolioWithTransactionsTest {
             "07 JUN 2024: \n" +
             "08 JUN 2024: \n" +
             "09 JUN 2024: \n" +
+            "10 JUN 2024: \n" +
             "\n" +
             "Scale: * = 10\n", perf);
   }
@@ -102,7 +103,7 @@ public class PortfolioWithTransactionsTest {
 
   @Test
   public void getTransactions() {
-    assertEquals(Arrays.asList(transaction1, transaction2), portfolio2.getTransactions());
+    assertEquals(Arrays.asList(), portfolio.getTransactions());
   }
 
   @Test

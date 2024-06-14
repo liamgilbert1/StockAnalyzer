@@ -21,6 +21,7 @@ public class ControllerModel2Test {
     IController controller = new ControllerImpl2(input, output);
     controller.control(new ModelImpl2());
     assertEquals("", output.toString());
+
   }
 
   @Test
