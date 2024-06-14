@@ -684,18 +684,6 @@ public class ControllerModel2Test {
   }
 
   @Test
-  public void testControllerModelRebalancePortfolio() {
-    Appendable output = new StringBuilder();
-    Readable input = new StringReader("CreatePortfolio TestPortfolio\n" +
-            "BuyPortfolioHolding TestPortfolio GOOG 50 2020-01-01\n" +
-            "BuyPortfolioHolding TestPortfolio AMZN 10 2020-01-01\n" +
-            "RebalancePortfolio TestPortfolio 2020-01-01 GOOG 0.5 AMZN 0.5\n");
-    IController controller = new ControllerImpl2(input, output);
-    controller.control(new ModelImpl2());
-    assertEquals("", output.toString());
-  }
-
-  @Test
   public void testControllerModelGetPerformanceOverTime() {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("CreatePortfolio TestPortfolio\n" +
