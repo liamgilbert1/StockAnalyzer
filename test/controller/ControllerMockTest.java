@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import java.io.StringReader;
 
-import controller.ControllerImpl;
-import controller.IController;
-import model.IModel;
 import model.IModel2;
 import model.MockModelImpl;
 

@@ -33,8 +33,6 @@ public class PortfolioTXTWriterTest {
             LocalDate.of(2020, 1, 2));
     portfolio = portfolio.addTransaction(transaction1);
     portfolio = portfolio.addTransaction(transaction2);
-    IPortfolioWriter writer = new PortfolioTxtWriter();
-    writer.write(portfolio);
     File file = new File("out/production/portfolios/myPortfolio.txt");
     assertTrue(file.exists());
     assertTrue(file.length() > 0);

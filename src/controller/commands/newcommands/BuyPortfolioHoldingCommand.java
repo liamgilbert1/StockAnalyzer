@@ -34,7 +34,7 @@ public class BuyPortfolioHoldingCommand extends AWriterCommand {
     int quantity = getPositiveInt(scanner);
     LocalDate date = LocalDate.parse(getNextString(scanner));
 
-    writeStockData(ticker);
+    tryWrite(ticker);
 
     try {
       model.buyPortfolioHolding(portfolioName, ticker, quantity, date);

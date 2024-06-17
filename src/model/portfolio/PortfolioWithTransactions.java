@@ -220,7 +220,8 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
    * @param daysToAdd the number of days to add.
    * @return the list of dates with the added days.
    */
-  private List<LocalDate> addDaysOccurrence(LocalDate startDate, LocalDate endDate, List<LocalDate> dates,
+  private List<LocalDate> addDaysOccurrence(LocalDate startDate, LocalDate endDate,
+                                            List<LocalDate> dates,
                                             int daysToAdd) {
     for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1));
          date = date.plusDays(daysToAdd)) {

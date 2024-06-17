@@ -16,11 +16,11 @@ public class TxtPortfolioReaderTest {
 
   @Test
   public void testGetPortfolio() {
-     IPortfolioWithTransactionsReader reader = new TxtPortfolioReader("myPortfolio");
-     IPortfolio portfolio = reader.getPortfolio();
-     assertNotNull(portfolio);
-     assertEquals("myPortfolio", portfolio.getName());
-     assertEquals(1, portfolio.getStocks().size());
-     LocalDate testDate = LocalDate.of(2020, 1, 1);
+    IPortfolioWithTransactionsReader reader = new TxtPortfolioReader("myPortfolio");
+    IPortfolio portfolio = reader.getPortfolio();
+    assertNotNull(portfolio);
+    assertEquals("myPortfolio", portfolio.getName());
+    assertEquals(1, portfolio.getStocks().size());
+    LocalDate testDate = LocalDate.of(2020, 1, 1);
   }
 }

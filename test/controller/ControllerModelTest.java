@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import java.io.StringReader;
 
-import controller.ControllerImpl;
-import controller.IController;
-import model.ModelImpl;
 import model.ModelImpl2;
 
 import static org.junit.Assert.assertEquals;
@@ -39,7 +36,8 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, " +
+            "over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -98,7 +96,8 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, " +
+            "over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -157,7 +156,8 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, " +
+            "over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -233,7 +233,8 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, " +
+            "over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -293,7 +294,8 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, " +
+            "over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -356,7 +358,8 @@ public class ControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, " +
+            "over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -390,7 +393,8 @@ public class ControllerModelTest {
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
             "\n" +
-            "An error occurred while executing the command. Please try again.Portfolio value is: $0.00\n" +
+            "An error occurred while executing the command. Please try again.Portfolio " +
+            "value is: $0.00\n" +
             " ", output.toString());
   }
 

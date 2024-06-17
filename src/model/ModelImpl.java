@@ -130,7 +130,8 @@ public class ModelImpl implements IModel {
   public void addPortfolioHolding(String portfolioName, String ticker, double quantity) {
     for (IPortfolioWithHoldings portfolio : this.portfolios) {
       if (portfolio.getName().equals(portfolioName)) {
-        IPortfolioWithHoldings newPortfolio = portfolio.addHolding(new Holding(getStock(ticker), quantity));
+        IPortfolioWithHoldings newPortfolio = portfolio.addHolding(new Holding(getStock(ticker),
+                quantity));
         this.portfolios.remove(portfolio);
         this.portfolios.add(newPortfolio);
         return;

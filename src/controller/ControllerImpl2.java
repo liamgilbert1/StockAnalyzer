@@ -33,11 +33,9 @@ public class ControllerImpl2 extends ControllerImpl {
     commandMap.put("BuyPortfolioHolding", () -> new BuyPortfolioHoldingCommand(output));
     commandMap.put("SellPortfolioHolding", () -> new SellPortfolioHoldingCommand(output));
     commandMap.put("GetPortfolioComposition", () -> new GetPortfolioCompositionCommand(output));
-    commandMap.put("GetPortfolioDistribution",
-            () -> new GetPortfolioDistributionCommand(output));
+    commandMap.put("GetPortfolioDistribution", () -> new GetPortfolioDistributionCommand(output));
     commandMap.put("RebalancePortfolio", () -> new RebalancePortfolioCommand(output));
-    commandMap.put("GetPerformanceOverTime",
-            () -> new PerformanceOverTimeCommand(output));
+    commandMap.put("GetPerformanceOverTime", () -> new PerformanceOverTimeCommand(output));
     commandMap.put("LoadPortfolio", () -> new LoadPortfolioCommand(output));
     this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover", "CreatePortfolio",
             "BuyPortfolioHolding", "SellPortfolioHolding", "GetPortfolioValue",

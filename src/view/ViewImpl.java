@@ -17,6 +17,7 @@ public class ViewImpl implements IView {
   public ViewImpl(Appendable output) {
     this.output = output;
   }
+
   @Override
   public Appendable append(CharSequence csq) throws IOException {
     output.append(csq);

@@ -74,7 +74,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
 
   /**
    * Purchase a specific number of shares of a specific stock on a specified date, and add them to
-   * the portfolio
+   * the portfolio.
    */
   @Override
   public void buyPortfolioHolding(String portfolioName, String ticker, int quantity,
@@ -98,7 +98,7 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
 
   /**
    * Sells a specific number of shares of a specific stock on a specified date, and remove them from
-   * the portfolio
+   * the portfolio.
    */
   @Override
   public void sellPortfolioHolding(String portfolioName, String ticker, double quantity,
@@ -198,7 +198,8 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
   }
 
   /**
-   * Get the portfolio writer for this model. This implementation of IModel2 uses a PortfolioTxtWriter
+   * Get the portfolio writer for this model. This implementation of IModel2 uses a
+   * PortfolioTxtWriter
    * to write portfolios. This can be overridden in a subclass to use a different portfolio writer.
    * @return the portfolio writer for this model.
    */
