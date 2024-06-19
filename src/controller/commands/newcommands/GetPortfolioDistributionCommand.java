@@ -50,8 +50,13 @@ public class GetPortfolioDistributionCommand extends AWriterCommand {
       }
     }
 
-    for (IStock stock : stocks) {
-      writeStockData(stock.getTicker());
+    try {
+      for (IStock stock : stocks) {
+        tryWrite(stock.getTicker());
+      }
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to write stock data in " +
+              "GetPortfolioCompositionCommand");
     }
 
     try {
