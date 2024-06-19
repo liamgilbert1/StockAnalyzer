@@ -3,6 +3,7 @@ package controller.commands;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class GetPortfolioValueCommandTest {
   }
 
   @Test
-  public void testExecute1() {
+  public void testExecute1() throws IOException {
     input = new StringReader("myPortfolio 2023-01-01\n");
     scanner = new Scanner(input);
     command.execute(model, scanner);
@@ -43,7 +44,7 @@ public class GetPortfolioValueCommandTest {
   }
 
   @Test
-  public void testExecute2() {
+  public void testExecute2() throws IOException {
     input = new StringReader("myPortfolio 2023-01-01\n");
     model.buyPortfolioHolding("myPortfolio", "GOOG", 10,
             LocalDate.of(2023, 1, 1));
@@ -53,7 +54,7 @@ public class GetPortfolioValueCommandTest {
   }
 
   @Test
-  public void testExecute3() {
+  public void testExecute3() throws IOException {
     input = new StringReader("myPortfolio 2023-01-01\n");
     model.buyPortfolioHolding("myPortfolio", "GOOG", 10,
             LocalDate.of(2023, 1, 1));

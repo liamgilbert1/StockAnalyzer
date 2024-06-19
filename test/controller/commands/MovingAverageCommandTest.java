@@ -2,6 +2,7 @@ package controller.commands;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.Scanner;
 
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class MovingAverageCommandTest {
 
   @Test
-  public void testValidTickerAndDateRange() {
+  public void testValidTickerAndDateRange() throws IOException {
     Readable input = new StringReader("GOOG 2023-01-01 30\n");
     Appendable output = new StringBuilder();
     ICommand command = new MovingAverageCommand(output);
@@ -24,7 +25,7 @@ public class MovingAverageCommandTest {
   }
 
   @Test
-  public void testValidTickerAndDateRange2() {
+  public void testValidTickerAndDateRange2() throws IOException {
     Readable input = new StringReader("MSFT 2023-02-01 5\n");
     Appendable output = new StringBuilder();
     ICommand command = new MovingAverageCommand(output);
@@ -33,7 +34,7 @@ public class MovingAverageCommandTest {
   }
 
   @Test
-  public void testValidTickerAndDateRange3() {
+  public void testValidTickerAndDateRange3() throws IOException {
     Readable input = new StringReader("AMZN 2023-03-01 15\n");
     Appendable output = new StringBuilder();
     ICommand command = new MovingAverageCommand(output);

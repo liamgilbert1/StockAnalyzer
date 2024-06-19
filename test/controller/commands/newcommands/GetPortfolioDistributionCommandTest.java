@@ -3,6 +3,7 @@ package controller.commands.newcommands;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class GetPortfolioDistributionCommandTest {
   }
 
   @Test
-  public void execute() {
+  public void execute() throws IOException {
     input = new StringReader("myPortfolio 2024-06-05");
     scanner = new Scanner(input);
     command.execute(model, scanner);

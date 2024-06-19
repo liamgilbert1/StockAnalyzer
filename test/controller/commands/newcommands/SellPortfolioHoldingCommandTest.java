@@ -3,6 +3,7 @@ package controller.commands.newcommands;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class SellPortfolioHoldingCommandTest {
   }
 
   @Test
-  public void execute() {
+  public void execute() throws IOException {
     input = new StringReader("myPortfolio GOOG 3 2024-06-05");
     scanner = new Scanner(input);
     command.execute(model, scanner);

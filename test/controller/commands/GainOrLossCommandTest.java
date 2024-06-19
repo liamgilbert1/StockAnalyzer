@@ -2,6 +2,7 @@ package controller.commands;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class GainOrLossCommandTest {
    * Expected result: Successfully calculate gain or loss for GOOG.
    */
   @Test
-  public void testValidTickerAndDateRange() {
+  public void testValidTickerAndDateRange() throws IOException {
     Readable input = new StringReader("GOOG 2023-01-01 2023-01-31\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
@@ -34,7 +35,7 @@ public class GainOrLossCommandTest {
    * Expected result: Successfully calculate gain or loss for MSFT.
    */
   @Test
-  public void testValidTickerAndDateRange2() {
+  public void testValidTickerAndDateRange2() throws IOException {
     Readable input = new StringReader("MSFT 2023-02-01 2023-02-28\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
@@ -48,7 +49,7 @@ public class GainOrLossCommandTest {
    * Expected result: Successfully calculate gain or loss for AMZN.
    */
   @Test
-  public void testValidTickerAndDateRange3() {
+  public void testValidTickerAndDateRange3() throws IOException {
     Readable input = new StringReader("AMZN 2023-03-01 2023-03-31\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);
@@ -96,7 +97,7 @@ public class GainOrLossCommandTest {
    * Expected result: Successfully calculate gain or loss, which should be zero or very minimal.
    */
   @Test
-  public void testStartDateEqualsEndDate() {
+  public void testStartDateEqualsEndDate() throws IOException {
     Readable input = new StringReader("MSFT 2023-01-15 2023-01-15\n");
     Appendable output = new StringBuilder();
     ICommand command = new GainOrLossCommand(output);

@@ -3,6 +3,7 @@ package controller.commands;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class CreatePortfolioCommandTest {
   }
 
   @Test
-  public void execute() {
+  public void execute() throws IOException {
     input = new StringReader("myPortfolio myPortfolio2");
     scanner = new Scanner(input);
     command.execute(model, scanner);
