@@ -43,7 +43,7 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
 
   private boolean firstActionTaken;
 
-  //private final Map<String, JTextArea> textAreaMap;
+  private final Map<String, List<JTextArea>> textAreaMap;
 
   public GUIView() {
     super("Stock Market Simulator");
@@ -54,7 +54,6 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     this.setLayout(new BorderLayout());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    // Instructions label at the top
     this.instructionLabel = new JLabel("<html>To create a portfolio, enter a name of your choice for the portfolio in the text box and click Create Portfolio.<br>"
             + "To load a portfolio, enter the name of the portfolio in the text box and click Load Portfolio.<br>"
             + "To buy a stock, enter the name of the portfolio, the ticker symbol of the stock, the quantity of shares, and the date in the text boxes and click Buy.<br>"
@@ -122,15 +121,15 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     JPanel buttonsPanel1 = new JPanel(new GridLayout(1, 3));
 
     this.createPortfolioButton = new JButton("Create Portfolio");
-    this.createPortfolioButton.setActionCommand("createPortfolio");
+    this.createPortfolioButton.setActionCommand("CreatePortfolio");
     buttonsPanel1.add(createPortfolioButton);
 
     this.loadPortfolioButton = new JButton("Load Portfolio");
-    this.loadPortfolioButton.setActionCommand("loadPortfolio");
+    this.loadPortfolioButton.setActionCommand("LoadPortfolio");
     buttonsPanel1.add(loadPortfolioButton);
 
     this.buyButton = new JButton("Buy");
-    this.buyButton.setActionCommand("buy");
+    this.buyButton.setActionCommand("BuyPortfolioHolding");
     buttonsPanel1.add(buyButton);
 
     gbc.gridy = 2;
@@ -140,15 +139,15 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     JPanel buttonsPanel2 = new JPanel(new GridLayout(1, 3));
 
     this.sellButton = new JButton("Sell");
-    this.sellButton.setActionCommand("sell");
+    this.sellButton.setActionCommand("SellPortfolioHolding");
     buttonsPanel2.add(sellButton);
 
     this.getValueButton = new JButton("Get Value");
-    this.getValueButton.setActionCommand("getValue");
+    this.getValueButton.setActionCommand("GetPortfolioValue");
     buttonsPanel2.add(getValueButton);
 
     this.getCompositionButton = new JButton("Get Composition");
-    this.getCompositionButton.setActionCommand("getComposition");
+    this.getCompositionButton.setActionCommand("GetPortfolioComposition");
     buttonsPanel2.add(getCompositionButton);
 
     gbc.gridy = 3;
@@ -175,6 +174,41 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     JPanel emptyPanel = new JPanel();
     this.add(emptyPanel, BorderLayout.SOUTH);
 
+    textAreaMap = new HashMap<>();
+
+    List<JTextArea> loadPortfolioTextAreas = new ArrayList<>();
+    loadPortfolioTextAreas.add(portfolioNameTextArea);
+
+    List<JTextArea> createPortfolioTextAreas = new ArrayList<>();
+    createPortfolioTextAreas.add(portfolioNameTextArea);
+
+    List<JTextArea> buyTextAreas = new ArrayList<>();
+    buyTextAreas.add(portfolioNameTextArea);
+    buyTextAreas.add(stockTickerTextArea);
+    buyTextAreas.add(quantityTextArea);
+    buyTextAreas.add(dateTextArea);
+
+    List<JTextArea> sellTextAreas = new ArrayList<>();
+    sellTextAreas.add(portfolioNameTextArea);
+    sellTextAreas.add(stockTickerTextArea);
+    sellTextAreas.add(quantityTextArea);
+    sellTextAreas.add(dateTextArea);
+
+    List<JTextArea> getValueTextAreas = new ArrayList<>();
+    getValueTextAreas.add(portfolioNameTextArea);
+    getValueTextAreas.add(dateTextArea);
+
+    List<JTextArea> getCompositionTextAreas = new ArrayList<>();
+    getCompositionTextAreas.add(portfolioNameTextArea);
+    getCompositionTextAreas.add(dateTextArea);
+
+    textAreaMap.put("LoadPortfolio", loadPortfolioTextAreas);
+    textAreaMap.put("CreatePortfolio", createPortfolioTextAreas);
+    textAreaMap.put("BuyPortfolioHolding", buyTextAreas);
+    textAreaMap.put("SellPortfolioHolding", sellTextAreas);
+    textAreaMap.put("GetPortfolioValue", getValueTextAreas);
+    textAreaMap.put("GetPortfolioComposition", getCompositionTextAreas);
+
     getCompositionButton.addActionListener(this);
     createPortfolioButton.addActionListener(this);
     loadPortfolioButton.addActionListener(this);
@@ -190,18 +224,19 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-//    if (!firstActionTaken) {
-//      actionOutput.setText("");
-//      firstActionTaken = true;
-//    }
-//    if (e.getActionCommand().equals("quit")) {
-//      System.exit(0);
-//    }
-//    command = e.getActionCommand() + " " + textAreaMap.get(e.getActionCommand()).getText();
-//    for (IViewListener listener : listeners) {
-//      listener.handleSetData();
-//      listener.handleGetData();
-//    }
+    if (!firstActionTaken) {
+      actionOutput.setText("");
+      firstActionTaken = true;
+    }
+    StringBuilder inputs = new StringBuilder();
+    for (JTextArea textArea : textAreaMap.get(e.getActionCommand())) {
+      inputs.append(" ").append(textArea.getText());
+    }
+    command = e.getActionCommand() + inputs;
+    for (IViewListener listener : listeners) {
+      listener.handleSetData();
+      listener.handleGetData();
+    }
   }
 
   @Override
