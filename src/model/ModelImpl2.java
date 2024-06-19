@@ -254,4 +254,17 @@ public class ModelImpl2 extends ModelImpl implements IModel2 {
     }
     throw new IllegalArgumentException("Portfolio does not exist");
   }
+
+  /**
+   * Get the names of the portfolios in the model.
+   * @return the names of the portfolios in the model.
+   */
+  @Override
+  public List<String> getPortfolioNames() {
+    List<String> portfolioNames = new ArrayList<>();
+    for (IPortfolioWithTransactions portfolio : portfolios) {
+      portfolioNames.add(portfolio.getName());
+    }
+    return portfolioNames;
+  }
 }

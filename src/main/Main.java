@@ -3,11 +3,15 @@ package main;
 import java.io.InputStreamReader;
 
 import controller.ControllerImpl2;
+import controller.GUIController;
+import controller.IGUIController;
 import model.IModel2;
 
 import controller.IController;
 import model.ModelImpl2;
-import view.IView;
+import view.GUIView;
+import view.IGUIView;
+import view.ITextView;
 import view.ViewImpl;
 
 /**
@@ -21,10 +25,26 @@ public class Main {
    * @param args the arguments to run the user interface.
    */
   public static void main(String[] args) {
-    IView view = new ViewImpl(System.out);
+    if (args.length == 0) {
+      launchGUIView();
+    }
+    else if (args[0].equals("-text")) {
+      launchTextView();
+    }
+  }
+
+  private static void launchTextView() {
+    ITextView view = new ViewImpl(System.out);
     IModel2 model = new ModelImpl2();
     Readable input = new InputStreamReader(System.in);
     IController controller = new ControllerImpl2(input, view);
     controller.control(model);
+  }
+
+  private static void launchGUIView() {
+    IGUIView view = new GUIView();
+    IModel2 model = new ModelImpl2();
+    IGUIController controller = new GUIController(model, view);
+    controller.control();
   }
 }

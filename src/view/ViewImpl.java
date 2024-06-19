@@ -7,7 +7,7 @@ import java.io.IOException;
  * A view can be used to display information to the user.
  * Has a field output that is an Appendable object.
  */
-public class ViewImpl implements IView {
+public class ViewImpl implements ITextView {
   private final Appendable output;
 
   /**

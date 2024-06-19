@@ -14,13 +14,13 @@ public class ViewTest {
   @Before
   public void setUp() {
     Appendable output = new StringBuilder();
-    IView view = new ViewImpl(output);
+    ITextView view = new ViewImpl(output);
   }
 
   @Test
   public void testAppend() {
     Appendable output = new StringBuilder();
-    IView view = new ViewImpl(output);
+    ITextView view = new ViewImpl(output);
     try {
       view.append("Hello");
     } catch (Exception e) {
@@ -32,7 +32,7 @@ public class ViewTest {
   @Test
   public void testAppend2() {
     Appendable output = new StringBuilder();
-    IView view = new ViewImpl(output);
+    ITextView view = new ViewImpl(output);
     try {
       view.append("Hello", 1, 4);
     } catch (Exception e) {
@@ -44,7 +44,7 @@ public class ViewTest {
   @Test
   public void testAppend3() {
     Appendable output = new StringBuilder();
-    IView view = new ViewImpl(output);
+    ITextView view = new ViewImpl(output);
     try {
       view.append("o");
     } catch (Exception e) {

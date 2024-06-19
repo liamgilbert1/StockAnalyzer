@@ -3,11 +3,16 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
-public class GUIView extends JFrame implements ActionListener {
+public class GUIView extends JFrame implements ActionListener, IGUIView {
   private final JButton buyButton;
   private final JButton sellButton;
   private final JButton getValueButton;
@@ -37,111 +42,194 @@ public class GUIView extends JFrame implements ActionListener {
   private final JLabel actionOutput;
   private final JLabel portfolioOutputs;
 
+  private final List<IViewListener> listeners;
+
+  private String command;
+
+  private final Map<String, JTextArea> textAreaMap;
+
   public GUIView() {
     super();
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1100, 800);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setSize(1100, 800);
 
-    this.setLayout(new BorderLayout());
+    setLayout(new BorderLayout());
 
     JPanel inputPanel = new JPanel();
     inputPanel.setLayout(new GridLayout(0, 1));
-    inputPanel.setPreferredSize(new Dimension(600, 800)); // Set preferred size for input panel
+    inputPanel.setPreferredSize(new Dimension(600, 800));
 
-    this.createPortfolioTextLabel = new JLabel("Enter a name to Create your Portfolio:");
+    createPortfolioTextLabel = new JLabel("Enter a name to Create your Portfolio:");
     inputPanel.add(createPortfolioTextLabel);
 
-    this.createPortfolioTextArea = new JTextArea();
+    createPortfolioTextArea = new JTextArea();
     inputPanel.add(createPortfolioTextArea);
 
-    this.createPortfolioButton = new JButton("Create Portfolio");
-    this.createPortfolioButton.setActionCommand("Create Portfolio");
+    createPortfolioButton = new JButton("Create Portfolio");
+    createPortfolioButton.setActionCommand("CreatePortfolio");
     inputPanel.add(createPortfolioButton);
 
-    this.loadPortfolioTextLabel = new JLabel("Enter portfolio name to Load Portfolio:");
+    loadPortfolioTextLabel = new JLabel("Enter portfolio name to Load Portfolio:");
     inputPanel.add(loadPortfolioTextLabel);
 
-    this.loadPortfolioTextArea = new JTextArea();
+    loadPortfolioTextArea = new JTextArea();
     inputPanel.add(loadPortfolioTextArea);
 
-    this.loadPortfolioButton = new JButton("Load Portfolio");
-    this.loadPortfolioButton.setActionCommand("Load Portfolio");
+    loadPortfolioButton = new JButton("Load Portfolio");
+    loadPortfolioButton.setActionCommand("LoadPortfolio");
     inputPanel.add(loadPortfolioButton);
 
-    this.buyTextLabel = new JLabel("Enter Portfolio Name, Stock Ticker, Quantity, " +
+    buyTextLabel = new JLabel("Enter Portfolio Name, Stock Ticker, Quantity, " +
             "and Date (PortfolioName XXXX # YYYY-MM-DD) to Purchase a Holding:");
     inputPanel.add(buyTextLabel);
 
-    this.buyTextArea = new JTextArea();
+    buyTextArea = new JTextArea();
     inputPanel.add(buyTextArea);
 
-    this.buyButton = new JButton("Buy Holding");
-    this.buyButton.setActionCommand("Buy Holding");
+    buyButton = new JButton("Buy Holding");
+    buyButton.setActionCommand("BuyPortfolioHolding");
     inputPanel.add(buyButton);
 
-    this.sellTextLabel = new JLabel("Enter Portfolio Name, Stock Ticker, Quantity, " +
+    sellTextLabel = new JLabel("Enter Portfolio Name, Stock Ticker, Quantity, " +
             "and Date (PortfolioName XXXX # YYYY-MM-DD) to Sell a Holding:");
     inputPanel.add(sellTextLabel);
 
-    this.sellTextArea = new JTextArea();
+    sellTextArea = new JTextArea();
     inputPanel.add(sellTextArea);
 
-    this.sellButton = new JButton("Sell");
-    this.sellButton.setActionCommand("Sell");
+    sellButton = new JButton("Sell");
+    sellButton.setActionCommand("SellPortfolioHolding");
     inputPanel.add(sellButton);
 
-    this.getValueTextLabel = new JLabel("Enter Portfolio Name, then Date " +
+    getValueTextLabel = new JLabel("Enter Portfolio Name, then Date " +
             "(PortfolioName YYYY-MM-DD) to Get the Value of a Portfolio:");
     inputPanel.add(getValueTextLabel);
 
-    this.getValueTextArea = new JTextArea();
+    getValueTextArea = new JTextArea();
     inputPanel.add(getValueTextArea);
 
-    this.getValueButton = new JButton("Get Value");
-    this.getValueButton.setActionCommand("Get Value");
+    getValueButton = new JButton("Get Value");
+    getValueButton.setActionCommand("GetPortfolioValue");
     inputPanel.add(getValueButton);
 
-    this.getCompositionTextLabel = new JLabel("Enter Portfolio Name, then Date " +
+    getCompositionTextLabel = new JLabel("Enter Portfolio Name, then Date " +
             "(PortfolioName YYYY-MM-DD) to Get the Composition of a Portfolio:");
     inputPanel.add(getCompositionTextLabel);
 
-    this.getCompositionTextArea = new JTextArea();
+    getCompositionTextArea = new JTextArea();
     inputPanel.add(getCompositionTextArea);
 
-    this.getCompositionButton = new JButton("Get Composition");
-    this.getCompositionButton.setActionCommand("Get Composition");
+    getCompositionButton = new JButton("Get Composition");
+    getCompositionButton.setActionCommand("GetPortfolioComposition");
     inputPanel.add(getCompositionButton);
 
 
-    this.quitButton = new JButton("Quit");
-    this.quitButton.setActionCommand("Quit");
+    quitButton = new JButton("Quit");
+    quitButton.setActionCommand("quit");
     inputPanel.add(quitButton);
 
-    this.add(inputPanel, BorderLayout.CENTER);
+    textAreaMap = new HashMap<>(Map.of(
+            buyButton.getActionCommand(), buyTextArea,
+            sellButton.getActionCommand(), sellTextArea,
+            getValueButton.getActionCommand(), getValueTextArea,
+            getCompositionButton.getActionCommand(), getCompositionTextArea,
+            createPortfolioButton.getActionCommand(), createPortfolioTextArea,
+            loadPortfolioButton.getActionCommand(), loadPortfolioTextArea
+    ));
+
+    add(inputPanel, BorderLayout.CENTER);
 
     JPanel outputPanel = new JPanel();
     outputPanel.setLayout(new GridLayout(2, 1));
     outputPanel.setPreferredSize(new Dimension(325, 800));
 
-    this.actionOutput = new JLabel("Your actions will be displayed here");
+    actionOutput = new JLabel("Your actions will be displayed here");
     Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-    this.actionOutput.setBorder(border);
-    this.actionOutput.setVerticalAlignment(JLabel.TOP);
+    actionOutput.setBorder(border);
+    actionOutput.setVerticalAlignment(JLabel.TOP);
     outputPanel.add(actionOutput);
 
-    this.portfolioOutputs = new JLabel("Your portfolios will be displayed here");
-    this.portfolioOutputs.setBorder(border);
-    this.portfolioOutputs.setVerticalAlignment(JLabel.TOP);
+    portfolioOutputs = new JLabel("Your portfolios will be displayed here");
+    portfolioOutputs.setBorder(border);
+    portfolioOutputs.setVerticalAlignment(JLabel.TOP);
     outputPanel.add(portfolioOutputs);
 
-    this.add(outputPanel, BorderLayout.EAST);
+    add(outputPanel, BorderLayout.EAST);
+    listeners = new ArrayList<>();
 
-    this.setVisible(true);
+    getCompositionButton.addActionListener(this);
+    createPortfolioButton.addActionListener(this);
+    quitButton.addActionListener(this);
+    loadPortfolioButton.addActionListener(this);
+    buyButton.addActionListener(this);
+    sellButton.addActionListener(this);
+    getValueButton.addActionListener(this);
+
+    setFocusable(true);
+    requestFocus();
+    pack();
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
+    if (e.getActionCommand().equals("quit")) {
+      System.exit(0);
+    }
+    command = e.getActionCommand() + " " + textAreaMap.get(e.getActionCommand()).getText();
+    for (IViewListener listener : listeners) {
+      listener.handleSetData();
+      listener.handleGetData();
+    }
   }
 
+  @Override
+  public String getData() {
+    return command;
+  }
+
+  @Override
+  public void setData(String data) {
+    String[] portfolio = data.split(" ");
+    StringBuilder portfoliosString = new StringBuilder("<html>");
+    for (String name : portfolio) {
+      portfoliosString.append(name).append("<br>");
+    }
+    portfoliosString.append("</html>");
+    portfolioOutputs.setText(portfoliosString.toString());
+  }
+
+  @Override
+  public void addViewListener(IViewListener viewListener) {
+    if (viewListener == null) {
+      throw new IllegalArgumentException("Listener cannot be null");
+    }
+    if (this.listeners.contains(viewListener)) {
+      throw new IllegalArgumentException("Listener already exists");
+    }
+    this.listeners.add(viewListener);
+  }
+
+  @Override
+  public Appendable append(CharSequence csq) throws IOException {
+    actionOutput.setText(csq.toString());
+    Appendable appendable = new StringBuilder();
+    appendable.append(actionOutput.getText());
+    return appendable;
+  }
+
+  @Override
+  public Appendable append(CharSequence csq, int start, int end) throws IOException {
+    actionOutput.setText(csq.subSequence(start, end).toString());
+    Appendable appendable = new StringBuilder();
+    appendable.append(actionOutput.getText());
+    return appendable;
+  }
+
+  @Override
+  public Appendable append(char c) throws IOException {
+    actionOutput.setText(String.valueOf(c));
+    Appendable appendable = new StringBuilder();
+    appendable.append(actionOutput.getText());
+    return appendable;
+  }
 }
