@@ -1,5 +1,6 @@
 package controller.commands.newcommands;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class GetPortfolioCompositionCommand extends AWriterCommand {
    * @param scanner the scanner object to read user input from
    */
   @Override
-  public void execute(IModel2 model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) throws IOException {
     String portfolioName = getNextString(scanner);
     LocalDate date = LocalDate.parse(getNextString(scanner));
 
@@ -50,9 +51,13 @@ public class GetPortfolioCompositionCommand extends AWriterCommand {
       }
     }
 
-
-    for (IStock stock : stocks) {
-      writeStockData(stock.getTicker());
+    try {
+      for (IStock stock : stocks) {
+        tryWrite(stock.getTicker());
+      }
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to write stock data in " +
+              "GetPortfolioCompositionCommand");
     }
 
 
