@@ -50,12 +50,15 @@ public class GetPortfolioCompositionCommand extends AWriterCommand {
       }
     }
 
+
     for (IStock stock : stocks) {
       writeStockData(stock.getTicker());
     }
 
+
     try {
-      this.out.append(model.getPortfolioComposition(portfolioName, date));
+      String portfolioComposition = model.getPortfolioComposition(portfolioName, date);
+      this.out.append(portfolioComposition);
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");
     }

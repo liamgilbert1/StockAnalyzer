@@ -37,12 +37,6 @@ public class GUIController implements IGUIController, IViewListener {
   }
 
   @Override
-  public void control() {
-    view.setVisible(true);
-    view.requestFocus();
-  }
-
-  @Override
   public void handleGetData() {
     List<String> portfolioNames = model.getPortfolioNames();
     StringBuilder portfolioNamesString = new StringBuilder();

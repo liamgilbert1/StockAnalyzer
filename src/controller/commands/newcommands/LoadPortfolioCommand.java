@@ -36,10 +36,6 @@ public class LoadPortfolioCommand extends AWriterCommand implements ICommand {
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to load portfolio.");
     }
-
-    for (String ticker : model.getStocksInPortfolio(portfolioName)) {
-      writeStockData(ticker);
-    }
   }
 
   /**

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,8 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
   private final List<IViewListener> listeners;
 
   private String command;
+
+  private boolean firstActionTaken;
 
   private final Map<String, JTextArea> textAreaMap;
 
@@ -164,14 +167,20 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     buyButton.addActionListener(this);
     sellButton.addActionListener(this);
     getValueButton.addActionListener(this);
+    firstActionTaken = false;
 
     setFocusable(true);
     requestFocus();
     pack();
+    setVisible(true);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    if (!firstActionTaken) {
+      actionOutput.setText("");
+      firstActionTaken = true;
+    }
     if (e.getActionCommand().equals("quit")) {
       System.exit(0);
     }
@@ -211,7 +220,7 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
 
   @Override
   public Appendable append(CharSequence csq) throws IOException {
-    actionOutput.setText(csq.toString());
+    addActionText(csq.toString());
     Appendable appendable = new StringBuilder();
     appendable.append(actionOutput.getText());
     return appendable;
@@ -219,17 +228,25 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
 
   @Override
   public Appendable append(CharSequence csq, int start, int end) throws IOException {
-    actionOutput.setText(csq.subSequence(start, end).toString());
+    return this.append(csq.subSequence(start, end));
+  }
+
+  @Override
+  public Appendable append(char c) throws IOException {
+    addActionText(String.valueOf(c));
     Appendable appendable = new StringBuilder();
     appendable.append(actionOutput.getText());
     return appendable;
   }
 
-  @Override
-  public Appendable append(char c) throws IOException {
-    actionOutput.setText(String.valueOf(c));
-    Appendable appendable = new StringBuilder();
-    appendable.append(actionOutput.getText());
-    return appendable;
+  private void addActionText(String additionalText) {
+    String[] newLines = additionalText.split("\n");
+    StringBuilder newText = new StringBuilder("<html>");
+    for (String line : newLines) {
+      newText.append(line).append("<br>");
+    }
+    newText.append(actionOutput.getText());
+    newText.append("</html>");
+    actionOutput.setText(newText.toString());
   }
 }

@@ -44,7 +44,6 @@ public class Main {
   private static void launchGUIView() {
     IGUIView view = new GUIView();
     IModel2 model = new ModelImpl2();
-    IGUIController controller = new GUIController(model, view);
-    controller.control();
+    new GUIController(model, view);
   }
 }
