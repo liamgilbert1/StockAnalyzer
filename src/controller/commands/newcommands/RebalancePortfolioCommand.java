@@ -40,8 +40,12 @@ public class RebalancePortfolioCommand extends AWriterCommand {
       stockWeights.put(getNextString(scanner), getPositiveInt(scanner));
     }
 
-    for (String stock : stockWeights.keySet()) {
-      writeStockData(stock);
+    try {
+      for (String stock : stockWeights.keySet()) {
+        tryWrite(stock);
+      }
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to write stock data in RebalancePortfolioCommand");
     }
 
     try {

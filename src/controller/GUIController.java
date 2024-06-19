@@ -57,11 +57,8 @@ public class GUIController implements IGUIController, IViewListener {
           ICommand commandToRun = this.commandMap.get(command).get();
           commandToRun.execute(model, scanner);
         } catch (Exception e) {
-          try {
-            view.append("\nAn error occurred while executing the command. Please try again.");
-          } catch (IOException ioException) {
-            throw new IllegalStateException("Could not append to output.");
-          }
+          System.out.print(command);
+          throw new IllegalArgumentException("Failed to process command.");
         }
       }
     }

@@ -1,5 +1,6 @@
 package controller.commands;
 
+import java.io.IOException;
 import java.util.Scanner;
 import model.IModel2;
 
@@ -16,7 +17,7 @@ public interface ICommand {
    * @param model   the model to execute the command on
    * @param scanner the scanner to read input from
    */
-  void execute(IModel2 model, Scanner scanner);
+  void execute(IModel2 model, Scanner scanner) throws IOException;
 
   /**
    * Gets the instructions for the command.

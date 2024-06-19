@@ -52,6 +52,15 @@ public class PerformanceOverTimeCommand extends AWriterCommand {
     }
 
     try {
+      for (IStock stock : stocks) {
+        tryWrite(stock.getTicker());
+      }
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to write stock data in " +
+              "GetPortfolioCompositionCommand");
+    }
+
+    try {
       this.out.append(model.getPortfolioPerformanceOverTime(portfolioName, startDate, endDate));
     } catch (Exception e) {
       throw new IllegalArgumentException("Failed to process command.");

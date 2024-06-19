@@ -35,7 +35,11 @@ public class SellPortfolioHoldingCommand extends AWriterCommand {
     int quantity = getPositiveInt(scanner);
     LocalDate date = LocalDate.parse(getNextString(scanner));
 
-    tryWrite(ticker);
+    try {
+      tryWrite(ticker);
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to write stock data.");
+    }
 
     try {
       model.sellPortfolioHolding(portfolioName, ticker, quantity, date);

@@ -1,5 +1,6 @@
 package controller.commands.newcommands;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -28,17 +29,21 @@ public class BuyPortfolioHoldingCommand extends AWriterCommand {
    * @param scanner the scanner object to read user input from
    */
   @Override
-  public void execute(IModel2 model, Scanner scanner) {
+  public void execute(IModel2 model, Scanner scanner) throws IOException {
     String portfolioName = getNextString(scanner);
     String ticker = getNextString(scanner);
     int quantity = getPositiveInt(scanner);
     LocalDate date = LocalDate.parse(getNextString(scanner));
 
-    tryWrite(ticker);
+    try {
+      tryWrite(ticker);
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to write stock data.");
+    }
 
     try {
       model.buyPortfolioHolding(portfolioName, ticker, quantity, date);
-      this.out.append("Portfolio shares have been purchased\n");
+      out.append("Portfolio shares have been purchased\n");
     } catch (Exception e) {
       throw new IllegalStateException("Failed to process command.");
     }
