@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,20 +48,22 @@ public class GUIController implements IGUIController, IViewListener {
   }
 
   @Override
-  public void handleSetData() {
-    Scanner scanner = new Scanner(view.getData());
-    while (scanner.hasNext()) {
+  public void handleSetData() throws IOException {
+    view.requestFocus();
+    String data = view.getData();
+    Scanner scanner = new Scanner(data);
+    if (scanner.hasNext()) {
       String command = scanner.next();
-      if (command != null) {
+      if (commandMap.containsKey(command)) {
         try {
           ICommand commandToRun = this.commandMap.get(command).get();
           commandToRun.execute(model, scanner);
         } catch (Exception e) {
-          System.out.print(command);
-          throw new IllegalArgumentException("Failed to process command.");
+          String message = "Failed to process " + command + " command.\n"
+                  + "Please check the inputs and try again.";
+          view.append(message);
         }
       }
     }
-    view.requestFocus();
   }
 }

@@ -60,7 +60,6 @@ public class GetPortfolioCompositionCommand extends AWriterCommand {
               "GetPortfolioCompositionCommand");
     }
 
-
     try {
       String portfolioComposition = model.getPortfolioComposition(portfolioName, date);
       this.out.append(portfolioComposition);

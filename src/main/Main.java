@@ -24,7 +24,7 @@ public class Main {
    * main.Main method to run the user interface.
    * @param args the arguments to run the user interface.
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws NoSuchMethodException {
     if (args.length == 0) {
       launchGUIView();
     }
@@ -41,7 +41,7 @@ public class Main {
     controller.control(model);
   }
 
-  private static void launchGUIView() {
+  private static void launchGUIView() throws NoSuchMethodException {
     IGUIView view = new GUIView();
     IModel2 model = new ModelImpl2();
     new GUIController(model, view);

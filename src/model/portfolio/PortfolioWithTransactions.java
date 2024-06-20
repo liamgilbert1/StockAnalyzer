@@ -74,9 +74,13 @@ public class PortfolioWithTransactions implements IPortfolioWithTransactions {
   @Override
   public String getComposition(LocalDate date) {
     StringBuilder composition = new StringBuilder();
+    if (transactions.isEmpty()) {
+      return "Portfolio contains no holdings at the given date.";
+    }
     for (ITransaction transaction : transactions) {
-      if (!composition.toString().contains(transaction.getStock().getTicker())
-              && (transaction.getDate().isBefore(date) || transaction.getDate().isEqual(date))) {
+      if ((!composition.toString().contains(transaction.getStock().getTicker())
+              && (transaction.getDate().isBefore(date) || transaction.getDate().isEqual(date)))
+      && getStockQuantity(transaction) != 0) {
         composition.append(transaction.getStock().getTicker()).append(": ")
                 .append(String.format("%.2f", getStockQuantity(transaction))).append("\n");
       }
