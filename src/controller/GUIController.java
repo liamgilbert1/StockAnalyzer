@@ -16,9 +16,8 @@ import controller.commands.newcommands.LoadPortfolioCommand;
 import controller.commands.newcommands.SellPortfolioHoldingCommand;
 import model.IModel2;
 import view.IGUIView;
-import view.IViewListener;
 
-public class GUIController implements IGUIController, IViewListener {
+public class GUIController implements IGUIController {
   private final IModel2 model;
   private final IGUIView view;
 

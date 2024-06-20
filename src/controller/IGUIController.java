@@ -1,4 +1,6 @@
 package controller;
 
-public interface IGUIController {
+import view.IViewListener;
+
+public interface IGUIController extends IViewListener {
 }
