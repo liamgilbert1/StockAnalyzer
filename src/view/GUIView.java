@@ -71,15 +71,15 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     JPanel dateLabelsPanel = new JPanel(new GridLayout(1, 3));
     dateLabelsPanel.setBorder(labelBorder);
 
-    JLabel yearLabel = new JLabel("Year");
+    JLabel yearLabel = new JLabel("Year (####)");
     yearLabel.setBorder(labelBorder);
     dateLabelsPanel.add(yearLabel);
 
-    JLabel monthLabel = new JLabel("Month");
+    JLabel monthLabel = new JLabel("Month ((#)#)");
     monthLabel.setBorder(labelBorder);
     dateLabelsPanel.add(monthLabel);
 
-    JLabel dayLabel = new JLabel("Day");
+    JLabel dayLabel = new JLabel("Day ((#)#)");
     dayLabel.setBorder(labelBorder);
     dateLabelsPanel.add(dayLabel);
 
