@@ -3,11 +3,7 @@ package controller.guicontroller;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.StringReader;
 
-import controller.textcontroller.ITextController;
-import controller.textcontroller.TextControllerImpl;
-import controller.textcontroller.TextControllerImpl2;
 import model.IModel2;
 import model.MockModelImpl;
 import view.guiview.IGUIView;
@@ -23,7 +19,7 @@ public class GUIControllerMockTest {
   public void testControllerMockLoadPortfolio() throws IOException {
     StringBuilder log = new StringBuilder();
     IModel2 mockModel = new MockModelImpl(log);
-    IGUIView view = new MockGUIView("LoadPortfolio Portfolio1");
+    IGUIView view = new MockGUIView("LoadPortfolio Portfolio1", new StringBuilder());
     IGUIController controller = new GUIController(mockModel, view);
     controller.handleSetData();
     assertEquals("LoadPortfolio Portfolio1", log.toString());
@@ -33,7 +29,8 @@ public class GUIControllerMockTest {
   public void testControllerMockGetPortfolioComposition() throws IOException {
      StringBuilder log = new StringBuilder();
       IModel2 mockModel = new MockModelImpl(log);
-      IGUIView view = new MockGUIView("GetPortfolioComposition Portfolio1 2024-06-05");
+      IGUIView view = new MockGUIView("GetPortfolioComposition Portfolio1 2024-06-05",
+              new StringBuilder());
       IGUIController controller = new GUIController(mockModel, view);
       controller.handleSetData();
       assertEquals("GetPortfolioComposition Portfolio1 2024-06-05", log.toString());
@@ -43,7 +40,8 @@ public class GUIControllerMockTest {
   public void testControllerMockSellPortfolioHolding() throws IOException {
     StringBuilder log = new StringBuilder();
     IModel2 mockModel = new MockModelImpl(log);
-    IGUIView view = new MockGUIView("SellPortfolioHolding Portfolio1 GOOG 10 2024-06-05");
+    IGUIView view = new MockGUIView("SellPortfolioHolding Portfolio1 GOOG 10 2024-06-05",
+            new StringBuilder());
     IGUIController controller = new GUIController(mockModel, view);
     controller.handleSetData();
     assertEquals("SellPortfolioHolding Portfolio1 GOOG 10.0 2024-06-05", log.toString());
@@ -53,7 +51,8 @@ public class GUIControllerMockTest {
   public void testControllerMockBuyPortfolioHolding() throws IOException {
     StringBuilder log = new StringBuilder();
     IModel2 mockModel = new MockModelImpl(log);
-    IGUIView view = new MockGUIView("BuyPortfolioHolding Portfolio1 GOOG 10 2024-06-05");
+    IGUIView view = new MockGUIView("BuyPortfolioHolding Portfolio1 GOOG 10 2024-06-05",
+            new StringBuilder());
     IGUIController controller = new GUIController(mockModel, view);
     controller.handleSetData();
     assertEquals("BuyPortfolioHolding Portfolio1 GOOG 10 2024-06-05", log.toString());
@@ -63,7 +62,8 @@ public class GUIControllerMockTest {
   public void testControllerMockCreatePortfolio() throws IOException {
     StringBuilder log = new StringBuilder();
     IModel2 mockModel = new MockModelImpl(log);
-    IGUIView view = new MockGUIView("CreatePortfolio Portfolio1");
+    IGUIView view = new MockGUIView("CreatePortfolio Portfolio1",
+            new StringBuilder());
     IGUIController controller = new GUIController(mockModel, view);
     controller.handleSetData();
     assertEquals("CreatePortfolio Portfolio1", log.toString());
@@ -73,7 +73,8 @@ public class GUIControllerMockTest {
   public void testControllerMockGetPortfolioValue() throws IOException {
     StringBuilder log = new StringBuilder();
     IModel2 mockModel = new MockModelImpl(log);
-    IGUIView view = new MockGUIView("GetPortfolioValue Portfolio1 2024-06-05");
+    IGUIView view = new MockGUIView("GetPortfolioValue Portfolio1 2024-06-05",
+            new StringBuilder());
     IGUIController controller = new GUIController(mockModel, view);
     controller.handleSetData();
     assertEquals("GetPortfolioValue Portfolio1 2024-06-05", log.toString());

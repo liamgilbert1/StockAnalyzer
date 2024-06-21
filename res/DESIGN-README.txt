@@ -2,50 +2,32 @@ This project was designed using a model-view-controller architecture.
 
 CHANGES FROM PREVIOUS SUBMISSION
 
-Signature of control in IController: Changed original method signature to take in an IModel2 instead
-of an IModel. Did this so the controller can work with the new commands as well as the old one.
-We did not feel it was necessary to implement a whole new controller with similar functionality, so
-we changed our control methods signature.
+-The only change made to the design of the previous submission was the addition of an AController
+abstract class. This class contains the map of commands that the controller uses to handle user
+requests. This class was added to abstract duplicate code in the controllers and to make the
+controllers more easily extendable.
 
-Changed signature of the execute method in ICommand for all the old commands to take in a IModel2
-instead of an IModel. Did this so the all the old commands can now work with the controller, as well
-as the new commands. Did not feel it was necessary to write new command classes for the old commands
-since the functionality would be almost identical.
-
-Changed MockModelImpl to implement IModel2 instead of IModel and added our new methods from
-ModelImpl2 to MockModelIpl. MockModelImpl is only used for testing purposes, so we did not feel it
-was needed to write a new mock model.
-
-We added a higher level portfolio interface to encapsulate shared behavior over multiple portfolios.
-Since the new portfolio implementation held transactions rather than holdings, they had some
-differences, but the similarities were enough to warrant a higher level interface.
-
-We added some getCopy methods in the model to return copies of the objects rather than the objects
-themselves. This is more secure and prevents clients from modifying the objects directly.
-
-We made changes to the readers and writers so the program works in a jar. Before, the readers and
-writers were working only within the ide, but now they work relative to the location of the jar and
-read and write files within the user’s file system. These changes were necessary to make the program
-work in a jar.
-
-New API key added. High volume api key put into AlphaVantageStreamReader. This is to prevent the
-program from being rate limited by the api.
-
-We had to fix bugs in the tryWrite method in the AWriterCommand class. The method was not writing
-when it was supposed to due to a bug in the method. We fixed the bug and now the method writes when
-it is supposed to. This was a critical bug that needed to be fixed.
-
-We added a getReader method in the AWriterCommand class. This method returns the reader that the
-command is using. This is useful for extensibility and allows the command to be easily extended to
-use a different reader in the future.
-
+Additionally, the Main class was updated to allow for launching a GUIView by default or a TextView
+with the addition of a -text command line argument.
 
 OVERVIEW OF THE ARCHITECTURE
 
 Controller:
-     The controller is responsible for handling user input and updating the model. The controller
-        uses the command pattern to handle user input. The controller stores ICommands in a map,
-        which is easily extendable to add new commands.
+     GUIController:
+        The GUIController class extends the AController abstract class and is responsible for
+        handling user input and updating the model. The GUIController uses the command pattern to
+        handle user input. The GUIController stores ICommands in a map, which is easily extendable
+        to add new commands. The GUIController is responsible for managing inputs from the GUIView
+        and updating the model, then updating the GUIView based on the updated model. The
+        GUIController implements the IGUIController interface.
+
+     TextController:
+        The TextController class extends the AController abstract class and is responsible for
+        handling user input and updating the model. The TextController uses the command pattern to
+        handle user input. The TextController stores ICommands in a map, which is easily extendable
+        to add new commands. The TextController is responsible for managing inputs from the TextView
+        and updating the model, then updating the TextView based on the updated model. The
+        TextController implements the ITextController interface.
 
      Commands:
         The commands extend abstract classes depending on whether they may have to write stock data
@@ -109,8 +91,15 @@ View:
         view simply outputs what is appended to it right now, but could be extended to have more
         complex functionality.
 
+     IGUIView extends IView and is implemented by the GUIView class. The GUIView is a graphical
+        viw that displays the state of the application to the user. The GUIView is updated by the
+        controller when the state of the application changes. The GUIView contains buttons and text
+        fields which allow the user to interact with the application.
+
 Main:
      The main method creates a controller, model, and view. The main method creates commands and
         adds them to the controller. The main method then runs the controller, which starts the
         application. The main method is responsible for creating the controller, model, and
-        view, and starting the application. This is the entry point of the application.
+        view, and starting the application. This is the entry point of the application. The main
+        method can take a -text command line argument to run the application in text mode, or run
+        the application in GUI mode by default.

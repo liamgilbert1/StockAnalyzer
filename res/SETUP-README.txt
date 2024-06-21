@@ -3,20 +3,11 @@
 Run the Jar
 1. Download the jar file from the release page
 2. Open a command-prompt/terminal and navigate to that folder
-3. Now type java -jar NameOfJARFile.jar and press ENTER or RETURN
-
-## How to Create Portfolio with 3 stocks and then query the value of the portfolio on two specific
-   dates
-1. Input the command CreatePortfolio followed by the name of the portfolio you want to create,
-   separated by a space.
-2. To add a stock to the portfolio, input the command BuyPortfolioHoldingCommand followed by the
-   name of the portfolio, the stock symbol, and the number of shares you want to add, and the date
-   that you made the transaction, separated by spaces.
-3. Repeat step 2 for the other 2 stocks
-4. To get the value of the portfolio on a specific date, input the command GetPortfolioValue
-   followed by the name of the portfolio and the date you want to get the value of, separated by a
-   space.
-5. Repeat step 4 for the other date.
+3. Now type java -jar NameOfJARFile.jar
+4. If you would like to run the text-based version of the program, type " -text" after the jar file
+   name. If you would like to run the GUI version of the program do not type anything after the jar
+   file name.
+5. Press enter to run the program.
 
 ## Supported Stocks
 Our program supports any stock that is available on the Alpha Vantage API. The value of the
