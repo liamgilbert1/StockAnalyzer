@@ -60,8 +60,8 @@ public class StockTest {
   @Test
   public void testGetMostRecentDate() {
     stock2 = new Stock("TEST");
-    assertEquals(LocalDate.of(2024, 6, 5), stock1.getMostRecentDate());
-    assertEquals(LocalDate.of(2024, 6, 5), stock1.getMostRecentDate());
+    assertEquals(LocalDate.of(2024, 6, 18), stock1.getMostRecentDate());
+    assertEquals(LocalDate.of(2024, 6, 18), stock1.getMostRecentDate());
   }
 
   @Test

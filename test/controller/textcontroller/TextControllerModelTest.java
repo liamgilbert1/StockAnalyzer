@@ -295,8 +295,7 @@ public class TextControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, " +
-            "over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -329,8 +328,8 @@ public class TextControllerModelTest {
             "Enter 'quit' to quit the program.\n" +
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
-            "\n" +
-            "An error occurred while executing the command. Please try again.", output.toString());
+            "Failed to process AddPortfolioHolding command.\n" +
+            "Please check the inputs and try again.", output.toString());
   }
 
   @Test
@@ -359,8 +358,7 @@ public class TextControllerModelTest {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, " +
-            "over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -393,9 +391,7 @@ public class TextControllerModelTest {
             "Enter 'quit' to quit the program.\n" +
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
-            "\n" +
-            "An error occurred while executing the command. Please try again.Portfolio " +
-            "value is: $0.00\n" +
-            " ", output.toString());
+            "Failed to process AddPortfolioHolding command.\n" +
+            "Please check the inputs and try again.Portfolio value is: $0.00", output.toString());
   }
 }

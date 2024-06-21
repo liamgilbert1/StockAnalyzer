@@ -271,8 +271,7 @@ public class TextControllerModel2Test {
             "4. Number of days to calculate the moving average over\n" +
             "\n" +
             "Crossovers: \n" +
-            "This command determines which days are x-day crossovers for a given stock, " +
-            "over a specified time period \n" +
+            "This command determines which days are x-day crossovers for a given stock, over a specified time period \n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (Crossover)\n" +
             "2. Stock ticker symbol\n" +
@@ -312,16 +311,14 @@ public class TextControllerModel2Test {
             "3. Date in the format yyyy-mm-dd\n" +
             "\n" +
             "Get Portfolio Composition Command: \n" +
-            "This command gets the composition of a portfolio (The stocks and the " +
-            "number of shares in each stock) on a specific date.\n" +
+            "This command gets the composition of a portfolio (The stocks and the number of shares in each stock) on a specific date.\n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (GetPortfolioComposition)\n" +
             "2. Portfolio name\n" +
             "3. Date in the format yyyy-mm-dd\n" +
             "\n" +
             "Get Portfolio Distribution Command: \n" +
-            "This command gets the distribution of a portfolio " +
-            "(The stocks and each stock's value) on a specific date.\n" +
+            "This command gets the distribution of a portfolio (The stocks and each stock's value) on a specific date.\n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (GetPortfolioDistribution)\n" +
             "2. Portfolio name\n" +
@@ -329,8 +326,7 @@ public class TextControllerModel2Test {
             "\n" +
             "Rebalance Portfolio: \n" +
             "This command rebalances the portfolio to the given stock weights.\n" +
-            "Whatever stocks you give weight will be purchased and whatever stocks " +
-            "you do not will be sold, regardless of the current portfolio holdings.\n" +
+            "Whatever stocks you give weight will be purchased and whatever stocks you do not will be sold, regardless of the current portfolio holdings.\n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (RebalancePortfolio)\n" +
             "2. Portfolio name\n" +
@@ -338,8 +334,7 @@ public class TextControllerModel2Test {
             "4. Stock weights (stock1 weight1 stock2 weight2 ...)\n" +
             "\n" +
             "Get Portfolio Performance Over Time: \n" +
-            "This command calculates the performance of a portfolio over " +
-            "a given period of time.\n" +
+            "This command calculates the performance of a portfolio over a given period of time.\n" +
             "Enter the following parameters separated by spaces:\n" +
             "1. Command name (GetPerformanceOverTime)\n" +
             "2. Portfolio name\n" +
@@ -357,8 +352,7 @@ public class TextControllerModel2Test {
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
-            "Portfolio value is: $885.35\n" +
-            " ", output.toString());
+            "Portfolio value is: $885.35", output.toString());
   }
 
   @Test
@@ -473,8 +467,7 @@ public class TextControllerModel2Test {
             "\n" +
             "Portfolio Created: TestPortfolio\n" +
             "Portfolio shares have been purchased\n" +
-            "Portfolio value is: $0.00\n" +
-            " ", output.toString());
+            "Portfolio value is: $0.00", output.toString());
   }
 
   @Test

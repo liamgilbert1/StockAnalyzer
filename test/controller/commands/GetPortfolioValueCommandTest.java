@@ -40,7 +40,7 @@ public class GetPortfolioValueCommandTest {
     input = new StringReader("myPortfolio 2023-01-01\n");
     scanner = new Scanner(input);
     command.execute(model, scanner);
-    assertEquals("Portfolio value is: $0.00\n ", output.toString());
+    assertEquals("Portfolio value is: $0.00", output.toString());
   }
 
   @Test
@@ -50,7 +50,7 @@ public class GetPortfolioValueCommandTest {
             LocalDate.of(2023, 1, 1));
     scanner = new Scanner(input);
     command.execute(model, scanner);
-    assertEquals("Portfolio value is: $887.30\n ", output.toString());
+    assertEquals("Portfolio value is: $887.30", output.toString());
   }
 
   @Test
@@ -64,7 +64,7 @@ public class GetPortfolioValueCommandTest {
             LocalDate.of(2023, 1, 1));
     scanner = new Scanner(input);
     command.execute(model, scanner);
-    assertEquals("Portfolio value is: $5323.80\n ", output.toString());
+    assertEquals("Portfolio value is: $5323.80", output.toString());
   }
 
   @Test

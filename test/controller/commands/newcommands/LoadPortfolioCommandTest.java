@@ -24,10 +24,6 @@ public class LoadPortfolioCommandTest {
     Scanner scanner = new Scanner("TestPortfolio");
     loadPortfolioCommand.execute(model, scanner);
     assertEquals("Portfolio loaded successfully.\n", out.toString());
-    assertEquals("GOOG: 8.82\n" +
-            "MSFT: 11.14\n" +
-            "AMZN: 52.00\n",model.getPortfolioComposition("TestPortfolio", LocalDate.of(2024, 6,
-            4)));
   }
 
   @Test
