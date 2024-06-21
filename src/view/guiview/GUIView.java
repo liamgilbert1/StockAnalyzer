@@ -1,4 +1,4 @@
-package view;
+package view.guiview;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +13,9 @@ import java.util.function.Supplier;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-public class GUIView extends JFrame implements ActionListener, IGUIView {
+import view.IViewListener;
 
+public class GUIView extends JFrame implements ActionListener, IGUIView {
   private final JTextArea portfolioNameTextArea;
   private final JTextArea quantityTextArea;
   private final JTextArea stockTickerTextArea;
@@ -243,7 +244,6 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
 
     setPreferredSize(new Dimension(1200, 800));
     pack();
-    setVisible(true);
   }
   
   @Override

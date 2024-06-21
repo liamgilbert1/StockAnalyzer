@@ -1,6 +1,9 @@
-package view;
+package view.guiview;
 
-public interface IGUIView extends ITextView {
+import view.IView;
+import view.IViewListener;
+
+public interface IGUIView extends IView {
   String getData();
   void setData(String data);
   void addViewListener(IViewListener viewListener);

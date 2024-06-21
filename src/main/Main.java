@@ -1,18 +1,18 @@
 package main;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 
-import controller.ControllerImpl2;
-import controller.GUIController;
-import controller.IGUIController;
+import controller.textcontroller.TextControllerImpl2;
+import controller.guicontroller.GUIController;
 import model.IModel2;
 
-import controller.IController;
+import controller.textcontroller.ITextController;
 import model.ModelImpl2;
-import view.GUIView;
-import view.IGUIView;
-import view.ITextView;
-import view.ViewImpl;
+import view.guiview.GUIView;
+import view.guiview.IGUIView;
+import view.IView;
+import view.textview.TextViewImpl;
 
 /**
  * Main class to run the user interface. This class creates a model and controller and runs the
@@ -24,7 +24,7 @@ public class Main {
    * main.Main method to run the user interface.
    * @param args the arguments to run the user interface.
    */
-  public static void main(String[] args) throws NoSuchMethodException {
+  public static void main(String[] args) throws IOException {
     if (args.length == 0) {
       launchGUIView();
     }
@@ -33,17 +33,18 @@ public class Main {
     }
   }
 
-  private static void launchTextView() {
-    ITextView view = new ViewImpl(System.out);
+  private static void launchTextView() throws IOException {
+    IView view = new TextViewImpl(System.out);
     IModel2 model = new ModelImpl2();
     Readable input = new InputStreamReader(System.in);
-    IController controller = new ControllerImpl2(input, view);
+    ITextController controller = new TextControllerImpl2(input, view);
     controller.control(model);
   }
 
-  private static void launchGUIView() throws NoSuchMethodException {
+  private static void launchGUIView() {
     IGUIView view = new GUIView();
     IModel2 model = new ModelImpl2();
     new GUIController(model, view);
+    view.setVisible(true);
   }
 }

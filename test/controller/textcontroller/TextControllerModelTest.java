@@ -1,7 +1,8 @@
-package controller;
+package controller.textcontroller;
 
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 
 import model.ModelImpl2;
@@ -11,12 +12,12 @@ import static org.junit.Assert.assertEquals;
 /**
  * Test cases for ControllerImpl with a model.
  */
-public class ControllerModelTest {
+public class TextControllerModelTest {
   @Test
-  public void testControllerModelGainOrLoss() {
+  public void testControllerModelGainOrLoss() throws IOException {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("GainOrLoss GOOG 2024-06-04 2024-06-05\n");
-    IController controller = new ControllerImpl(input, output);
+    ITextController controller = new TextControllerImpl(input, output);
     controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
@@ -73,10 +74,10 @@ public class ControllerModelTest {
   }
 
   @Test
-  public void testControllerModelMovingAverage() {
+  public void testControllerModelMovingAverage() throws IOException {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("MovingAverage GOOG 2023-01-01 30\n");
-    IController controller = new ControllerImpl(input, output);
+    ITextController controller = new TextControllerImpl(input, output);
     controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
@@ -133,10 +134,10 @@ public class ControllerModelTest {
   }
 
   @Test
-  public void testControllerModelCrossover() {
+  public void testControllerModelCrossover() throws IOException {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("Crossover GOOG 2023-01-01 2023-01-31 10\n");
-    IController controller = new ControllerImpl(input, output);
+    ITextController controller = new TextControllerImpl(input, output);
     controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
@@ -210,10 +211,10 @@ public class ControllerModelTest {
   }
 
   @Test
-  public void testControllerModelCreatePortfolio() {
+  public void testControllerModelCreatePortfolio() throws IOException {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("CreatePortfolio TestPortfolio\n");
-    IController controller = new ControllerImpl(input, output);
+    ITextController controller = new TextControllerImpl(input, output);
     controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
@@ -270,11 +271,11 @@ public class ControllerModelTest {
   }
 
   @Test
-  public void testControllerModelAddPortfolioHolding() {
+  public void testControllerModelAddPortfolioHolding() throws IOException {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("CreatePortfolio TestPortfolio\n" +
             "AddPortfolioHolding TestPortfolio GOOG 10\n");
-    IController controller = new ControllerImpl(input, output);
+    ITextController controller = new TextControllerImpl(input, output);
     controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
@@ -333,12 +334,12 @@ public class ControllerModelTest {
   }
 
   @Test
-  public void testControllerModelGetPortfolioValue() {
+  public void testControllerModelGetPortfolioValue() throws IOException {
     Appendable output = new StringBuilder();
     Readable input = new StringReader("CreatePortfolio TestPortfolio\n" +
             "AddPortfolioHolding TestPortfolio GOOG 10\n" +
             "GetPortfolioValue TestPortfolio 2024-06-04\n");
-    IController controller = new ControllerImpl(input, output);
+    ITextController controller = new TextControllerImpl(input, output);
     controller.control(new ModelImpl2());
     assertEquals("\n" +
             "Gain or Loss: \n" +
@@ -397,5 +398,4 @@ public class ControllerModelTest {
             "value is: $0.00\n" +
             " ", output.toString());
   }
-
 }

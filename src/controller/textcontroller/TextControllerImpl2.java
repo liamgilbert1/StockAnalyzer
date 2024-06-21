@@ -1,4 +1,4 @@
-package controller;
+package controller.textcontroller;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import controller.commands.newcommands.SellPortfolioHoldingCommand;
  * The controller has an Appendable object that outputs to the user.
  * The controller has a list of ordered commands that are executed in order.
  */
-public class ControllerImpl2 extends ControllerImpl {
+public class TextControllerImpl2 extends TextControllerImpl {
 
   /**
    * Constructs a ControllerImpl2 object with the given input and output.
@@ -27,18 +27,20 @@ public class ControllerImpl2 extends ControllerImpl {
    * @param input  the input to be used
    * @param output the output to be used
    */
-  public ControllerImpl2(Readable input, Appendable output) {
+  public TextControllerImpl2(Readable input, Appendable output) {
     super(input, output);
-    commandMap.remove("AddPortfolioHolding");
-    commandMap.put("BuyPortfolioHolding", () -> new BuyPortfolioHoldingCommand(output));
-    commandMap.put("SellPortfolioHolding", () -> new SellPortfolioHoldingCommand(output));
-    commandMap.put("GetPortfolioComposition", () -> new GetPortfolioCompositionCommand(output));
-    commandMap.put("GetPortfolioDistribution", () -> new GetPortfolioDistributionCommand(output));
-    commandMap.put("RebalancePortfolio", () -> new RebalancePortfolioCommand(output));
-    commandMap.put("GetPerformanceOverTime", () -> new PerformanceOverTimeCommand(output));
-    commandMap.put("LoadPortfolio", () -> new LoadPortfolioCommand(output));
-    this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover", "CreatePortfolio",
-            "BuyPortfolioHolding", "SellPortfolioHolding", "GetPortfolioValue",
+    removeCommand("AddPortfolioHolding");
+    addCommand("BuyPortfolioHolding", () -> new BuyPortfolioHoldingCommand(output));
+    addCommand("SellPortfolioHolding", () -> new SellPortfolioHoldingCommand(output));
+    addCommand("GetPortfolioComposition", () ->
+            new GetPortfolioCompositionCommand(output));
+    addCommand("GetPortfolioDistribution", () ->
+            new GetPortfolioDistributionCommand(output));
+    addCommand("RebalancePortfolio", () -> new RebalancePortfolioCommand(output));
+    addCommand("GetPerformanceOverTime", () -> new PerformanceOverTimeCommand(output));
+    addCommand("LoadPortfolio", () -> new LoadPortfolioCommand(output));
+    this.orderedCommands = List.of("GainOrLoss", "MovingAverage", "Crossover",
+            "CreatePortfolio", "BuyPortfolioHolding", "SellPortfolioHolding", "GetPortfolioValue",
             "GetPortfolioComposition", "GetPortfolioDistribution", "RebalancePortfolio",
             "GetPerformanceOverTime", "LoadPortfolio");
   }

@@ -1,20 +1,22 @@
-package view;
+package view.textview;
 
 import java.io.IOException;
+
+import view.IView;
 
 /**
  * Represents a view that can be used to display information to the user.
  * A view can be used to display information to the user.
  * Has a field output that is an Appendable object.
  */
-public class ViewImpl implements ITextView {
+public class TextViewImpl implements IView {
   private final Appendable output;
 
   /**
    * Constructs a new view with the given output.
    * @param output the output to use.
    */
-  public ViewImpl(Appendable output) {
+  public TextViewImpl(Appendable output) {
     this.output = output;
   }
 

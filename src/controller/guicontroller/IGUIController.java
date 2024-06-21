@@ -1,4 +1,4 @@
-package controller;
+package controller.guicontroller;
 
 import view.IViewListener;
 

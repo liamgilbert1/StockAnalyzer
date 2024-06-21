@@ -52,6 +52,9 @@ public class AlphaVantageStreamReader implements IReader {
     } catch (IOException e) {
       throw new IllegalArgumentException("No price data found for " + stockSymbol);
     }
+    if (output.toString().contains("Invalid API call")) {
+      throw new IllegalArgumentException("Invalid API call");
+    }
     return new StringReader(output.toString());
   }
 }
