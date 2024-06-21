@@ -15,6 +15,9 @@ import view.guiview.MockGUIView;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the GUIController class.
+ */
 public class GUIControllerModelTest {
 
 }
