@@ -18,8 +18,6 @@ import static org.junit.Assert.assertTrue;
  * Test cases for PortfolioTxtWriter.
  */
 public class PortfolioTXTWriterTest {
-
-
   @Test
   public void testWrite() {
     IPortfolioWithTransactions portfolio = new PortfolioWithTransactions("myPortfolio");
