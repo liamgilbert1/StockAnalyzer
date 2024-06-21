@@ -6,7 +6,6 @@ The program gets the stock prices for the given dates and calculates the gain or
 
 Status: Complete and functional.
 
-
 ## X-Day Moving Average Calculation
 Description: Allows a user to examine the x-day moving average of a stock for a specified date and a
 specified value of x.
@@ -41,7 +40,7 @@ portfolio.
 Status: Complete and functional.
 
 
-## User Interface and Interactivity
+## Text-based User Interface and Interactivity
 Description: A text-based interactive interface that allows users to use all the features mentioned
 above. This includes a formal view which implements the IView interface.
 
@@ -51,6 +50,16 @@ input data, and receive results interactively.
 Status: Complete and functional. The interface is designed to handle user inputs gracefully,
 including error handling for invalid inputs.
 
+## GUI-based User Interface and Interactivity
+Description: A GUI-based interactive interface that allows users to use 6 of the features
+mentioned: Create portfolio, buy stock, sell stock, get portfolio composition, get portfolio value,
+and load a portfolio.
+
+How it Works: The program provides a GUI interface where users can input data and receive
+results interactively. The GUI is designed to be user-friendly and intuitive.
+
+Status: Complete and functional. The GUI is designed to handle user inputs gracefully,
+including error handling for invalid inputs.
 
 ## Data Retrieval from Alpha Vantage API
 Description: Integration with the Alpha Vantage API to fetch real-time and historical stock data.
