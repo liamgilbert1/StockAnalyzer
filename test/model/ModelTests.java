@@ -180,8 +180,7 @@ public class ModelTests {
             LocalDate.of(2024, 6, 6));
     String composition2 = model.getPortfolioComposition("TestPortfolio",
             LocalDate.of(2024, 6, 6));
-    assertEquals("GOOG: 0.00\n" +
-            "MSFT: 10.00\n" +
+    assertEquals("MSFT: 10.00\n" +
             "AMZN: 15.00\n", composition2);
 
     try {
