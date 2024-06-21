@@ -9,6 +9,10 @@ import java.util.function.Supplier;
 import controller.commands.ICommand;
 import model.IModel2;
 
+/**
+ * This class represents a controller for the stock market simulator.
+ * The controller is responsible for taking in user input and executing the appropriate commands.
+ */
 public class AController {
   protected final Map<String, Supplier<ICommand>> commandMap;
 

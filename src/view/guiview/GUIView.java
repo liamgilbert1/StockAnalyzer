@@ -15,6 +15,12 @@ import javax.swing.border.Border;
 
 import view.IViewListener;
 
+/**
+ * This class represents a GUI view for the stock market simulator. The GUI view has text areas for
+ * the user to input data and buttons for the user to click to execute commands. The GUI view has
+ * labels to instruct the user on how to use the GUI. The GUI view has a text area to display the
+ * output of the user's actions. The GUI view has a text area to display the user's portfolios.
+ */
 public class GUIView extends JFrame implements ActionListener, IGUIView {
   private final JTextArea portfolioNameTextArea;
   private final JTextArea quantityTextArea;
@@ -29,6 +35,12 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
   private boolean firstActionTaken;
   private final Map<String, List<Supplier<String>>> textAreaMap;
 
+  /**
+   * Constructs a GUI view object that has text areas for the user to input data, buttons for the
+   * user to click to execute commands, labels to instruct the user on how to use the GUI, a text
+   * area to display the output of the user's actions, and a text area to display the user's
+   * portfolios.
+   */
   public GUIView() {
     super("Stock Market Simulator");
     this.listeners = new ArrayList<>();
@@ -38,12 +50,18 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     this.setLayout(new BorderLayout());
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    JLabel instructionLabel = new JLabel("<html>To create a portfolio, enter a name of your choice for the portfolio in the text box and click Create Portfolio.<br>"
-            + "To load a portfolio, enter the name of the portfolio in the text box and click Load Portfolio.<br>"
-            + "To buy a stock, enter the name of the portfolio, the ticker symbol of the stock, the quantity of shares, and the date in the text boxes and click Buy.<br>"
-            + "To sell a stock, enter the name of the portfolio, the ticker symbol of the stock, the quantity of shares, and the date in the text boxes and click Sell.<br>"
-            + "To get the value of a portfolio, enter the name of the portfolio, and the date in the text boxes and click Get Value.<br>"
-            + "To get the composition of a portfolio, enter the name of the portfolio, and the date in the text boxes and click Get Composition.<br>"
+    JLabel instructionLabel = new JLabel("<html>To create a portfolio, enter a name of " +
+            "your choice for the portfolio in the text box and click Create Portfolio.<br>"
+            + "To load a portfolio, enter the name of the portfolio in the text box and click " +
+            "Load Portfolio.<br>"
+            + "To buy a stock, enter the name of the portfolio, the ticker symbol of the stock, " +
+            "the quantity of shares, and the date in the text boxes and click Buy.<br>"
+            + "To sell a stock, enter the name of the portfolio, the ticker symbol of the stock, " +
+            "the quantity of shares, and the date in the text boxes and click Sell.<br>"
+            + "To get the value of a portfolio, enter the name of the portfolio, and the date " +
+            "in the text boxes and click Get Value.<br>"
+            + "To get the composition of a portfolio, enter the name of the portfolio, and the " +
+            "date in the text boxes and click Get Composition.<br>"
             + "To quit the program, exit out of the page.</html>");
     instructionLabel.setPreferredSize(new Dimension(800, 120));
     this.add(instructionLabel, BorderLayout.NORTH);
@@ -267,11 +285,19 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     }
   }
 
+  /**
+   * This method is used to start the GUI view.
+   * @return the data from the GUI view
+   */
   @Override
   public String getData() {
     return command;
   }
 
+  /**
+   * This method is used to set the data in the GUI view.
+   * @param data the data to be set
+   */
   @Override
   public void setData(String data) {
     if (!data.isEmpty()) {
@@ -285,6 +311,10 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     }
   }
 
+  /**
+   * This method is used to add a view listener to the GUI view.
+   * @param viewListener the view listener to be added
+   */
   @Override
   public void addViewListener(IViewListener viewListener) {
     if (viewListener == null) {
@@ -296,6 +326,12 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     this.listeners.add(viewListener);
   }
 
+  /**
+   * This method is used to request focus in the GUI view.
+   * @param csq the character sequence to be appended
+   * @return the appendable
+   * @throws IOException if the append fails
+   */
   @Override
   public Appendable append(CharSequence csq) throws IOException {
     addActionText(csq.toString());
@@ -304,11 +340,25 @@ public class GUIView extends JFrame implements ActionListener, IGUIView {
     return appendable;
   }
 
+  /**
+   * This method is used to append a character sequence to the GUI view.
+   * @param csq the character sequence to be appended
+   * @param start the start index of the character sequence
+   * @param end the end index of the character sequence
+   * @return the appendable
+   * @throws IOException if the append fails
+   */
   @Override
   public Appendable append(CharSequence csq, int start, int end) throws IOException {
     return this.append(csq.subSequence(start, end));
   }
 
+  /**
+   * This method is used to append a character to the GUI view.
+   * @param c the character to be appended
+   * @return the appendable
+   * @throws IOException if the append fails
+   */
   @Override
   public Appendable append(char c) throws IOException {
     addActionText(String.valueOf(c));
