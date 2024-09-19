@@ -1,4 +1,4 @@
-# Stock Portfolio Manager
+# Stock Analyzer
 
 ## Stocks
 
